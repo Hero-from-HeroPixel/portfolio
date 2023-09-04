@@ -37,7 +37,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@slicemachine/adapter-next": "^0.3.11",
+    "@slicemachine/adapter-next": "^0.3.13",
     "@storybook/addon-essentials": "7.3.2",
     "@storybook/addon-interactions": "7.3.2",
     "@storybook/addon-links": "7.3.2",
@@ -47,7 +47,7 @@
     "@storybook/react": "7.3.2",
     "@storybook/testing-library": "0.2.0",
     "eslint-plugin-storybook": "^0.6.13",
-    "slice-machine-ui": "^1.9.0",
+    "slice-machine-ui": "^1.11.0",
     "storybook": "7.3.2"
   }
 }
