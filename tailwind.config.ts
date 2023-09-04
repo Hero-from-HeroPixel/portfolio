@@ -15,9 +15,51 @@ const config: Config = {
 				heading_font: ['var(--font-bebas-neue)'],
 				body_font: ['var(--font-league-spartan)'],
 			},
+			colors: {
+				base: '#212121',
+				primary: '#CCFF00',
+				secondary: '#ffffff',
+				accent: '#3300FF',
+				info: '#00CCFF',
+				success: '#00FF66',
+				warning: '#FFFF00',
+				danger: '#FF004C',
+				'inactive-white': 'rgba(256, 256, 256, 0.7)',
+				'fade-white': 'rgba(256, 256, 256, 0.15)',
+				overlay: 'rgba(0,0,0,0.6)',
+				'fade-primary': 'rgba(204, 255, 0, 0.6)',
+			},
+			boxShadow: {
+				glow: '0px 0px 15px 4px rgba(51, 0, 255, 0.81), 3px 8px 14px 12px rgba(51, 0, 255, 0.07)',
+			},
+			dropShadow: {
+				'text-glow': '2px 3px 18px rgba(256,256,256,1)',
+				glow: ['4px -7px 19px '],
+			},
 		},
 	},
 	darkMode: 'class',
-	plugins: [nextui()],
+	plugins: [
+		nextui({
+			prefix: 'nextui',
+			addCommonColors: false,
+			themes: {
+				dark: {
+					colors: {
+						background: '#212121',
+						foreground: '#ffffff',
+						divider: '#111111',
+						focus: '#3300FF',
+						primary: '#CCFF00',
+						secondary: '#3300FF',
+						default: '#111111',
+						success: '#00FF66',
+						warning: '#FFFF00',
+						danger: '#FF004C',
+					},
+				},
+			},
+		}),
+	],
 };
 export default config;
