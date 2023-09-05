@@ -2,8 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Bebas_Neue, League_Spartan } from 'next/font/google';
 import clsx from 'clsx';
-import { preload } from 'react-dom';
 import { Providers } from './providers/providers';
+import Main from '@/app/components/UI/Main';
 
 const bebas_neue = Bebas_Neue({
 	weight: ['400'],
@@ -28,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={clsx(bebas_neue.variable, league_spartan.variable)}>
-				<Providers>{children}</Providers>
+				<Providers>
+					<Main>{children}</Main>
+				</Providers>
 			</body>
 		</html>
 	);
