@@ -7,7 +7,7 @@ type Props = {
 	className?: string;
 };
 
-export default function Bounded({
+export default function BoundWrapper({
 	as: Comp = 'section',
 	className,
 	children,
@@ -16,7 +16,10 @@ export default function Bounded({
 	return (
 		<Comp
 			{...restProps}
-			className={clsx('mx-auto w-full  flex flex-col items-center', className)}>
+			className={clsx(
+				'mx-auto w-full md:w-11/12 xl:w-10/12 2xl:w-9/12 flex flex-col',
+				className,
+			)}>
 			{children}
 		</Comp>
 	);

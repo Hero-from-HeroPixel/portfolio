@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+p {
+	@apply lg:text-2xl text-lg;
+}
+
+p.sm {
+	@apply lg:text-lg text-sm;
+}
+
+p.light {
+	@apply font-light;
+}
+
+p.display1 {
+	@apply lg:text-4xl text-3xl;
+}
+
+p.display2 {
+	@apply lg:text-xl text-lg;
+}
