@@ -1,3 +1,4 @@
+import { cn } from '@/app/utils/cn';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -18,7 +19,7 @@ export default function Heading({
 }: Props) {
 	return (
 		<Comp
-			className={clsx(
+			className={cn(
 				'font-heading_font',
 				Comp &&
 					Comp === 'h1' &&
