@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '@/app/utils/cn';
 import React from 'react';
 
 type Props = {
@@ -9,8 +9,7 @@ type Props = {
 
 export default function Main({ children, className, theme = 'dark' }: Props) {
 	return (
-		<main
-			className={clsx(`min-h-screen ${theme} text-foreground bg-background`, className)}>
+		<main className={cn(`min-h-screen ${theme} text-foreground bg-background`, className)}>
 			{children}
 		</main>
 	);
