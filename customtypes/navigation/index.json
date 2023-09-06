@@ -1,10 +1,59 @@
 {
   "id": "navigation",
-  "label": "Navigation",
+  "label": "Header",
   "format": "custom",
   "repeatable": false,
   "status": true,
   "json": {
-    "Main": {}
+    "Main": {
+      "navigation": {
+        "type": "Group",
+        "config": {
+          "label": "Navigation",
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": ""
+              }
+            },
+            "url": {
+              "type": "Link",
+              "config": {
+                "label": "url",
+                "placeholder": "",
+                "select": null
+              }
+            }
+          }
+        }
+      },
+      "logo": {
+        "type": "Select",
+        "config": {
+          "label": "Logo",
+          "placeholder": "",
+          "options": ["Light", "Dark"],
+          "default_value": "Light"
+        }
+      },
+      "cta_label": {
+        "type": "Text",
+        "config": {
+          "label": "CTA Label",
+          "placeholder": ""
+        }
+      },
+      "cta_link": {
+        "type": "Link",
+        "config": {
+          "label": "CTA Link",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      }
+    }
   }
 }
