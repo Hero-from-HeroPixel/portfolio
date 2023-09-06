@@ -1,5 +1,6 @@
 'use client';
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
+import { Button, ButtonProps } from '@nextui-org/button';
 import {
 	Modal,
 	ModalContent,
@@ -7,26 +8,35 @@ import {
 	ModalBody,
 	ModalFooter,
 	useDisclosure,
-} from '@nextui-org/react';
+} from '@nextui-org/modal';
+
+const defaultButtonProps: ButtonProps = {
+	radius: 'full',
+	color: 'default',
+	variant: 'solid',
+};
 
 type Props = {
-	Button: React.ReactElement;
+	BtnProps?: ButtonProps;
 	modalTitle: string;
-	ModalActions: React.ReactNode;
 	ModalBodyContent: React.ReactNode;
+	ModalActions?: React.ReactNode;
+	CloseProps?: ButtonProps;
 };
 
 export default function ModalWithButton({
-	Button,
+	BtnProps = defaultButtonProps,
 	modalTitle,
 	ModalBodyContent,
 	ModalActions,
+	CloseProps = defaultButtonProps,
 }: Props) {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
 	return (
 		<>
-			{Button}
+			<Button {...BtnProps} onPress={onOpen}>
+				{BtnProps.children}
+			</Button>
 			<Modal isOpen={isOpen} placement={'bottom-center'} onOpenChange={onOpenChange}>
 				<ModalContent>
 					{(onClose) => (
@@ -35,7 +45,12 @@ export default function ModalWithButton({
 								{modalTitle}
 							</ModalHeader>
 							<ModalBody>{ModalBodyContent}</ModalBody>
-							<ModalFooter>{ModalActions}</ModalFooter>
+							<ModalFooter>
+								<Button {...CloseProps} onPress={onClose}>
+									{CloseProps.children}
+								</Button>
+								{ModalActions}
+							</ModalFooter>
 						</>
 					)}
 				</ModalContent>
