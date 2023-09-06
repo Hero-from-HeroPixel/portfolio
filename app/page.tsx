@@ -1,6 +1,6 @@
-import Heading from '@/app/components/UI/Heading';
-import NavigationLink from '@/app/components/Navigation/NavigationLink';
-import BoundWrapper from '@/app/components/UI/BoundWrapper';
+import Heading from '@/app/components/ui/Heading';
+import NavigationLink from '@/app/components/navigation/Links';
+import BoundWrapper from '@/app/components/ui/BoundWrapper';
 
 export default function Home() {
 	return (
