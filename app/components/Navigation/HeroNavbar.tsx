@@ -12,7 +12,7 @@ import {
 import NavigationLink from '@/app/components/Navigation/NavigationLink';
 import LogoIcon from '@/app/assets/Logo';
 import { Link } from '@nextui-org/link';
-import { Button, ButtonGroup } from '@nextui-org/button';
+import { Button } from '@nextui-org/button';
 import { NavigationDocumentData, Simplify } from '@/prismicio-types';
 
 type Props = {
@@ -31,8 +31,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 				className="sm:hidden"
 			/>
 			<NavbarBrand>
-				<LogoIcon />
-				<p className="font-bold text-inherit">ACME</p>
+				<LogoIcon width={117} height={79} className="w-20" />
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="center">
 				<NavbarItem>

@@ -8,5 +8,9 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 export default function NavigationLink({ href, className, children, ...restProps }: Props) {
-	return <Link {...restProps} href={href}></Link>;
+	return (
+		<Link {...restProps} href={href}>
+			{children}
+		</Link>
+	);
 }
