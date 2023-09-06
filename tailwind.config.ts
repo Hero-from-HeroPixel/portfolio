@@ -52,7 +52,7 @@ const config: Config = {
 						focus: '#3300FF',
 						primary: '#CCFF00',
 						secondary: '#3300FF',
-						default: '#111111',
+						default: '#050505',
 						success: '#00FF66',
 						warning: '#FFFF00',
 						danger: '#FF004C',
