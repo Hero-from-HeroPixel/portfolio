@@ -16,7 +16,7 @@ export default function Home() {
 			<DefaultButton className="m-5">Default Button</DefaultButton>
 			<LinkButton className="m-5">Link</LinkButton>
 			<SocialButton className="m-5">
-				<GitHub className="" />
+				<GitHub />
 			</SocialButton>
 		</BoundWrapper>
 	);

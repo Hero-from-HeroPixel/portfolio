@@ -1,5 +1,4 @@
 import React, { AnchorHTMLAttributes } from 'react';
-import Link from 'next/link';
 import { cn } from '@/app/utils/cn';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
 

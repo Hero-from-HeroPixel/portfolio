@@ -1,6 +1,7 @@
 import { cn } from '@/app/utils/cn';
 import { Button, ButtonProps } from '@nextui-org/button';
 import React from 'react';
+import styles from '@/app/components/UI/Buttons.module.css';
 
 interface PrimaryButtonProps extends ButtonProps {
 	className?: string;
@@ -8,16 +9,16 @@ interface PrimaryButtonProps extends ButtonProps {
 }
 export function PrimaryButton({ className, children, ...restProps }: PrimaryButtonProps) {
 	return (
-		<Button
-			{...restProps}
-			className={cn(
-				'scale-105 max-w-fit h-fit p-1 border hover:bg-primary hover:border-background border-secondary rounded-full',
-				className,
-			)}>
-			<div className="btn rounded-full scale-100 py-1 lg:px-16 px-10 md:px-12 bg-primary">
+		<div className="">
+			<Button
+				{...restProps}
+				color="primary"
+				variant="solid"
+				radius="full"
+				className={cn('btn px-16 text-background', className)}>
 				{children}
-			</div>
-		</Button>
+			</Button>
+		</div>
 	);
 }
 
@@ -67,7 +68,7 @@ interface LinkButtonProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
 }
 export function LinkButton({ className, children, ...restProps }: LinkButtonProps) {
 	return (
-		<button {...restProps} className={cn('btn max-w-fit', className)}>
+		<button {...restProps} className={cn('btn max-w-fit', styles.link, className)}>
 			{children}
 		</button>
 	);
@@ -85,7 +86,10 @@ export function SocialButton({ className, children, ...restProps }: SocialButton
 			isIconOnly
 			variant="ghost"
 			color="secondary"
-			className={cn('w-8 h-8 p-2 fill-secondary hover:fill-background', className)}>
+			className={cn(
+				' border-none sm:border-2 p-2 lg:p-1 fill-secondary hover:fill-background',
+				className,
+			)}>
 			{children}
 		</Button>
 	);
