@@ -1,6 +1,6 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 
-import { ExternalLink, NavigationLink } from '@/app/components/navigation/Links';
+import { ExternalLink, NavigationLink } from '@/app/components/Navigation/Links';
 import { prismicClient } from '@/app/lib/clients';
 
 export default async function Home() {
@@ -8,13 +8,13 @@ export default async function Home() {
 
 	return (
 		<BoundWrapper>
-			<NavigationLink className="m-5" href="#">
+			<NavigationLink className="m-5" href="/">
 				Navigation Link
 			</NavigationLink>
 			<NavigationLink className="m-5" field={data.cta_link}>
 				Prismic Navigation link
 			</NavigationLink>
-			<ExternalLink className="m-5" href="#">
+			<ExternalLink className="m-5" href="/">
 				External Link
 			</ExternalLink>
 			<ExternalLink className="m-5" field={data.cta_link}>

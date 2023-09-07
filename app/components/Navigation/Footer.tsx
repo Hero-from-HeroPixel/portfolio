@@ -1,7 +1,7 @@
 import LogoIcon from '@/app/assets/Logo';
 import { prismicClient } from '@/app/lib/clients';
 import React from 'react';
-import ModalWithButton from '@/app/components/ui/ModalWithButton';
+import ModalWithButton from '@/app/components/UI/ModalWithButton';
 
 type Props = { theme?: 'dark' | 'light' };
 

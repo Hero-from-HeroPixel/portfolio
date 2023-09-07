@@ -9,7 +9,7 @@ import {
 	NavbarMenu,
 	NavbarMenuItem,
 } from '@nextui-org/navbar';
-import { NavigationLink } from '@/app/components/navigation/Links';
+import { NavigationLink } from '@/app/components/Navigation/Links';
 import LogoIcon from '@/app/assets/Logo';
 import { Link } from '@nextui-org/link';
 import { Button } from '@nextui-org/button';
