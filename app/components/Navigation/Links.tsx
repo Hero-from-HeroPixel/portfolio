@@ -87,8 +87,6 @@ export function ScrollLink({
 		targetEl?.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	if (activeSection) return;
-
 	return (
 		<>
 			<AnimatePresence>
