@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 import { cn } from '@/app/utils/cn';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
 import { Link } from '@nextui-org/link';
-import { LinkField } from '@prismicio/client';
+import { FilledLinkToWebField, LinkField } from '@prismicio/client';
 import styles from '@/app/components/Navigation/links.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
-import { SITE_URL } from '@/app/lib/URL';
 
 type LinkProps = {
 	className?: string;
@@ -23,6 +22,17 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 	const [activeLink, setActiveLink] = useState(false);
 	const currentPath = usePathname();
 
+	if (field && field.link_type === 'Web') {
+		const webLink = field as FilledLinkToWebField;
+		const targetPath = new URL(webLink.url).pathname;
+		console.log('prismic field', targetPath === currentPath);
+		// if (targetPath === currentPath) setActiveLink(true);
+	}
+
+	if (href) {
+		console.log('normal link', href === currentPath);
+		// if (href === currentPath) setActiveLink(true);
+	}
 	return (
 		<>
 			{!activeLink && field && (
