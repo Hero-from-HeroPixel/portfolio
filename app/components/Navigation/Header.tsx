@@ -1,6 +1,6 @@
 import { prismicClient } from '@/app/lib/clients';
 import React from 'react';
-import HeroNavbar from './HeroNavbar';
+import HeroNavbar from '@/app/components/Navigation/HeroNavbar';
 
 type Props = {};
 

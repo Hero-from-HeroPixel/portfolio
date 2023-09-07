@@ -10,6 +10,49 @@ import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 
+type ScrollLinkProps = {
+	className?: string;
+	children: React.ReactNode;
+	sectionId?: string;
+};
+
+export function ScrollLink({ className, children, sectionId }: ScrollLinkProps) {
+	const [activeSection, setActiveSection] = useState(false);
+	const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		e.preventDefault();
+	};
+
+	return (
+		<>
+			{!activeSection && sectionId && (
+				<Link
+					as={NextLink}
+					onClick={() => setActiveSection(true)}
+					href={sectionId}
+					className={cn(
+						`btn ${styles.navigationLink}
+				${styles.link}`,
+						className,
+					)}>
+					{children}
+				</Link>
+			)}
+			{activeSection && (
+				<p
+					className={cn(
+						`btn ${styles.navigationLink}
+				${styles.link}
+				${activeSection && styles.active}`,
+						className,
+					)}>
+					{children}
+				</p>
+			)}
+			{!sectionId && <p className="text-danger">section not provided</p>}
+		</>
+	);
+}
+
 type LinkProps = {
 	className?: string;
 	children: React.ReactNode;
@@ -17,27 +60,26 @@ type LinkProps = {
 	field?: LinkField;
 	restProps?: PrismicNextLinkProps;
 };
-
 export function NavigationLink({ className, children, href, field, ...restProps }: LinkProps) {
 	const [activeLink, setActiveLink] = useState(false);
 	const currentPath = usePathname();
 
-	if (field && field.link_type === 'Web') {
-		const webLink = field as FilledLinkToWebField;
-		const targetPath = new URL(webLink.url).pathname;
-		console.log('prismic field', targetPath === currentPath);
-		//targetPath === currentPath ? setActiveLink(true) : setActiveLink(false);
-	}
+	// if (field && field.link_type === 'Web') {
+	// 	const webLink = field as FilledLinkToWebField;
+	// 	const targetPath = new URL(webLink.url).pathname;
+	// 	// //if (targetPath === currentPath) setActiveLink(true);
+	// }
 
-	if (href) {
-		console.log('normal link', href === currentPath);
-		//href === currentPath ? setActiveLink(true) : setActiveLink(false);
-	}
+	// if (href) {
+	// 	//href === currentPath ? () => setActiveLink(true) : () => setActiveLink(false);
+	// }
+
 	return (
 		<>
 			{!activeLink && field && (
 				<PrismicNextLink
 					{...restProps}
+					onClick={() => setActiveLink(true)}
 					field={field}
 					className={cn(
 						`btn ${styles.navigationLink}
@@ -50,6 +92,7 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 			{!activeLink && href && (
 				<Link
 					as={NextLink}
+					onClick={() => setActiveLink(true)}
 					href={href}
 					className={cn(
 						`btn ${styles.navigationLink}
