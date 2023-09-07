@@ -17,5 +17,5 @@
 }
 
 .active {
-	@apply cursor-default pointer-events-none text-opacity-75;
+	@apply cursor-default pointer-events-none text-opacity-75 relative;
 }

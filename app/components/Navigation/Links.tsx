@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type LinkProps = {
 	className?: string;
@@ -25,13 +26,28 @@ export function ActiveLink({
 	children: React.ReactNode;
 	className?: string;
 }) {
+	const underlineVariants = {
+		start: {
+			scale: 0.1,
+		},
+		end: {
+			scale: 1,
+		},
+		exit: {
+			scale: 0.1,
+		},
+	};
 	return (
-		<p
-			className={cn(
-				`btn ${styles.navigationLink} ${styles.link} ${styles.active}`,
-				className,
-			)}>
+		<p className={cn(`btn ${styles.active} flex flex-col`, className)}>
 			{children}
+
+			<motion.span
+				initial="start"
+				animate="end"
+				exit="exit"
+				variants={underlineVariants}
+				transition={{ duration: 0.5, type: 'spring' }}
+				className="border w-full border-primary mx-auto"></motion.span>
 		</p>
 	);
 }
@@ -48,8 +64,6 @@ export function ScrollLink({
 }: Omit<LinkProps, 'field'>) {
 	const [activeSection, setActiveSection] = useState(false);
 	const [targetEl, setTargetEl] = useState<HTMLElement | null>();
-
-	console.log(activeSection);
 
 	const observeSection = useCallback(
 		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -73,19 +87,23 @@ export function ScrollLink({
 		targetEl?.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	if (activeSection) return <ActiveLink className={className}>{children}</ActiveLink>;
+	if (activeSection) return;
+
 	return (
-		<Link
-			{...restProps}
-			href={href}
-			onClick={scrollHandler}
-			className={cn(
-				`btn ${styles.navigationLink}
-		${styles.link}`,
-				className,
-			)}>
-			{children}
-		</Link>
+		<>
+			<AnimatePresence>
+				{activeSection && <ActiveLink className={className}>{children}</ActiveLink>}{' '}
+			</AnimatePresence>
+			{!activeSection && (
+				<Link
+					{...restProps}
+					href={href}
+					onClick={scrollHandler}
+					className={cn(`btn ${styles.navigationLink} ${styles.link}`, className)}>
+					{children}
+				</Link>
+			)}
+		</>
 	);
 }
 

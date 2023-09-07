@@ -7,7 +7,7 @@ export default async function Home() {
 	const { data } = await prismicClient.getSingle('navigation');
 	return (
 		<BoundWrapper className="h-[300vh] flex flex-col justify-between">
-			<div className="fixed top-10 left-20">
+			<div className="fixed top-10 left-20 h-32 w-32 bg-accent text-foreground z-20">
 				<NavigationLink className="m-5 " field={data.cta_link}>
 					{data.cta_label}
 				</NavigationLink>
