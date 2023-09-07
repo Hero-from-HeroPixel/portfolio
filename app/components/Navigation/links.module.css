@@ -1,0 +1,21 @@
+.navigationLink {
+	@apply max-w-fit relative font-body_font hover:text-opacity-75 text-foreground;
+}
+
+.externalLink {
+	@apply max-w-fit relative font-body_font items-start hover:text-opacity-75 text-foreground;
+}
+
+.link::after {
+	content: '';
+	@apply border-primary w-2 border block hover:w-full absolute top-full left-1/2 -translate-x-1/2 transition-width duration-200 ease-soft-spring active:border-accent;
+}
+
+.link.active::after {
+	content: '';
+	@apply border-primary border block w-full absolute left-1/2 -translate-x-1/2;
+}
+
+.active {
+	@apply cursor-default pointer-events-none text-opacity-75;
+}

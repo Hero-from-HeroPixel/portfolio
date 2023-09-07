@@ -1,23 +1,25 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
-import {
-	PrimaryButton,
-	SecondaryButton,
-	DefaultButton,
-	LinkButton,
-	SocialButton,
-} from '@/app/components/UI/Buttons';
-import { GitHub } from '@/app/components/icons';
 
-export default function Home() {
+import { ExternalLink, NavigationLink } from '@/app/components/navigation/Links';
+import { prismicClient } from '@/app/lib/clients';
+
+export default async function Home() {
+	const { data } = await prismicClient.getSingle('navigation');
+
 	return (
 		<BoundWrapper>
-			<PrimaryButton className="m-5">Primary Button</PrimaryButton>
-			<SecondaryButton className="m-5">Secondary Button</SecondaryButton>
-			<DefaultButton className="m-5">Default Button</DefaultButton>
-			<LinkButton className="m-5">Link</LinkButton>
-			<SocialButton className="m-5">
-				<GitHub />
-			</SocialButton>
+			<NavigationLink className="m-5" href="#">
+				Navigation Link
+			</NavigationLink>
+			<NavigationLink className="m-5" field={data.cta_link}>
+				Prismic Navigation link
+			</NavigationLink>
+			<ExternalLink className="m-5" href="#">
+				External Link
+			</ExternalLink>
+			<ExternalLink className="m-5" field={data.cta_link}>
+				Prismic External link
+			</ExternalLink>
 		</BoundWrapper>
 	);
 }
