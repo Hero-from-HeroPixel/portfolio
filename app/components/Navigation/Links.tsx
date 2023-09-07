@@ -26,12 +26,12 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 		const webLink = field as FilledLinkToWebField;
 		const targetPath = new URL(webLink.url).pathname;
 		console.log('prismic field', targetPath === currentPath);
-		// if (targetPath === currentPath) setActiveLink(true);
+		//targetPath === currentPath ? setActiveLink(true) : setActiveLink(false);
 	}
 
 	if (href) {
 		console.log('normal link', href === currentPath);
-		// if (href === currentPath) setActiveLink(true);
+		//href === currentPath ? setActiveLink(true) : setActiveLink(false);
 	}
 	return (
 		<>
