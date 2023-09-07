@@ -64,15 +64,21 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 	const [activeLink, setActiveLink] = useState(false);
 	const currentPath = usePathname();
 
-	// if (field && field.link_type === 'Web') {
-	// 	const webLink = field as FilledLinkToWebField;
-	// 	const targetPath = new URL(webLink.url).pathname;
-	// 	// //if (targetPath === currentPath) setActiveLink(true);
-	// }
+	if (field && field.link_type === 'Web') {
+		const webLink = field as FilledLinkToWebField;
 
-	// if (href) {
-	// 	//href === currentPath ? () => setActiveLink(true) : () => setActiveLink(false);
-	// }
+		if (webLink.url.includes('#')) {
+			const targetId = webLink.url.replace(/.*\#/, '');
+		} else {
+			const targetPath = new URL(webLink.url).pathname;
+			// //if (targetPath === currentPath) setActiveLink(true);
+		}
+	}
+
+	if (href) {
+		const targetId = href.replace(/.*\#/, '');
+		//href === currentPath ? () => setActiveLink(true) : () => setActiveLink(false);
+	}
 
 	return (
 		<>

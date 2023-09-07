@@ -8,7 +8,9 @@ export default async function Home() {
 
 	return (
 		<BoundWrapper>
-			<ScrollLink sectionId="#">ScrollLink</ScrollLink>
+			<ScrollLink className="m-5" sectionId="#">
+				ScrollLink
+			</ScrollLink>
 		</BoundWrapper>
 	);
 }
