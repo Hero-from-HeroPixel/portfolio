@@ -8,9 +8,9 @@ export default async function Home() {
 
 	return (
 		<BoundWrapper>
-			<ScrollLink className="m-5" sectionId="#">
-				ScrollLink
-			</ScrollLink>
+			<NavigationLink className="m-5" field={data.cta_link}>
+				{data.cta_label}
+			</NavigationLink>
 		</BoundWrapper>
 	);
 }
