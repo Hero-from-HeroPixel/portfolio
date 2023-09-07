@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/app/utils/cn';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
 import { Link } from '@nextui-org/link';
@@ -10,82 +10,138 @@ import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 
-type ScrollLinkProps = {
-	className?: string;
-	children: React.ReactNode;
-	sectionId?: string;
-};
-
-export function ScrollLink({ className, children, sectionId }: ScrollLinkProps) {
-	const [activeSection, setActiveSection] = useState(false);
-	const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-		e.preventDefault();
-	};
-
-	return (
-		<>
-			{!activeSection && sectionId && (
-				<Link
-					as={NextLink}
-					onClick={() => setActiveSection(true)}
-					href={sectionId}
-					className={cn(
-						`btn ${styles.navigationLink}
-				${styles.link}`,
-						className,
-					)}>
-					{children}
-				</Link>
-			)}
-			{activeSection && (
-				<p
-					className={cn(
-						`btn ${styles.navigationLink}
-				${styles.link}
-				${activeSection && styles.active}`,
-						className,
-					)}>
-					{children}
-				</p>
-			)}
-			{!sectionId && <p className="text-danger">section not provided</p>}
-		</>
-	);
-}
-
 type LinkProps = {
 	className?: string;
 	children: React.ReactNode;
 	href?: string;
 	field?: LinkField;
-	restProps?: PrismicNextLinkProps;
+	restProps?: PrismicNextLinkProps | LinkProps;
 };
+
+export function ActiveLink({
+	children,
+	className,
+}: {
+	children: React.ReactNode;
+	className?: string;
+}) {
+	return (
+		<p
+			className={cn(
+				`btn ${styles.navigationLink} ${styles.link} ${styles.active}`,
+				className,
+			)}>
+			{children}
+		</p>
+	);
+}
+
+const scrollLinkCheck = (url: string) => {
+	return url.includes('#');
+};
+
+export function ScrollLink({
+	className,
+	children,
+	href,
+	...restProps
+}: Omit<LinkProps, 'field'>) {
+	const [activeSection, setActiveSection] = useState(false);
+	const [targetEl, setTargetEl] = useState<HTMLElement | null>();
+
+	console.log(activeSection);
+
+	const observeSection = useCallback(
+		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+			setActiveSection(entries[0].isIntersecting);
+		},
+		[],
+	);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(observeSection, { threshold: 0.5 });
+
+		if (href && typeof document !== 'undefined') {
+			const targetId = href.replace(/.*\#/, '');
+			setTargetEl(document.getElementById(targetId));
+			if (targetEl) observer.observe(targetEl);
+		}
+	}, [href, targetEl, observeSection]);
+
+	const scrollHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		e.preventDefault();
+		targetEl?.scrollIntoView({ behavior: 'smooth' });
+	};
+
+	if (activeSection) return <ActiveLink className={className}>{children}</ActiveLink>;
+	return (
+		<Link
+			{...restProps}
+			href={href}
+			onClick={scrollHandler}
+			className={cn(
+				`btn ${styles.navigationLink}
+		${styles.link}`,
+				className,
+			)}>
+			{children}
+		</Link>
+	);
+}
+
 export function NavigationLink({ className, children, href, field, ...restProps }: LinkProps) {
 	const [activeLink, setActiveLink] = useState(false);
+	const [isScrollLink, setIsScrollLink] = useState(false);
 	const currentPath = usePathname();
 
-	if (field && field.link_type === 'Web') {
-		const webLink = field as FilledLinkToWebField;
-
-		if (webLink.url.includes('#')) {
-			const targetId = webLink.url.replace(/.*\#/, '');
-		} else {
-			const targetPath = new URL(webLink.url).pathname;
-			// //if (targetPath === currentPath) setActiveLink(true);
+	const linkFactory = useCallback(() => {
+		if (field) {
+			if (field && field.link_type === 'Web') {
+				const webLink = field as FilledLinkToWebField;
+				const targetPath = new URL(webLink.url).pathname;
+				if (scrollLinkCheck(webLink.url) && currentPath === targetPath)
+					setIsScrollLink(true);
+				if (targetPath === currentPath && !scrollLinkCheck(webLink.url))
+					setActiveLink(true);
+			}
 		}
-	}
 
-	if (href) {
-		const targetId = href.replace(/.*\#/, '');
-		//href === currentPath ? () => setActiveLink(true) : () => setActiveLink(false);
+		if (href) {
+			if (scrollLinkCheck(href)) {
+				setIsScrollLink(true);
+			}
+
+			href === currentPath && !scrollLinkCheck(href)
+				? () => setActiveLink(true)
+				: () => setActiveLink(false);
+		}
+	}, [field, href, currentPath]);
+
+	useEffect(() => {
+		linkFactory();
+	}, [linkFactory]);
+
+	if (!href && !field) return <p className="text-danger">link not provided</p>;
+
+	if (activeLink) return <ActiveLink className={className}>{children}</ActiveLink>;
+
+	if (isScrollLink) {
+		let webLink;
+		if (field?.link_type === 'Web') webLink = field as FilledLinkToWebField;
+
+		return (
+			//@ts-ignore Error on field type before execution. f
+			<ScrollLink className={className} href={href || webLink?.url} {...restProps}>
+				{children}
+			</ScrollLink>
+		);
 	}
 
 	return (
 		<>
-			{!activeLink && field && (
+			{field && (
 				<PrismicNextLink
 					{...restProps}
-					onClick={() => setActiveLink(true)}
 					field={field}
 					className={cn(
 						`btn ${styles.navigationLink}
@@ -95,10 +151,10 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 					{children}
 				</PrismicNextLink>
 			)}
-			{!activeLink && href && (
+			{href && (
 				<Link
+					{...restProps}
 					as={NextLink}
-					onClick={() => setActiveLink(true)}
 					href={href}
 					className={cn(
 						`btn ${styles.navigationLink}
@@ -108,18 +164,6 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 					{children}
 				</Link>
 			)}
-			{activeLink && (
-				<p
-					className={cn(
-						`btn ${styles.navigationLink}
-						${styles.link}
-						${activeLink && styles.active}`,
-						className,
-					)}>
-					{children}
-				</p>
-			)}
-			{!href && !field && <p className="text-danger">link not provided</p>}
 		</>
 	);
 }
@@ -141,6 +185,7 @@ export function ExternalLink({ className, children, href, field, ...restProps }:
 			)}
 			{href && (
 				<Link
+					{...restProps}
 					as={NextLink}
 					isExternal
 					href={href}
