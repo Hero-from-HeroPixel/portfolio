@@ -15,6 +15,7 @@ import { MenuToggle } from './MenuToggle';
 import { AnimatePresence, useCycle } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { height } from '@fortawesome/free-solid-svg-icons/fa0';
+import { menuSlide } from './anim';
 
 type Props = {
 	theme?: 'dark' | 'light';
@@ -30,7 +31,11 @@ interface NavBarContentProps {
 
 export function HeroNavbarContent({ cta, as, links, className }: NavBarContentProps) {
 	return (
-		<ul
+		<motion.ul
+			variants={menuSlide}
+			initial={'initial'}
+			animate={'enter'}
+			exit={'exit'}
 			className={cn(
 				'justify-between gap-10',
 				as === 'MobileMenu' && 'flex flex-col justify-center lg:hidden ',
@@ -52,29 +57,9 @@ export function HeroNavbarContent({ cta, as, links, className }: NavBarContentPr
 				</li>
 			))}
 			{cta}
-		</ul>
+		</motion.ul>
 	);
 }
-
-const menu = {
-	open: (height = 1000) => ({
-		clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-		transition: {
-			type: 'spring',
-			stiffness: 20,
-			restDelta: 2,
-		},
-	}),
-	closed: {
-		clipPath: 'circle(30px at 40px 40px)',
-		transition: {
-			delay: 0.5,
-			type: 'spring',
-			stiffness: 400,
-			damping: 40,
-		},
-	},
-};
 
 export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	const [isMenuOpen, setIsMenuOpen] = useCycle(false, true);
@@ -106,7 +91,11 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 						className="lg:justify-self-end hidden lg:block">
 						{data.cta_label}
 					</DefaultButton>
-					<MenuToggle onClick={() => setIsMenuOpen()} isOpen={isMenuOpen} />
+					<MenuToggle
+						className="z-10"
+						onClick={() => setIsMenuOpen()}
+						isOpen={isMenuOpen}
+					/>
 					{isMenuOpen && (
 						<HeroNavbarContent
 							cta={

@@ -14,18 +14,20 @@ const Path = (props: any) => (
 );
 
 interface MenuToggleProps {
+	className?: string;
 	children?: React.ReactNode;
 	isOpen: boolean;
 	onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const MenuToggle = ({ isOpen, onClick, children }: MenuToggleProps) => (
+export const MenuToggle = ({ isOpen, onClick, children, className }: MenuToggleProps) => (
 	<DefaultButton
 		onClick={onClick}
 		aria-label={isOpen ? 'Close menu' : 'Open menu'}
 		className={cn(
 			`lg:hidden p-5 min-w-0 absolute top-5 right-5`,
 			isOpen ? 'bg-transparent text-background' : 'bg-secondary text-foreground',
+			className,
 		)}>
 		<svg width="23" height="23" viewBox="0 0 23 23">
 			<Path
