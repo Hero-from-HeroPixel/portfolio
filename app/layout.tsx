@@ -5,7 +5,7 @@ import { Providers } from '@/app/providers/providers';
 import Main from '@/app/components/UI/Main';
 import { prismicClient } from '@/app/lib/clients';
 import { Metadata } from 'next';
-import Header from '@/app/components/Navigation/Header';
+import Header from '@/app/components/Navigation/Header/Header';
 import Footer from '@/app/components/Navigation/Footer';
 
 const bebas_neue = Bebas_Neue({
