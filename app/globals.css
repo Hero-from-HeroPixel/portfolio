@@ -6,6 +6,10 @@ p {
 	@apply lg:text-2xl text-lg;
 }
 
+.btn {
+	@apply font-medium font-body_font lg:text-xl text-lg;
+}
+
 p.sm {
 	@apply lg:text-lg text-sm;
 }

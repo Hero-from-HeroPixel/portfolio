@@ -1,0 +1,8 @@
+.link {
+	@apply relative px-2 pt-2 rounded-t-xl;
+}
+
+.link::after {
+	content: '';
+	@apply border-primary w-2 border block hover:w-full absolute left-1/2 -translate-x-1/2 transition-width duration-200 ease-soft-spring active:border-accent;
+}
