@@ -19,3 +19,8 @@
 .active {
 	@apply cursor-default pointer-events-none relative;
 }
+
+.link.clicked::after {
+	content: '';
+	@apply bg-primary h-1 w-full block absolute left-1/2 -translate-x-1/2;
+}

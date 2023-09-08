@@ -43,7 +43,7 @@ export function ActiveLink({
 	return (
 		<div className={cn(`btn ${styles.active}`, className)}>
 			<motion.p
-				initial={{ opacity: 1 }}
+				initial={initial && { opacity: 1 }}
 				animate={{ opacity: 0.5 }}
 				exit={{ opacity: 1 }}
 				transition={{ duration: 0.5 }}>
@@ -122,7 +122,11 @@ export function ScrollLink({
 					{...restProps}
 					href={href}
 					onClick={scrollHandler}
-					className={cn(`btn ${styles.navigationLink} ${styles.link}`, className)}>
+					className={cn(
+						`btn ${styles.navigationLink} ${styles.link}`,
+						clicked && styles.clicked,
+						className,
+					)}>
 					{children}
 				</Link>
 			)}
