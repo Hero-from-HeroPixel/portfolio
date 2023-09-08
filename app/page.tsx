@@ -1,24 +1,25 @@
-import Heading from '@/app/components/UI/Heading';
-import NavigationLink from '@/app/components/Navigation/NavigationLink';
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 
-export default function Home() {
+import { ExternalLink, NavigationLink, ScrollLink } from '@/app/components/Navigation/Links';
+import { prismicClient } from '@/app/lib/clients';
+
+export default async function Home() {
+	const { data } = await prismicClient.getSingle('navigation');
 	return (
-		<BoundWrapper className="">
-			<div className="">
-				<Heading as="h1">H1</Heading>
-				<Heading as="h2">H2</Heading>
-				<Heading as="h3">H3</Heading>
-				<Heading as="h4">H4</Heading>
-				<Heading as="h5">H5</Heading>
-				<Heading as="h6">H6</Heading>
-				<p>body</p>
-				<p className="light">body light</p>
-				<p className="light sm">body light sm</p>
-				<p className="display1">Display 1</p>
-				<p className="display2">Display 2</p>
-				<NavigationLink href="/">NavLink/Button</NavigationLink>
+		<BoundWrapper className="h-[300vh] flex flex-col justify-between">
+			<div className="fixed top-10 left-20 px-20 py-10 w-fit bg-default text-foreground z-20">
+				<NavigationLink className="m-5 " field={data.cta_link}>
+					{data.cta_label}
+				</NavigationLink>
 			</div>
+
+			<NavigationLink className="m-5" href="#contact-me">
+				{data.cta_label}
+			</NavigationLink>
+			<NavigationLink className="m-5" href="/contact-me">
+				{data.cta_label}
+			</NavigationLink>
+			<div className="h-screen w-full bg-blue-300" id="contact-me"></div>
 		</BoundWrapper>
 	);
 }

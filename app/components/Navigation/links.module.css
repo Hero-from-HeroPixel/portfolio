@@ -1,0 +1,26 @@
+.navigationLink {
+	@apply max-w-fit relative font-body_font hover:text-opacity-75 text-foreground cursor-pointer;
+}
+
+.externalLink {
+	@apply max-w-fit relative font-body_font items-start hover:text-opacity-75 text-foreground;
+}
+
+.link::after {
+	content: '';
+	@apply bg-primary h-1 w-2 block hover:w-full absolute top-full left-1/2 -translate-x-1/2 transition-width duration-200 ease-soft-spring active:bg-accent;
+}
+
+.link.active::after {
+	content: '';
+	@apply bg-primary h-1 w-full block absolute left-1/2 -translate-x-1/2;
+}
+
+.active {
+	@apply cursor-default pointer-events-none relative;
+}
+
+.link.clicked::after {
+	content: '';
+	@apply bg-primary h-1 w-full block absolute left-1/2 -translate-x-1/2;
+}

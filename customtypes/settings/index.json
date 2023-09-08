@@ -1,0 +1,114 @@
+{
+  "id": "settings",
+  "label": "Settings",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "site_title": {
+        "type": "Text",
+        "config": {
+          "label": "Site Title",
+          "placeholder": ""
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description",
+          "placeholder": ""
+        }
+      },
+      "open_graph": {
+        "type": "Group",
+        "config": {
+          "label": "Open Graph",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "Title",
+                "placeholder": ""
+              }
+            },
+            "description": {
+              "type": "Text",
+              "config": {
+                "label": "Description",
+                "placeholder": ""
+              }
+            },
+            "url": {
+              "type": "Text",
+              "config": {
+                "label": "url",
+                "placeholder": ""
+              }
+            },
+            "site_name": {
+              "type": "Text",
+              "config": {
+                "label": "site name",
+                "placeholder": ""
+              }
+            },
+            "og_image": {
+              "type": "Image",
+              "config": {
+                "label": "OG Image",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "locale": {
+              "type": "Text",
+              "config": {
+                "label": "locale",
+                "placeholder": ""
+              }
+            },
+            "type": {
+              "type": "Select",
+              "config": {
+                "label": "Type",
+                "placeholder": "",
+                "options": ["website", "article"]
+              }
+            }
+          }
+        }
+      },
+      "twitter_x": {
+        "type": "Group",
+        "config": {
+          "label": "Twitter X",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "title",
+                "placeholder": ""
+              }
+            },
+            "description": {
+              "type": "Text",
+              "config": {
+                "label": "description",
+                "placeholder": ""
+              }
+            },
+            "twitter_x_image": {
+              "type": "Image",
+              "config": {
+                "label": "Twitter X Image",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
