@@ -2,11 +2,11 @@ import './globals.css';
 import { Bebas_Neue, League_Spartan } from 'next/font/google';
 import clsx from 'clsx';
 import { Providers } from '@/app/providers/providers';
-import Main from '@/app/components/ui/Main';
+import Main from '@/app/components/UI/Main';
 import { prismicClient } from '@/app/lib/clients';
 import { Metadata } from 'next';
-import Header from '@/app/components/navigation/Header';
-import Footer from '@/app/components/navigation/Footer';
+import Header from '@/app/components/Navigation/Header';
+import Footer from '@/app/components/Navigation/Footer';
 
 const bebas_neue = Bebas_Neue({
 	weight: ['400'],
