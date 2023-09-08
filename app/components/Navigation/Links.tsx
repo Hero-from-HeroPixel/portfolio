@@ -2,53 +2,62 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/app/utils/cn';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
-import { Link } from '@nextui-org/link';
+import { Link, LinkProps } from '@nextui-org/link';
 import { FilledLinkToWebField, LinkField } from '@prismicio/client';
 import styles from '@/app/components/Navigation/links.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 
-type LinkProps = {
+interface HeroLinkProps extends LinkProps {
 	className?: string;
 	children: React.ReactNode;
 	href?: string;
 	field?: LinkField;
-	restProps?: PrismicNextLinkProps | LinkProps;
-};
+}
 
 export function ActiveLink({
 	children,
+	onAnimateStart,
+	initial = true,
 	className,
 }: {
 	children: React.ReactNode;
+	onAnimateStart?: () => void;
+	initial?: boolean;
 	className?: string;
 }) {
-	const underlineVariants = {
+	const underlineVariants: Variants = {
 		start: {
-			scale: 0.1,
+			scaleX: 0.1,
 		},
 		end: {
-			scale: 1,
+			scaleX: 1,
 		},
 		exit: {
-			scale: 0.1,
+			scaleX: 0.1,
 		},
 	};
 	return (
-		<p className={cn(`btn ${styles.active} flex flex-col`, className)}>
-			{children}
-
+		<div className={cn(`btn ${styles.active}`, className)}>
+			<motion.p
+				initial={initial && { opacity: 1 }}
+				animate={{ opacity: 0.5 }}
+				exit={{ opacity: 1 }}
+				transition={{ duration: 0.5 }}>
+				{children}
+			</motion.p>
 			<motion.span
-				initial="start"
+				onAnimationStart={onAnimateStart}
+				initial={initial && 'start'}
 				animate="end"
 				exit="exit"
 				variants={underlineVariants}
 				transition={{ duration: 0.5, type: 'spring' }}
-				className="border w-full border-primary mx-auto"></motion.span>
-		</p>
+				className="bg-primary block h-1"></motion.span>
+		</div>
 	);
 }
 
@@ -60,10 +69,13 @@ export function ScrollLink({
 	className,
 	children,
 	href,
+	onClick,
 	...restProps
-}: Omit<LinkProps, 'field'>) {
+}: Omit<HeroLinkProps, 'field'>) {
 	const [activeSection, setActiveSection] = useState(false);
+	const [inAnimation, setInAnimation] = useState<boolean>(false);
 	const [targetEl, setTargetEl] = useState<HTMLElement | null>();
+	const [clicked, setClicked] = useState(false);
 
 	const observeSection = useCallback(
 		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -84,20 +96,37 @@ export function ScrollLink({
 
 	const scrollHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.preventDefault();
+		setClicked(true);
+		if (onClick) onClick(e);
 		targetEl?.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	return (
 		<>
-			<AnimatePresence>
-				{activeSection && <ActiveLink className={className}>{children}</ActiveLink>}{' '}
+			<AnimatePresence
+				onExitComplete={() => {
+					setInAnimation(false);
+					setClicked(false);
+				}}>
+				{activeSection && (
+					<ActiveLink
+						initial={!clicked}
+						onAnimateStart={() => setInAnimation(true)}
+						className={className}>
+						{children}
+					</ActiveLink>
+				)}{' '}
 			</AnimatePresence>
-			{!activeSection && (
+			{!activeSection && !inAnimation && (
 				<Link
 					{...restProps}
 					href={href}
 					onClick={scrollHandler}
-					className={cn(`btn ${styles.navigationLink} ${styles.link}`, className)}>
+					className={cn(
+						`btn ${styles.navigationLink} ${styles.link}`,
+						clicked && styles.clicked,
+						className,
+					)}>
 					{children}
 				</Link>
 			)}
@@ -105,7 +134,13 @@ export function ScrollLink({
 	);
 }
 
-export function NavigationLink({ className, children, href, field, ...restProps }: LinkProps) {
+export function NavigationLink({
+	className,
+	children,
+	href,
+	field,
+	...restProps
+}: HeroLinkProps) {
 	const [activeLink, setActiveLink] = useState(false);
 	const [isScrollLink, setIsScrollLink] = useState(false);
 	const currentPath = usePathname();
@@ -157,7 +192,6 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 		<>
 			{field && (
 				<PrismicNextLink
-					{...restProps}
 					field={field}
 					className={cn(
 						`btn ${styles.navigationLink}
@@ -184,12 +218,17 @@ export function NavigationLink({ className, children, href, field, ...restProps 
 	);
 }
 
-export function ExternalLink({ className, children, href, field, ...restProps }: LinkProps) {
+export function ExternalLink({
+	className,
+	children,
+	href,
+	field,
+	...restProps
+}: HeroLinkProps) {
 	return (
 		<>
 			{field && (
 				<PrismicNextLink
-					{...restProps}
 					field={field}
 					className={cn(`${styles.externalLink} ${styles.link}`, className)}>
 					{children}
