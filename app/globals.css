@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+	@apply bg-foreground w-1;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-foreground rounded-full my-1 px-1;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply dark bg-default border-accent rounded-full;
+}
+
+@supports (scrollbar-color: red blue) {
+	* {
+		scrollbar-color: #212121 #3300ff;
+	}
+}
+
 p {
 	@apply lg:text-2xl text-lg;
 }
