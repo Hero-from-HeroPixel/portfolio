@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<body className={clsx(bebas_neue.variable, league_spartan.variable)}>
 				<Providers>
-					{/* <Header /> */}
+					<Header />
 					<Main>{children}</Main>
 					{/* <Footer /> */}
 				</Providers>

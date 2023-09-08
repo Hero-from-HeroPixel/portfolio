@@ -91,15 +91,19 @@ export function ScrollLink({
 		if (href && typeof document !== 'undefined') {
 			const targetId = href.replace(/.*\#/, '');
 			setTargetEl(document.getElementById(targetId));
-			if (targetEl) observer.observe(targetEl);
+			if (targetEl && observer) observer.observe(targetEl);
 		}
 	}, [href, targetEl, observeSection]);
 
 	const scrollHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.preventDefault();
-		setClicked(true);
 		if (onClick) onClick(e);
-		targetEl?.scrollIntoView({ behavior: 'smooth' });
+		if (targetEl) {
+			setClicked(true);
+			targetEl.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			console.error('target element not found');
+		}
 	};
 
 	return (
