@@ -33,13 +33,20 @@ export function HeroNavbarContent({ cta, as, links, className }: NavBarContentPr
 		<ul
 			className={cn(
 				'justify-between gap-10',
-				as === 'MobileMenu' && 'flex flex-col justify-center lg:hidden',
+				as === 'MobileMenu' && 'flex flex-col justify-center lg:hidden ',
 				as === 'DesktopMenu' && 'lg:flex justify-between hidden',
 				className,
 			)}>
 			{links.map((link, i) => (
-				<li key={link + i.toString()}>
-					<NavigationLink className="text-foreground after:w-0" field={link.url}>
+				<li
+					key={link + i.toString()}
+					className={cn(as === 'MobileMenu' && 'w-3/4 mx-auto')}>
+					<NavigationLink
+						className={cn(
+							'text-foreground after:w-0',
+							as === 'MobileMenu' && 'text-3xl',
+						)}
+						field={link.url}>
 						{link.label}
 					</NavigationLink>
 				</li>
@@ -105,7 +112,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 							cta={
 								<DefaultButton
 									onClick={ctaHandler}
-									className="lg:justify-self-end bg-foreground text-background">
+									className="lg:justify-self-end bg-foreground text-background w-10/12 max-w-none mx-auto">
 									{data.cta_label}
 								</DefaultButton>
 							}
