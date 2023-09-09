@@ -4,7 +4,8 @@ import { slide } from '@/app/components/Navigation/Header/anim';
 import { motion } from 'framer-motion';
 import { GroupField } from '@prismicio/client';
 import { NavigationDocumentDataNavigationItem, Simplify } from '@/prismicio-types';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler } from 'react';
+import styles from '@/app/components/Navigation/Header/navMenu.module.css';
 
 interface NavbarContentProps {
 	as: 'VerticalMenu' | 'HorizontalMenu';
@@ -30,9 +31,10 @@ export function HeroNavbarContent({
 	return (
 		<motion.ul
 			className={cn(
-				'justify-between gap-10',
+				' justify-between gap-10',
 				menuLayout === 'VerticalMenu' && 'flex flex-col justify-center ',
 				menuLayout === 'HorizontalMenu' && 'lg:flex justify-between hidden',
+				styles.navItems,
 				className,
 			)}>
 			{links.map((link, i) => (
@@ -43,13 +45,13 @@ export function HeroNavbarContent({
 					animate="enter"
 					exit="exit"
 					key={link + i.toString()}
-					className={cn(menuLayout === 'VerticalMenu' && 'w-3/4 mx-auto')}>
+					className={cn(
+						menuLayout === 'VerticalMenu' && 'w-3/4 mx-auto',
+						styles.navItem,
+					)}>
 					<NavigationLink
 						onClick={onNavigationClick}
-						className={cn(
-							'text-foreground after:w-0',
-							menuLayout === 'VerticalMenu' && 'text-3xl',
-						)}
+						className={cn('text-foreground after:w-0 hover:text-opacity-100')}
 						field={link.url}>
 						{link.label}
 					</NavigationLink>
@@ -64,7 +66,7 @@ export function HeroNavbarContent({
 				className="flex justify-center">
 				{cta}
 			</motion.div>
-
+			<div className="" id="background-pattern"></div>
 			{children}
 		</motion.ul>
 	);

@@ -21,6 +21,7 @@ type Props = {
 
 export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	//const isMenuOpen = true;
 	const [headerMinify, setHeaderMinify] = useState(true);
 	const { width: windowWidth } = useWindowSize();
 
@@ -59,7 +60,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 						<HeroNavbarContent as="HorizontalMenu" links={data.navigation} />
 						<DefaultButton
 							onClick={ctaHandler}
-							className="lg:justify-self-end hidden lg:block animate-appearance-in delay-700">
+							className="lg:justify-self-end hidden lg:block animate-appearance-in">
 							{data.cta_label}
 						</DefaultButton>
 					</motion.div>
