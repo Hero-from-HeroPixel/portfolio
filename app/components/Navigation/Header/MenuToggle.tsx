@@ -3,13 +3,15 @@ import { motion } from 'framer-motion';
 import { DefaultButton } from '@/app/components/UI/Buttons';
 import { cn } from '@/app/utils/cn';
 
-const Path = (props: any) => (
+const dark = 'hsl(0, 0%, 18%)';
+const light = 'hsl(0, 0%, 95%)';
+const Path = ({ className, color = 'dark', ...restProps }: any) => (
 	<motion.path
-		fill="transparent"
+		className={className}
 		strokeWidth="3"
-		stroke="hsl(0, 0%, 18%)"
+		stroke={color === 'dark' ? dark : light}
 		strokeLinecap="round"
-		{...props}
+		{...restProps}
 	/>
 );
 
@@ -25,18 +27,22 @@ export const MenuToggle = ({ isOpen, onClick, children, className }: MenuToggleP
 		onClick={onClick}
 		aria-label={isOpen ? 'Close menu' : 'Open menu'}
 		className={cn(
-			`lg:hidden p-5 min-w-0 absolute top-5 right-5`,
-			isOpen ? 'bg-transparent text-background' : 'bg-secondary text-foreground',
+			` p-5 min-w-0 absolute top-5 right-5 stroke-foreground hover:stroke-background`,
+			isOpen ? 'bg-transparent ' : 'bg-secondary',
 			className,
 		)}>
-		<svg width="23" height="23" viewBox="0 0 23 23">
+		<svg className="" width="23" height="23" viewBox="0 0 23 23">
 			<Path
+				className="stroke-inherit"
+				color={isOpen ? 'dark' : 'light'}
 				variants={{
 					closed: { d: 'M 2 2.5 L 20 2.5' },
 					open: { d: 'M 3 16.5 L 17 2.5' },
 				}}
 			/>
 			<Path
+				className="stroke-inherit"
+				color={isOpen ? 'dark' : 'light'}
 				d="M 2 9.423 L 20 9.423"
 				variants={{
 					closed: { opacity: 1 },
@@ -45,6 +51,8 @@ export const MenuToggle = ({ isOpen, onClick, children, className }: MenuToggleP
 				transition={{ duration: 0.1 }}
 			/>
 			<Path
+				className="stroke-inherit"
+				color={isOpen ? 'dark' : 'light'}
 				variants={{
 					closed: { d: 'M 2 16.346 L 20 16.346' },
 					open: { d: 'M 3 2.5 L 17 16.346' },

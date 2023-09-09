@@ -4,6 +4,7 @@ import { slide } from '@/app/components/Navigation/Header/anim';
 import { motion } from 'framer-motion';
 import { GroupField } from '@prismicio/client';
 import { NavigationDocumentDataNavigationItem, Simplify } from '@/prismicio-types';
+import { MouseEventHandler, useState } from 'react';
 
 interface NavbarContentProps {
 	as: 'VerticalMenu' | 'HorizontalMenu';
@@ -11,36 +12,43 @@ interface NavbarContentProps {
 	links: GroupField<Simplify<NavigationDocumentDataNavigationItem>>;
 	className?: string;
 	children?: React.ReactNode;
+	onNavigationClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function HeroNavbarContent({
 	cta,
-	as,
+	as: menuLayout,
 	links,
 	className,
 	children,
+	onNavigationClick,
 }: NavbarContentProps) {
+	let animDirection: 'vertical' | 'horizontal' = 'vertical';
+
+	if (menuLayout === 'HorizontalMenu') animDirection = 'horizontal';
+
 	return (
 		<motion.ul
 			className={cn(
 				'justify-between gap-10',
-				as === 'VerticalMenu' && 'flex flex-col justify-center lg:hidden ',
-				as === 'HorizontalMenu' && 'lg:flex justify-between hidden',
+				menuLayout === 'VerticalMenu' && 'flex flex-col justify-center ',
+				menuLayout === 'HorizontalMenu' && 'lg:flex justify-between hidden',
 				className,
 			)}>
 			{links.map((link, i) => (
 				<motion.li
 					custom={i}
-					variants={slide}
+					variants={slide[animDirection]}
 					initial="initial"
 					animate="enter"
 					exit="exit"
 					key={link + i.toString()}
-					className={cn(as === 'VerticalMenu' && 'w-3/4 mx-auto')}>
+					className={cn(menuLayout === 'VerticalMenu' && 'w-3/4 mx-auto')}>
 					<NavigationLink
+						onClick={onNavigationClick}
 						className={cn(
 							'text-foreground after:w-0',
-							as === 'VerticalMenu' && 'text-3xl',
+							menuLayout === 'VerticalMenu' && 'text-3xl',
 						)}
 						field={link.url}>
 						{link.label}
@@ -49,7 +57,7 @@ export function HeroNavbarContent({
 			))}
 			<motion.div
 				custom={links.length}
-				variants={slide}
+				variants={slide[animDirection]}
 				initial="initial"
 				animate="enter"
 				exit="exit"

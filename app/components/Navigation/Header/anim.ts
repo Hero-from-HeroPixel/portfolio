@@ -7,15 +7,28 @@ export const menuSlide = {
 };
 
 export const slide = {
-	initial: { x: 80 },
-	enter: (i: number) => ({
-		x: 0,
-		transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 * i },
-	}),
-	exit: (i: number) => ({
-		x: 80,
-		transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 * i },
-	}),
+	vertical: {
+		initial: { x: 80 },
+		enter: (i: number) => ({
+			x: 0,
+			transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 * i },
+		}),
+		exit: (i: number) => ({
+			x: 80,
+			transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 * i },
+		}),
+	},
+	horizontal: {
+		initial: { y: -80 },
+		enter: (i: number) => ({
+			y: 0,
+			transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 * i },
+		}),
+		exit: (i: number) => ({
+			y: -80,
+			transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 * i },
+		}),
+	},
 };
 
 export const scale = {

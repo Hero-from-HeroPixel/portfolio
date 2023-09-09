@@ -6,13 +6,16 @@ function LogoIcon({
 	className,
 	width = 117,
 	height = 79,
+	onClick,
 }: {
 	className?: string;
+	onClick?: React.MouseEventHandler<SVGSVGElement>;
 	width: number;
 	height: number;
 }) {
 	return (
 		<motion.svg
+			onClick={onClick}
 			exit={{ opacity: 0 }}
 			xmlns="http://www.w3.org/2000/svg"
 			width={width}
