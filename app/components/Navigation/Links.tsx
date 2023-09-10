@@ -41,8 +41,9 @@ export function ActiveLink({
 		},
 	};
 	return (
-		<div className={cn(`btn ${styles.active}`, className)}>
+		<div className={cn(`${styles.active}`, className)}>
 			<motion.p
+				className="btn"
 				initial={initial && { opacity: 1 }}
 				animate={{ opacity: 0.5 }}
 				exit={{ opacity: 1 }}
@@ -90,15 +91,19 @@ export function ScrollLink({
 		if (href && typeof document !== 'undefined') {
 			const targetId = href.replace(/.*\#/, '');
 			setTargetEl(document.getElementById(targetId));
-			if (targetEl) observer.observe(targetEl);
+			if (targetEl && observer) observer.observe(targetEl);
 		}
 	}, [href, targetEl, observeSection]);
 
 	const scrollHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.preventDefault();
-		setClicked(true);
 		if (onClick) onClick(e);
-		targetEl?.scrollIntoView({ behavior: 'smooth' });
+		if (targetEl) {
+			setClicked(true);
+			targetEl.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			console.error('target element not found');
+		}
 	};
 
 	return (
@@ -123,7 +128,8 @@ export function ScrollLink({
 					href={href}
 					onClick={scrollHandler}
 					className={cn(
-						`btn ${styles.navigationLink} ${styles.link}`,
+						'btn',
+						`${styles.navigationLink} ${styles.link}`,
 						clicked && styles.clicked,
 						className,
 					)}>

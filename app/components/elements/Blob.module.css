@@ -1,0 +1,42 @@
+@keyframes rotate {
+	from {
+		rotate: 0deg;
+	}
+
+	50% {
+		scale: 1 1.5;
+	}
+
+	to {
+		rotate: 360deg;
+	}
+}
+
+.blob {
+	background-color: white;
+	aspect-ratio: 1;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	translate: -50% -50%;
+	border-radius: 50%;
+	background: linear-gradient(
+		139deg,
+		rgba(51, 0, 255, 1) 21.56%,
+		rgba(255, 255, 255, 1) 40.54%,
+		rgba(204, 255, 0, 1) 60.51%,
+		rgba(17, 17, 17, 1) 83.1%
+	);
+	animation: rotate 20s infinite;
+	opacity: 0.5;
+	z-index: 1;
+	@apply h-52 lg:h-96;
+}
+
+.blur {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	z-index: 2;
+	backdrop-filter: blur(12vmax);
+}
