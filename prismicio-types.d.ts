@@ -99,6 +99,38 @@ export type FooterDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Hero Introduction documents
+ */
+interface HeroIntroductionDocumentData {
+  /**
+   * Hero Introduction field in *Hero Introduction*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero_introduction.hero_introduction
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  hero_introduction: prismic.RichTextField;
+}
+
+/**
+ * Hero Introduction document from Prismic
+ *
+ * - **API ID**: `hero_introduction`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HeroIntroductionDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<HeroIntroductionDocumentData>,
+    "hero_introduction",
+    Lang
+  >;
+
 type HomePageDocumentDataSlicesSlice = never;
 
 /**
@@ -435,6 +467,7 @@ export type SettingsDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | FooterDocument
+  | HeroIntroductionDocument
   | HomePageDocument
   | NavigationDocument
   | SettingsDocument;
@@ -513,6 +546,8 @@ declare module "@prismicio/client" {
     export type {
       FooterDocument,
       FooterDocumentData,
+      HeroIntroductionDocument,
+      HeroIntroductionDocumentData,
       HomePageDocument,
       HomePageDocumentData,
       HomePageDocumentDataSlicesSlice,

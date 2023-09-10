@@ -13,7 +13,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  */
 const Hero = ({ slice }: HeroProps): JSX.Element => {
 	return (
-		<BoundWrapper className=" h-screen">
+		<BoundWrapper className="h-screen flex flex-col justify-center items-center bg-background">
 			<Heading>
 				hero <span>from</span> heropixels
 			</Heading>

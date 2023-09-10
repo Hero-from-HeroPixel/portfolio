@@ -25,7 +25,7 @@ body {
 }
 
 p {
-	@apply lg:text-2xl text-lg;
+	@apply lg:text-2xl text-lg font-body_font;
 }
 
 .backdrop {

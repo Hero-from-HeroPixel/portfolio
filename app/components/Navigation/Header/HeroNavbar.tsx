@@ -26,7 +26,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	const [headerMinify, setHeaderMinify] = useState(true);
 	const { width: windowWidth } = useWindowSize();
 
-	scroll((progress) => (progress > 0.1 ? setHeaderMinify(true) : setHeaderMinify(false)));
+	scroll((progress) => (progress > 0.05 ? setHeaderMinify(true) : setHeaderMinify(false)));
 
 	const ctaHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setIsMenuOpen(false);
@@ -37,10 +37,6 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 			console.error('CTA link is invalid');
 		}
 	};
-
-	const modalTitle = 'Credits- Thanks to the following content creators';
-
-	const ModalBodyContent = <div className=""></div>;
 
 	return (
 		<>

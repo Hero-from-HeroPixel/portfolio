@@ -1,6 +1,7 @@
 import { cn } from '@/app/utils/cn';
 import { Button, ButtonProps } from '@nextui-org/button';
 import React from 'react';
+import styles from '@/app/components/UI/Buttons.module.css';
 
 export interface PrimaryButtonProps extends ButtonProps {
 	className?: string;
@@ -8,16 +9,17 @@ export interface PrimaryButtonProps extends ButtonProps {
 }
 export function PrimaryButton({ className, children, ...restProps }: PrimaryButtonProps) {
 	return (
-		<div className="">
-			<Button
-				{...restProps}
-				color="primary"
-				variant="solid"
-				radius="full"
-				className={cn('btn px-16 text-background', className)}>
-				{children}
-			</Button>
-		</div>
+		<Button
+			className={cn(
+				'btn p-1 text-background hover:!text-background border-foreground transition-all !duration-300',
+				className,
+			)}
+			{...restProps}
+			color="primary"
+			variant="ghost"
+			radius="full">
+			<span className="rounded-full bg-primary w-full h-full px-16">{children}</span>
+		</Button>
 	);
 }
 
@@ -74,7 +76,7 @@ export function SocialButton({ className, children, ...restProps }: SocialButton
 			variant="ghost"
 			color="secondary"
 			className={cn(
-				' border-none sm:border-2 p-2 lg:p-1 fill-secondary hover:fill-background',
+				' border-none sm:border-2 p-2 lg:p-1 fill-secondary hover:fill-background hover:text-background',
 				className,
 			)}>
 			{children}
