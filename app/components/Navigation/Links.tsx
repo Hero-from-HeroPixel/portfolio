@@ -42,12 +42,7 @@ export function ActiveLink({
 	};
 	return (
 		<div className={cn(`${styles.active}`, className)}>
-			<motion.p
-				className="btn"
-				initial={initial && { opacity: 1 }}
-				animate={{ opacity: 0.5 }}
-				exit={{ opacity: 1 }}
-				transition={{ duration: 0.5 }}>
+			<motion.p className="btn" transition={{ duration: 0.5 }}>
 				{children}
 			</motion.p>
 			<motion.span
@@ -129,7 +124,7 @@ export function ScrollLink({
 					onClick={scrollHandler}
 					className={cn(
 						'btn',
-						`${styles.navigationLink} ${styles.link}`,
+						`${styles.link}`,
 						clicked && styles.clicked,
 						className,
 					)}>
@@ -197,13 +192,7 @@ export function NavigationLink({
 	return (
 		<>
 			{field && (
-				<PrismicNextLink
-					field={field}
-					className={cn(
-						`btn ${styles.navigationLink}
-						${styles.link}`,
-						className,
-					)}>
+				<PrismicNextLink field={field} className={cn(`btn ${styles.link}`, className)}>
 					{children}
 				</PrismicNextLink>
 			)}
@@ -212,11 +201,7 @@ export function NavigationLink({
 					{...restProps}
 					as={NextLink}
 					href={href}
-					className={cn(
-						`btn ${styles.navigationLink}
-						${styles.link}`,
-						className,
-					)}>
+					className={cn(`btn ${styles.link}`, className)}>
 					{children}
 				</Link>
 			)}

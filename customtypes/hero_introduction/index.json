@@ -1,0 +1,20 @@
+{
+  "id": "hero_introduction",
+  "label": "Hero Introduction",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "hero_introduction": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Hero Introduction",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "single": "paragraph,strong,em"
+        }
+      }
+    }
+  }
+}

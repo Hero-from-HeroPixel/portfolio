@@ -9,35 +9,38 @@ import {
 	ModalFooter,
 	useDisclosure,
 } from '@nextui-org/modal';
-
-const defaultButtonProps: ButtonProps = {
-	radius: 'full',
-	color: 'default',
-	variant: 'solid',
-};
+import { ModalButton } from '@/app/components/UI/ModalButton';
+import { cn } from '@/app/utils/cn';
 
 type Props = {
-	BtnProps?: ButtonProps;
 	modalTitle: string;
 	ModalBodyContent: React.ReactNode;
 	ModalActions?: React.ReactNode;
 	CloseProps?: ButtonProps;
+	OpenButton: {
+		title: string;
+		className?: string;
+	};
 };
 
-export default function ModalWithButton({
-	BtnProps = defaultButtonProps,
+export function HeroModal({
 	modalTitle,
 	ModalBodyContent,
 	ModalActions,
-	CloseProps = defaultButtonProps,
+	CloseProps,
+	OpenButton,
 }: Props) {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	return (
 		<>
-			<Button {...BtnProps} onPress={onOpen}>
-				{BtnProps.children}
-			</Button>
-			<Modal isOpen={isOpen} placement={'bottom-center'} onOpenChange={onOpenChange}>
+			<ModalButton onClick={onOpen} className={cn('font-light', OpenButton?.className)}>
+				{OpenButton.title}
+			</ModalButton>
+			<Modal
+				className="bg-background text-foreground"
+				isOpen={isOpen}
+				placement={'bottom-center'}
+				onOpenChange={onOpenChange}>
 				<ModalContent>
 					{(onClose) => (
 						<>
@@ -46,8 +49,12 @@ export default function ModalWithButton({
 							</ModalHeader>
 							<ModalBody>{ModalBodyContent}</ModalBody>
 							<ModalFooter>
-								<Button {...CloseProps} onPress={onClose}>
-									{CloseProps.children}
+								<Button
+									color="default"
+									className="text-background btn"
+									{...CloseProps}
+									onPress={onClose}>
+									Close
 								</Button>
 								{ModalActions}
 							</ModalFooter>

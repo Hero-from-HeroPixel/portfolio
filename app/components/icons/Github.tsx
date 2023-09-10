@@ -4,7 +4,7 @@ type Props = {
 	width?: number;
 	height?: number;
 };
-export function Icon({ className, width, height }: Props) {
+export function Github({ className, width, height }: Props) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

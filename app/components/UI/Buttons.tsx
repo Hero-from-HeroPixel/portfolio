@@ -1,28 +1,31 @@
+'use client';
 import { cn } from '@/app/utils/cn';
 import { Button, ButtonProps } from '@nextui-org/button';
+import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
-import styles from '@/app/components/UI/Buttons.module.css';
 
-interface PrimaryButtonProps extends ButtonProps {
+export interface PrimaryButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
 export function PrimaryButton({ className, children, ...restProps }: PrimaryButtonProps) {
 	return (
-		<div className="">
-			<Button
-				{...restProps}
-				color="primary"
-				variant="solid"
-				radius="full"
-				className={cn('btn px-16 text-background', className)}>
-				{children}
-			</Button>
-		</div>
+		<Button
+			className={cn(
+				'btn p-1 text-background hover:!text-background border-foreground transition-all !duration-300',
+				className,
+			)}
+			{...restProps}
+			color="primary"
+			variant="ghost"
+			radius="full">
+			<span className="rounded-full bg-primary w-full h-full px-16">{children}</span>
+		</Button>
 	);
 }
 
-interface SecondaryButtonProps extends ButtonProps {
+export interface SecondaryButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
@@ -42,7 +45,7 @@ export function SecondaryButton({ className, children, ...restProps }: Secondary
 	);
 }
 
-interface DefaultButtonProps extends ButtonProps {
+export interface DefaultButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
@@ -62,35 +65,31 @@ export function DefaultButton({ className, children, ...restProps }: DefaultButt
 	);
 }
 
-interface LinkButtonProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
+export interface SocialButtonsProps extends LinkProps {
 	className?: string;
 	children: React.ReactNode;
-}
-export function LinkButton({ className, children, ...restProps }: LinkButtonProps) {
-	return (
-		<button {...restProps} className={cn('btn max-w-fit', styles.link, className)}>
-			{children}
-		</button>
-	);
+	href: string;
+	external?: boolean;
 }
 
-interface SocialButtonsProps extends ButtonProps {
-	className?: string;
-	children: React.ReactNode;
-}
-
-export function SocialButton({ className, children, ...restProps }: SocialButtonsProps) {
+export function SocialButton({
+	external = true,
+	href,
+	className,
+	children,
+	...restProps
+}: SocialButtonsProps) {
 	return (
-		<Button
+		<Link
+			target={external ? '_blank' : '_self'}
+			rel={external ? 'noreferrer' : ''}
+			href={href}
 			{...restProps}
-			isIconOnly
-			variant="ghost"
-			color="secondary"
 			className={cn(
-				' border-none sm:border-2 p-2 lg:p-1 fill-secondary hover:fill-background',
+				'w-10 h-10 bg-transparent border-none sm:border-2 p-2 lg:p-1 fill-secondary hover:fill-background hover:text-background hover:bg-foreground rounded-xl transition-all duration-200 ease-out',
 				className,
 			)}>
 			{children}
-		</Button>
+		</Link>
 	);
 }

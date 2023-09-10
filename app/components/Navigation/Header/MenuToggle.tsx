@@ -27,7 +27,7 @@ export const MenuToggle = ({ isOpen, onClick, children, className }: MenuToggleP
 		onClick={onClick}
 		aria-label={isOpen ? 'Close menu' : 'Open menu'}
 		className={cn(
-			` p-5 min-w-0 absolute top-5 right-5 stroke-foreground hover:stroke-background`,
+			` p-5 min-w-0 absolute top-5 right-5 lg:top-10 lg:right-10 stroke-foreground lg:bg-transparent hover:stroke-background `,
 			isOpen ? 'bg-transparent ' : 'bg-secondary',
 			className,
 		)}>

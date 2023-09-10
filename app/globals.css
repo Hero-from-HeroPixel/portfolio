@@ -25,11 +25,19 @@ body {
 }
 
 p {
-	@apply lg:text-2xl text-lg;
+	@apply lg:text-xl 2xl:text-2xl text-lg font-body_font;
+}
+
+.backdrop {
+	@apply fixed w-screen h-screen bg-black bg-opacity-30 z-50;
 }
 
 .btn {
-	@apply font-medium font-body_font lg:text-xl text-lg;
+	@apply font-body_font lg:text-xl text-lg;
+}
+
+.btn.bold {
+	@apply font-medium;
 }
 
 p.sm {
