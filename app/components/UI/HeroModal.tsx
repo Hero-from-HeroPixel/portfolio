@@ -36,7 +36,11 @@ export function HeroModal({
 			<ModalButton onClick={onOpen} className={cn('font-light', OpenButton?.className)}>
 				{OpenButton.title}
 			</ModalButton>
-			<Modal isOpen={isOpen} placement={'bottom-center'} onOpenChange={onOpenChange}>
+			<Modal
+				className="bg-background text-foreground"
+				isOpen={isOpen}
+				placement={'bottom-center'}
+				onOpenChange={onOpenChange}>
 				<ModalContent>
 					{(onClose) => (
 						<>
@@ -45,7 +49,11 @@ export function HeroModal({
 							</ModalHeader>
 							<ModalBody>{ModalBodyContent}</ModalBody>
 							<ModalFooter>
-								<Button {...CloseProps} onPress={onClose}>
+								<Button
+									color="default"
+									className="text-background btn"
+									{...CloseProps}
+									onPress={onClose}>
 									Close
 								</Button>
 								{ModalActions}

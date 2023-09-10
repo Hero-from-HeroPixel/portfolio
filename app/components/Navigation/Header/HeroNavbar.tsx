@@ -58,7 +58,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 				initial={false}
 				animate={isMenuOpen ? 'open' : 'closed'}
 				custom={height}
-				className={`relative ${theme} text-foreground bg-background w-full lg:px-10 lg:pt-5 sticky top-0 z-50`}>
+				className={`relative ${theme} text-foreground bg-transparent w-full lg:px-10 lg:pt-5 sticky top-0 z-50`}>
 				<AnimatePresence mode="wait">
 					{!headerMinify && (
 						<motion.div
