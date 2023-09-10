@@ -18,7 +18,13 @@ function blobAnimate(el: HTMLElement, left: number, top: number, duration?: numb
 
 function touchEventHandler(e: TouchEvent) {
 	const blobEl = document.getElementById('blob');
-	if (blobEl) blobAnimate(blobEl, e.touches[0].screenX / 2, e.touches[0].screenY, 1500);
+	const screenHeight = window.innerHeight;
+	const x = e.touches[0].screenX;
+	const y = e.touches[0].screenY;
+	console.log(screenHeight);
+	console.log('x', x);
+	console.log('y', (screenHeight + y) * 1.1);
+	if (blobEl) blobAnimate(blobEl, x / 2, screenHeight + y, 1500);
 }
 
 export default function Blob({}: Props) {
