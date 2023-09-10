@@ -32,13 +32,7 @@ export default function Blob({}: Props) {
 				} else {
 					window.onpointermove = (e) => {
 						const { clientX, clientY } = e;
-						blobEl.animate(
-							{
-								left: `${clientX}px`,
-								top: `${clientY}px`,
-							},
-							{ duration: 3000, fill: 'forwards' },
-						);
+						blobAnimate(blobEl, clientX, clientY, 2000);
 					};
 				}
 			}
