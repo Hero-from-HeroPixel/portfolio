@@ -1,17 +1,26 @@
 import React from 'react';
 import { HeroModal } from '@/app/components/UI/HeroModal';
+import { cn } from '@/app/utils/cn';
 
-type Props = {};
+type Props = {
+	openButton?: {
+		title?: string;
+		className?: string;
+	};
+};
 
-export default function CreditsModal({}: Props) {
+export default function CreditsModal({ openButton }: Props) {
 	const modalTitle = 'Credits- Thanks to the following content creators';
 
 	const ModalBodyContent = <div className=""></div>;
 	return (
 		<HeroModal
 			OpenButton={{
-				title: 'credits',
-				className: 'text-foreground mx-auto mb-5 after:border-foreground',
+				title: openButton?.title || 'credits',
+				className: cn(
+					'text-foreground mx-auto after:border-foreground',
+					openButton?.className,
+				),
 			}}
 			modalTitle={modalTitle}
 			ModalBodyContent={ModalBodyContent}
