@@ -1,9 +1,8 @@
 import { cn } from '@/app/utils/cn';
 import { Button, ButtonProps } from '@nextui-org/button';
 import React from 'react';
-import styles from '@/app/components/UI/Buttons.module.css';
 
-interface PrimaryButtonProps extends ButtonProps {
+export interface PrimaryButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
@@ -22,7 +21,7 @@ export function PrimaryButton({ className, children, ...restProps }: PrimaryButt
 	);
 }
 
-interface SecondaryButtonProps extends ButtonProps {
+export interface SecondaryButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
@@ -42,7 +41,7 @@ export function SecondaryButton({ className, children, ...restProps }: Secondary
 	);
 }
 
-interface DefaultButtonProps extends ButtonProps {
+export interface DefaultButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
@@ -62,19 +61,7 @@ export function DefaultButton({ className, children, ...restProps }: DefaultButt
 	);
 }
 
-interface LinkButtonProps extends React.HtmlHTMLAttributes<HTMLButtonElement> {
-	className?: string;
-	children: React.ReactNode;
-}
-export function LinkButton({ className, children, ...restProps }: LinkButtonProps) {
-	return (
-		<button {...restProps} className={cn('btn max-w-fit', styles.link, className)}>
-			{children}
-		</button>
-	);
-}
-
-interface SocialButtonsProps extends ButtonProps {
+export interface SocialButtonsProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
 }
