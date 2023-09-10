@@ -12,7 +12,7 @@ import { menuSlide, slide } from '@/app/components/Navigation/Header/anim';
 import { HeroNavbarContent } from '@/app/components/Navigation/Header/NavMenu';
 import { useWindowSize } from '@uidotdev/usehooks';
 import Brand from '@/app/components/Navigation/Header/Brand';
-import Curve from '@/app/components/Navigation/Header/curve';
+import Curve from '@/app/components/Navigation/Header/Curve';
 
 type Props = {
 	theme?: 'dark' | 'light';
@@ -44,7 +44,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 			initial={false}
 			animate={isMenuOpen ? 'open' : 'closed'}
 			custom={height}
-			className={`relative ${theme} text-foreground bg-background w-full lg:px-10 lg:pt-5 sticky top-0 `}>
+			className={`relative ${theme} text-foreground bg-transparent w-full lg:px-10 lg:pt-5 sticky top-0 z-50 `}>
 			<AnimatePresence mode="wait">
 				{!headerMinify && (
 					<motion.div
@@ -74,7 +74,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 						exit={{ x: 200 }}
 						className="fixed top-1 right-5 z-10 ">
 						<MenuToggle
-							className={`flex bg-default `}
+							className={`flex bg-default lg:px-5`}
 							onClick={() => setIsMenuOpen((current) => !current)}
 							isOpen={isMenuOpen}
 						/>

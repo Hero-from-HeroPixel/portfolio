@@ -1,3 +1,4 @@
+'use client';
 import LogoIcon from '@/app/assets/Logo';
 import { cn } from '@/app/utils/cn';
 import { scrollTo } from '@/app/utils/scrollTo';

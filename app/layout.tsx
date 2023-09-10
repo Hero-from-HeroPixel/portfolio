@@ -7,6 +7,7 @@ import { prismicClient } from '@/app/lib/clients';
 import { Metadata } from 'next';
 import Header from '@/app/components/Navigation/Header/Header';
 import Footer from '@/app/components/Navigation/Footer';
+import Blob from '@/app/components/elements/Blob';
 
 const bebas_neue = Bebas_Neue({
 	weight: ['400'],
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<body className={clsx(bebas_neue.variable, league_spartan.variable)}>
 				<Providers>
+					<Blob />
 					<Header />
 					<Main>{children}</Main>
 					{/* <Footer /> */}

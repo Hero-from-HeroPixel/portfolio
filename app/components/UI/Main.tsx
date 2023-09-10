@@ -9,7 +9,11 @@ type Props = {
 
 export default function Main({ children, className, theme = 'dark' }: Props) {
 	return (
-		<main className={cn(`min-h-screen ${theme} text-foreground bg-background`, className)}>
+		<main
+			className={cn(
+				`min-h-screen ${theme} text-foreground bg-background z-40`,
+				className,
+			)}>
 			{children}
 		</main>
 	);
