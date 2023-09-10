@@ -1,9 +1,9 @@
-.navigationLink {
+.link {
 	@apply max-w-fit relative font-body_font hover:text-opacity-75 text-foreground cursor-pointer;
 }
 
 .externalLink {
-	@apply max-w-fit relative font-body_font items-start hover:text-opacity-75 text-foreground;
+	@apply items-start;
 }
 
 .link::after {
