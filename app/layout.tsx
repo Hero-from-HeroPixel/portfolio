@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<Blob />
 					<Header />
 					<Main>{children}</Main>
-					{/* <Footer /> */}
+					<Footer />
 				</Providers>
 			</body>
 		</html>

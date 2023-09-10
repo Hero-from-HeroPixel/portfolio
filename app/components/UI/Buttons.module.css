@@ -1,5 +1,5 @@
 .link {
-	@apply relative px-2 pt-2 rounded-t-xl;
+	@apply relative rounded-t-xl;
 }
 
 .link::after {
