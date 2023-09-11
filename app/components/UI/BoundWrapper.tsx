@@ -1,18 +1,20 @@
+import { KeyTextField } from '@prismicio/client';
 import clsx from 'clsx';
 import React from 'react';
 
-type Props = {
+interface Props {
 	children: React.ReactNode;
 	as?: React.ElementType;
 	className?: string;
-	id?: string;
-};
+	id?: string | KeyTextField;
+}
 
 export default function BoundWrapper({
 	as: Comp = 'section',
 	id,
 	className,
 	children,
+	id,
 	...restProps
 }: Props) {
 	return (

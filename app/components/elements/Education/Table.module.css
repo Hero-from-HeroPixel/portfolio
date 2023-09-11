@@ -1,0 +1,31 @@
+.table {
+	@apply w-11/12 lg:w-full mx-auto;
+}
+
+.table > tbody p {
+	@apply border-b-2 border-foreground border-opacity-30 my-2;
+}
+
+.table > tbody div {
+	@apply flex flex-col my-3 lg:my-10;
+}
+
+.table > tbody tr {
+	@apply border-t-2 border-foreground border-opacity-75 flex flex-col lg:flex-row lg:justify-between lg:items-center;
+}
+
+.table > tbody > tr > td {
+	@apply text-lg lg:text-xl font-body_font h-fit lg:h-full mt-3 lg:my-0;
+}
+
+.table div > p {
+	@apply text-base lg:text-lg font-light;
+}
+
+.table strong {
+	@apply font-medium;
+}
+
+.table .noUnderline p {
+	@apply border-none;
+}

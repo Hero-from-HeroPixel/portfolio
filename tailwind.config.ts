@@ -16,7 +16,7 @@ const config: Config = {
 				body_font: ['var(--font-league-spartan)'],
 			},
 			colors: {
-				base: '#212121',
+				dark: '#212121',
 				primary: '#CCFF00',
 				secondary: '#ffffff',
 				accent: '#3300FF',
