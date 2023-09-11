@@ -15,7 +15,7 @@
 }
 
 .table > tbody > tr > td {
-	@apply text-lg lg:text-xl font-body_font h-fit lg:h-full mt-3 lg:my-0;
+	@apply text-lg lg:text-xl font-body_font h-fit lg:h-full mt-3 lg:my-0 lg:w-4/6;
 }
 
 .table div > p {
