@@ -1,8 +1,9 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import Heading from '@/app/components/UI/Heading';
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+import { Content, isFilled } from '@prismicio/client';
+import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
 import styles from '@/app/components/elements/Education/Table.module.css';
+import { prismicClient } from '@/app/lib/clients';
 
 /**
  * Props for `Education`.
@@ -12,7 +13,18 @@ export type EducationProps = SliceComponentProps<Content.EducationSlice>;
 /**
  * Component for "Education" Slices.
  */
-const Education = ({ slice }: EducationProps): JSX.Element => {
+const Education = async ({ slice }: EducationProps): Promise<JSX.Element> => {
+	const educationEntries = await Promise.all(
+		slice.items.map((item) => {
+			if (
+				isFilled.contentRelationship(item.education_entry) &&
+				item.education_entry.uid
+			) {
+				return prismicClient.getByUID('education_entry', item.education_entry.uid);
+			}
+		}),
+	);
+
 	return (
 		<BoundWrapper
 			data-slice-type={slice.slice_type}
@@ -23,35 +35,33 @@ const Education = ({ slice }: EducationProps): JSX.Element => {
 			</Heading>
 			<table className={styles.table}>
 				<tbody>
-					<tr>
-						<td>Completed Courses/Self education (2022-2023)</td>
-						<td>
-							<div>
-								<p>
-									Become a WordPress Developer: Unlocking Power With Code by
-									<strong> Brad Schiff</strong>
-								</p>
-								<p>
-									React - The complete guide 2023 by{' '}
-									<strong>Academind</strong>
-								</p>
-								<p>
-									The Web Developer Bootcamp by <strong></strong> Colt Steele
-								</p>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>B. Com Law degree (2019-2022)</td>
-						<td>
-							<div className="flex flex-col">
-								<p className={styles.noUnderline}>
-									I studied law with plans to become a lawyer. However, I
-									decided to switch careers and do what I love, programming.
-								</p>
-							</div>
-						</td>
-					</tr>
+					{educationEntries &&
+						educationEntries.map((entry) => (
+							<>
+								{entry && (
+									<tr key={entry.id}>
+										<td className={styles.noUnderline}>
+											<PrismicRichText field={entry.data.title} />
+										</td>
+										<td>
+											<div
+												className={
+													entry.data.content.length > 1
+														? ''
+														: styles.noUnderline
+												}>
+												{entry.data.content.map((item, i) => (
+													<PrismicRichText
+														key={i}
+														field={item.education}
+													/>
+												))}
+											</div>
+										</td>
+									</tr>
+								)}
+							</>
+						))}
 				</tbody>
 			</table>
 		</BoundWrapper>

@@ -27,10 +27,15 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	const { width: windowWidth } = useWindowSize();
 
 	useEffect(() => {
-		scroll((progress) =>
-			progress > 0.05 ? setHeaderMinify(true) : setHeaderMinify(false),
-		);
-	}, []);
+		scroll((progress) => {
+			if (progress > 0.05) {
+				setHeaderMinify(true);
+			} else {
+				isMenuOpen ? setIsMenuOpen(false) : null;
+				setHeaderMinify(false);
+			}
+		});
+	}, [isMenuOpen]);
 
 	const ctaHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setIsMenuOpen(false);
@@ -58,7 +63,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 				initial={false}
 				animate={isMenuOpen ? 'open' : 'closed'}
 				custom={height}
-				className={`relative ${theme} text-foreground bg-transparent w-full lg:px-10 lg:pt-5 sticky top-0 z-50`}>
+				className={`relative ${theme} text-foreground bg-transparent w-full h-14 lg:px-10 lg:pt-5 fixed top-0 z-50`}>
 				<AnimatePresence mode="wait">
 					{!headerMinify && (
 						<motion.div
@@ -84,9 +89,9 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 					{(headerMinify || (windowWidth !== null && windowWidth <= 1024)) && (
 						<motion.div
 							initial={{ opacity: 0, x: 80 }}
-							animate={{ opacity: 100, x: 0, transition: { delay: 0.5 } }}
+							animate={{ opacity: 100, x: 0, transition: { delay: 0.3 } }}
 							exit={{ x: 200 }}
-							className="fixed top-1 right-5 z-10 ">
+							className="fixed lg:top-2 right-5 z-10 ">
 							<MenuToggle
 								className={`flex bg-default `}
 								onClick={() => setIsMenuOpen((current) => !current)}

@@ -18,7 +18,7 @@
 	@apply text-lg lg:text-xl font-body_font h-fit lg:h-full mt-3 lg:my-0;
 }
 
-.table p {
+.table div > p {
 	@apply text-base lg:text-lg font-light;
 }
 
@@ -26,6 +26,6 @@
 	@apply font-medium;
 }
 
-.table .noUnderline {
+.table .noUnderline p {
 	@apply border-none;
 }

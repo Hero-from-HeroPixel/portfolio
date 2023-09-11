@@ -28,9 +28,8 @@
 		rgba(17, 17, 17, 1) 83.1%
 	);
 	animation: rotate 20s infinite;
-	opacity: 1;
 	z-index: 1;
-	@apply h-52 lg:h-96;
+	@apply h-52 lg:h-96 opacity-80 lg:opacity-100;
 }
 
 .blur {
