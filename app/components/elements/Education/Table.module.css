@@ -1,0 +1,11 @@
+.table > tbody > tr > td > div > p {
+	@apply border-b-2 border-foreground border-opacity-30;
+}
+
+.table > tbody > tr {
+	@apply border-t-2 border-foreground border-opacity-75;
+}
+
+.table > tbody > tr > td {
+	@apply my-20;
+}
