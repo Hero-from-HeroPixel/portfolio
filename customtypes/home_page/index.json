@@ -13,6 +13,9 @@
           "choices": {
             "hero": {
               "type": "SharedSlice"
+            },
+            "education": {
+              "type": "SharedSlice"
             }
           }
         }

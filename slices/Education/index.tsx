@@ -1,15 +1,23 @@
-import React from 'react';
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
-import Heading from '../../UI/Heading';
+import Heading from '@/app/components/UI/Heading';
+import { Content } from '@prismicio/client';
+import { SliceComponentProps } from '@prismicio/react';
 import styles from '@/app/components/elements/Education/Table.module.css';
 
-type Props = {
-	id?: string;
-};
+/**
+ * Props for `Education`.
+ */
+export type EducationProps = SliceComponentProps<Content.EducationSlice>;
 
-export default function EducationTable({ id }: Props) {
+/**
+ * Component for "Education" Slices.
+ */
+const Education = ({ slice }: EducationProps): JSX.Element => {
 	return (
-		<BoundWrapper id={id}>
+		<BoundWrapper
+			data-slice-type={slice.slice_type}
+			data-slice-variation={slice.variation}
+			id={slice.primary.section_id}>
 			<Heading className="w-10/12 lg:w-full mx-auto" as="h2">
 				Education
 			</Heading>
@@ -48,4 +56,6 @@ export default function EducationTable({ id }: Props) {
 			</table>
 		</BoundWrapper>
 	);
-}
+};
+
+export default Education;
