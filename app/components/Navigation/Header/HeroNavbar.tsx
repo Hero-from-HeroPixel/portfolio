@@ -94,9 +94,9 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 							initial={{ opacity: 0, x: 80 }}
 							animate={{ opacity: 100, x: 0, transition: { delay: 0.3 } }}
 							exit={{ x: 200 }}
-							className="fixed lg:top-2 right-5 z-10 ">
+							className="fixed lg:top-2 right-0 z-10 ">
 							<MenuToggle
-								className={`flex bg-default `}
+								className={`flex bg-default lg:px-5`}
 								onClick={() => setIsMenuOpen((current) => !current)}
 								isOpen={isMenuOpen}
 							/>

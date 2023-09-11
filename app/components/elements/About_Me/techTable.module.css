@@ -1,5 +1,9 @@
+.table {
+	@apply table-auto;
+}
+
 .table tr {
-	@apply grid grid-cols-3 grid-flow-row-dense;
+	@apply grid grid-cols-6 grid-flow-row-dense lg:gap-20 mb-5;
 }
 
 .table thead > tr {
@@ -7,13 +11,28 @@
 }
 
 .table tr > td {
-	@apply grid grid-flow-col grid-rows-2 gap-x-8 gap-y-4 place-self-start items-start;
+	@apply grid grid-flow-col w-fit grid-rows-2 lg:gap-x-8 2xl:gap-x-16 place-self-start items-start;
 }
 
 .table div > p {
-	@apply flex lg:text-lg text-sm font-light;
+	@apply flex gap-2 lg:text-lg text-sm font-light;
 }
 
 .table p > svg {
-	@apply w-6 aspect-square me-2;
+	@apply w-6 aspect-square;
+}
+.table p > img {
+	@apply w-6 aspect-auto;
+}
+
+.table span > svg {
+	@apply w-6 aspect-square;
+}
+
+.table h4 {
+	@apply mb-1;
+}
+
+.table p {
+	@apply my-1;
 }
