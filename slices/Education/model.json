@@ -28,22 +28,14 @@
         }
       },
       "items": {
-        "title": {
-          "type": "StructuredText",
+        "education_entry": {
+          "type": "Link",
           "config": {
-            "label": "Title",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "single": "paragraph,heading3,strong,em"
-          }
-        },
-        "content": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Content",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "single": "paragraph,strong,em,hyperlink"
+            "label": "Education Entry",
+            "select": "document",
+            "customtypes": [
+              "education_entry"
+            ]
           }
         }
       }

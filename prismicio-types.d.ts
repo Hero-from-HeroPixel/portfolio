@@ -5,6 +5,64 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Item in *Education Entry → Content*
+ */
+export interface EducationEntryDocumentDataContentItem {
+  /**
+   * Education field in *Education Entry → Content*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education_entry.content[].education
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  education: prismic.RichTextField;
+}
+
+/**
+ * Content for Education Entry documents
+ */
+interface EducationEntryDocumentData {
+  /**
+   * Title field in *Education Entry*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education_entry.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Content field in *Education Entry*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: education_entry.content[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  content: prismic.GroupField<Simplify<EducationEntryDocumentDataContentItem>>;
+}
+
+/**
+ * Education Entry document from Prismic
+ *
+ * - **API ID**: `education_entry`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type EducationEntryDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<EducationEntryDocumentData>,
+    "education_entry",
+    Lang
+  >;
+
+/**
  * Item in *Footer → Credits*
  */
 export interface FooterDocumentDataCreditsItem {
@@ -466,6 +524,7 @@ export type SettingsDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | EducationEntryDocument
   | FooterDocument
   | HeroIntroductionDocument
   | HomePageDocument
@@ -502,24 +561,14 @@ export interface EducationSliceDefaultPrimary {
  */
 export interface EducationSliceDefaultItem {
   /**
-   * Title field in *Education → Items*
+   * Education Entry field in *Education → Items*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: education.items[].title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **API ID Path**: education.items[].education_entry
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  title: prismic.RichTextField;
-
-  /**
-   * Content field in *Education → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: education.items[].content
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  content: prismic.RichTextField;
+  education_entry: prismic.ContentRelationshipField<"education_entry">;
 }
 
 /**
@@ -624,6 +673,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      EducationEntryDocument,
+      EducationEntryDocumentData,
       FooterDocument,
       FooterDocumentData,
       HeroIntroductionDocument,

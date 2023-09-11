@@ -19,31 +19,13 @@
 				"__TYPE__": "GroupItemContent",
 				"value": [
 					[
-						"title",
+						"education_entry",
 						{
-							"__TYPE__": "StructuredTextContent",
-							"value": [
-								{
-									"type": "paragraph",
-									"content": {
-										"text": "Proident reprehenderit sint proident nostrud nostrud sunt occaecat sunt sit Lorem est do excepteur. Duis deserunt labore eiusmod velit ea irure adipisicing amet ea veniam."
-									}
-								}
-							]
-						}
-					],
-					[
-						"content",
-						{
-							"__TYPE__": "StructuredTextContent",
-							"value": [
-								{
-									"type": "paragraph",
-									"content": {
-										"text": "Aute est pariatur culpa aliqua dolore."
-									}
-								}
-							]
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "DocumentLink",
+								"id": "mock_document_id"
+							}
 						}
 					]
 				]
