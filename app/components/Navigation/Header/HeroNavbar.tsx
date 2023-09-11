@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationDocumentData, Simplify } from '@/prismicio-types';
 import { DefaultButton } from '@/app/components/UI/Buttons';
 import { scrollTo } from '@/app/utils/scrollTo';
@@ -26,7 +26,11 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	const [headerMinify, setHeaderMinify] = useState(true);
 	const { width: windowWidth } = useWindowSize();
 
-	scroll((progress) => (progress > 0.05 ? setHeaderMinify(true) : setHeaderMinify(false)));
+	useEffect(() => {
+		scroll((progress) =>
+			progress > 0.05 ? setHeaderMinify(true) : setHeaderMinify(false),
+		);
+	}, []);
 
 	const ctaHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setIsMenuOpen(false);
