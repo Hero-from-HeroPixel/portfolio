@@ -40,11 +40,11 @@ p {
 	@apply font-medium;
 }
 
-p.sm {
+.sm {
 	@apply lg:text-lg text-sm;
 }
 
-p.light {
+.light {
 	@apply font-light;
 }
 

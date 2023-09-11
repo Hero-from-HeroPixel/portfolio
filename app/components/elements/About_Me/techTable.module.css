@@ -1,7 +1,19 @@
-.table {
-	@apply table-auto;
+.table tr {
+	@apply grid grid-cols-3 grid-flow-row-dense;
 }
 
-.table tr {
-	@apply flex justify-between flex-wrap lg:flex-nowrap gap-8;
+.table thead > tr {
+	@apply place-items-start;
+}
+
+.table tr > td {
+	@apply grid grid-flow-col grid-rows-2 gap-x-8 gap-y-4 place-self-start items-start;
+}
+
+.table div > p {
+	@apply flex lg:text-lg text-sm font-light;
+}
+
+.table p > svg {
+	@apply w-6 aspect-square me-2;
 }

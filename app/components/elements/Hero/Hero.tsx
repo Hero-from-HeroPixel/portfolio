@@ -62,7 +62,7 @@ export default async function Hero({}: Props) {
 						<GithubIcon />
 					</SocialButton>
 					<SocialButton href={MAIL_LINK}>
-						<FontAwesomeIcon icon={faEnvelope} />
+						<FontAwesomeIcon className="w-full h-full" icon={faEnvelope} />
 					</SocialButton>
 					<SocialButton href={PHONE_LINK}>
 						<WhatsAppIcon />
