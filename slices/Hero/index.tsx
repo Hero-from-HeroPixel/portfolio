@@ -53,7 +53,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 				</div>
 				<HeroCTA href={slice.primary.cta_link} title={slice.primary.cta_label} />
 			</div>
-			<div className="flex flex-col items-center lg:gap-4">
+			<div className="flex flex-col items-center gap-1 lg:gap-4">
 				<div className="w-full h-2 lg:w-2 lg:h-24 bg-accent"></div>
 				<div className="flex lg:flex-col gap-2">
 					<SocialButton href="https://github.com/Hero-from-HeroPixel">

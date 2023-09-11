@@ -131,7 +131,7 @@ export type HeroIntroductionDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomePageDocumentDataSlicesSlice = never;
+type HomePageDocumentDataSlicesSlice = HeroSlice;
 
 /**
  * Content for Home Page documents
