@@ -1,26 +1,28 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 
 import { prismicClient } from '@/app/lib/clients';
-import Hero from '@/app/components/elements/Hero';
+import Hero from '@/app/components/elements/Hero/Hero';
 import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
+import EducationTable from '@/app/components/elements/Education/EducationTable';
 
 export default async function Home() {
-	let pageData;
-	try {
-		const { data } = await prismicClient.getSingle('home_page');
-		pageData = data;
-	} catch (error) {
-		console.error('failed to fetch CMS data');
-	}
+	//*********************Prismic Content */
+	// let pageData;
+	// try {
+	// 	const { data } = await prismicClient.getSingle('home_page');
+	// 	pageData = data;
+	// } catch (error) {
+	// 	console.error('failed to fetch CMS data');
+	// }
 
-	if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
-
+	// if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
+	//*********************End Prismic Content */
 	return (
 		<>
 			<Hero />
-			<div className="h-screen w-full " id="education"></div>
+			<EducationTable />
 			<div className="h-screen w-full " id="projects"></div>
 			<div className="h-screen w-full " id="designs"></div>
 			<div className="h-screen w-full " id="contact-me"></div>
