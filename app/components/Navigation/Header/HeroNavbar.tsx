@@ -14,6 +14,7 @@ import { useWindowSize } from '@uidotdev/usehooks';
 import Brand from '@/app/components/Navigation/Brand';
 import Curve from '@/app/components/Navigation/Header/Curve';
 import CreditsModal from '@/app/components/Navigation/CreditsModal';
+import { MobileScreen } from '@/app/constants/screens';
 
 type Props = {
 	theme?: 'dark' | 'light';
@@ -31,11 +32,13 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 			if (progress > 0.05) {
 				setHeaderMinify(true);
 			} else {
-				isMenuOpen ? setIsMenuOpen(false) : null;
+				isMenuOpen && windowWidth !== null && windowWidth >= MobileScreen
+					? setIsMenuOpen(false)
+					: null;
 				setHeaderMinify(false);
 			}
 		});
-	}, [isMenuOpen]);
+	}, [isMenuOpen, windowWidth]);
 
 	const ctaHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setIsMenuOpen(false);

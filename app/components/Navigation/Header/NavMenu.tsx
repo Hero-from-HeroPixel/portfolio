@@ -51,7 +51,7 @@ export function HeroNavbarContent({
 					)}>
 					<NavigationLink
 						onClick={onNavigationClick}
-						className={cn('text-foreground after:w-0 hover:text-opacity-100')}
+						className="text-foreground after:w-0 hover:text-opacity-100"
 						field={link.url}>
 						{link.label}
 					</NavigationLink>

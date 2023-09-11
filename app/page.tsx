@@ -10,15 +10,15 @@ import About from './components/elements/About_Me/About';
 
 export default async function Home() {
 	//*********************Prismic Content */
-	let pageData;
-	try {
-		const { data } = await prismicClient.getSingle('home_page');
-		pageData = data;
-	} catch (error) {
-		console.error('failed to fetch CMS data');
-	}
+	// let pageData;
+	// try {
+	// 	const { data } = await prismicClient.getSingle('home_page');
+	// 	pageData = data;
+	// } catch (error) {
+	// 	console.error('failed to fetch CMS data');
+	// }
 
-	if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
+	// if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
 	//*********************End Prismic Content */
 	return (
 		<>

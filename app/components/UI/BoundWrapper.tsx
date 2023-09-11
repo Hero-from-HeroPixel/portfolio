@@ -14,7 +14,6 @@ export default function BoundWrapper({
 	id,
 	className,
 	children,
-	id,
 	...restProps
 }: Props) {
 	return (
