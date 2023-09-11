@@ -6,6 +6,7 @@ import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
 import EducationTable from '@/app/components/elements/Education/EducationTable';
+import About from './components/elements/About_Me/About';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -23,6 +24,7 @@ export default async function Home() {
 		<>
 			<Hero />
 			<EducationTable id="education" />
+			<About id="experience" />
 			<div className="h-screen w-full " id="projects"></div>
 			<div className="h-screen w-full " id="designs"></div>
 			<div className="h-screen w-full " id="contact-me"></div>

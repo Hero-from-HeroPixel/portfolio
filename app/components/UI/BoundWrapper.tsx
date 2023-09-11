@@ -11,6 +11,7 @@ interface Props {
 
 export default function BoundWrapper({
 	as: Comp = 'section',
+	id,
 	className,
 	children,
 	id,

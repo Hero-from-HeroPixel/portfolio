@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Providers>
 					<Blob />
 					<Header />
-					<Main>{children}</Main>
+					<Main className="grid grid-flow-row gap-44">{children}</Main>
 					<Footer />
 				</Providers>
 			</body>

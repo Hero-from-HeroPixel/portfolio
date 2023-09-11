@@ -2,7 +2,6 @@
 import { cn } from '@/app/utils/cn';
 import { Button, ButtonProps } from '@nextui-org/button';
 import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 
 export interface PrimaryButtonProps extends ButtonProps {
@@ -33,11 +32,11 @@ export function SecondaryButton({ className, children, ...restProps }: Secondary
 	return (
 		<Button
 			{...restProps}
-			variant="bordered"
+			variant="ghost"
 			color="primary"
 			radius="full"
 			className={cn(
-				'btn lg:px-12 px-6 py-1 max-w-fit hover:bg-primary hover:text-background',
+				'btn lg:px-12 px-6 py-1 max-w-fit hover:text-background',
 				className,
 			)}>
 			{children}
