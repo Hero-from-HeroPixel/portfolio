@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { LinkdnIcon, GithubIcon, WhatsAppIcon } from '../../icons';
 import HeroCTA from '@/app/components/elements/HeroCTA';
+import { GITHUB_LINK, LINKDN_LINK, MAIL_LINK, PHONE_LINK } from '@/app/constants/Social';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => (
@@ -57,16 +58,16 @@ export default async function Hero({}: Props) {
 			<div className="flex flex-col items-center gap-2 lg:gap-4">
 				<div className="w-full h-2 lg:w-2 lg:h-24 bg-accent"></div>
 				<div className="flex lg:flex-col gap-2">
-					<SocialButton href="https://github.com/Hero-from-HeroPixel">
+					<SocialButton href={GITHUB_LINK}>
 						<GithubIcon />
 					</SocialButton>
-					<SocialButton href="mailto:dev@heropixel.co.za">
+					<SocialButton href={MAIL_LINK}>
 						<FontAwesomeIcon icon={faEnvelope} />
 					</SocialButton>
-					<SocialButton href="tel:+27607326830">
+					<SocialButton href={PHONE_LINK}>
 						<WhatsAppIcon />
 					</SocialButton>
-					<SocialButton href="https://www.linkedin.com/in/jean-jacques-grobler/">
+					<SocialButton href={LINKDN_LINK}>
 						<LinkdnIcon />
 					</SocialButton>
 				</div>

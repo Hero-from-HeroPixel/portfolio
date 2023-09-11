@@ -1,0 +1,3 @@
+type PageProps = {
+	id?: string;
+};
