@@ -1,0 +1,7 @@
+.table {
+	@apply table-auto;
+}
+
+.table tr {
+	@apply flex justify-between flex-wrap lg:flex-nowrap gap-8;
+}
