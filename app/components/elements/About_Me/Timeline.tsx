@@ -15,7 +15,9 @@ export default async function Timeline({}: Props) {
 	return (
 		<div className="flex relative">
 			<div className={styles.timeline}></div>
-			<div>{jobs && jobs.map((job) => <Job key={job.data.company} job={job} />)}</div>
+			<div className="flex flex-col-reverse">
+				{jobs && jobs.map((job) => <Job key={job.data.company} job={job} />)}
+			</div>
 			{!jobs && <p>Could not retrieve jobs</p>}
 		</div>
 	);
