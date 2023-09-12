@@ -23,7 +23,7 @@ export default async function Home() {
 	return (
 		<>
 			<Hero />
-			<EducationTable id="education" />
+			{/* <EducationTable id="education" /> */}
 			<About id="experience" />
 			<div className="h-screen w-full " id="projects"></div>
 			<div className="h-screen w-full " id="designs"></div>

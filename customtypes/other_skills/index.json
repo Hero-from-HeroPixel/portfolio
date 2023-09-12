@@ -1,0 +1,26 @@
+{
+  "id": "other_skills",
+  "label": "Other Skills",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "skills_list": {
+        "type": "Link",
+        "config": {
+          "label": "Skills List",
+          "select": "document",
+          "customtypes": ["skills_list"]
+        }
+      }
+    }
+  }
+}

@@ -1,38 +1,11 @@
-.table {
-	@apply table-auto;
+.container {
+	@apply flex flex-wrap lg:flex-nowrap w-full justify-between lg:gap-20;
 }
 
-.table tr {
-	@apply grid grid-cols-6 grid-flow-row-dense lg:gap-20 mb-5;
+.category {
+	@apply w-1/2 lg:w-full h-fit;
 }
 
-.table thead > tr {
-	@apply place-items-start;
-}
-
-.table tr > td {
-	@apply grid grid-flow-col w-fit grid-rows-2 lg:gap-x-8 2xl:gap-x-16 place-self-start items-start;
-}
-
-.table div > p {
-	@apply flex gap-2 lg:text-lg text-sm font-light;
-}
-
-.table p > svg {
-	@apply w-6 aspect-square;
-}
-.table p > img {
-	@apply w-6 aspect-auto;
-}
-
-.table span > svg {
-	@apply w-6 aspect-square;
-}
-
-.table h4 {
-	@apply mb-1;
-}
-
-.table p {
-	@apply my-1;
+.techList {
+	@apply flex flex-wrap gap-x-10;
 }

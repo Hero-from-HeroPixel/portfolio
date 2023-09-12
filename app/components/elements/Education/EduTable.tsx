@@ -2,7 +2,12 @@
 import React from 'react';
 import styles from '@/app/components/elements/Education/Table.module.css';
 import { Variants, motion } from 'framer-motion';
-type Props = {};
+import { Content } from '@prismicio/client';
+import { PrismicRichText } from '@prismicio/react';
+
+type Props = {
+	entries: (Content.EducationEntryDocument<string> | undefined)[];
+};
 
 const variants: Variants = {
 	start: {
@@ -16,40 +21,37 @@ const variants: Variants = {
 	},
 };
 
-export default function EduTable({}: Props) {
+export default function EduTable({ entries }: Props) {
 	return (
 		<table className={styles.table}>
 			<tbody>
-				<tr>
-					<motion.td initial="start" whileInView="enter" variants={variants}>
-						Completed Courses/Self education (2022-2023)
-					</motion.td>
-					<td>
-						<div>
-							<p>
-								Become a WordPress Developer: Unlocking Power With Code by
-								<strong> Brad Schiff</strong>
-							</p>
-							<p>
-								React - The complete guide 2023 by <strong>Academind</strong>
-							</p>
-							<p>
-								The Web Developer Bootcamp by <strong></strong> Colt Steele
-							</p>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>B. Com Law degree (2019-2022)</td>
-					<td>
-						<div className="flex flex-col">
-							<p className={styles.noUnderline}>
-								I studied law with plans to become a lawyer. However, I decided
-								to switch careers and do what I love, programming.
-							</p>
-						</div>
-					</td>
-				</tr>
+				{entries &&
+					entries.map((entry) => (
+						<>
+							{entry && (
+								<tr key={entry.id}>
+									<td className={styles.noUnderline}>
+										<PrismicRichText field={entry.data.title} />
+									</td>
+									<td>
+										<div
+											className={
+												entry.data.content.length > 1
+													? ''
+													: styles.noUnderline
+											}>
+											{entry.data.content.map((item, i) => (
+												<PrismicRichText
+													key={i}
+													field={item.education}
+												/>
+											))}
+										</div>
+									</td>
+								</tr>
+							)}
+						</>
+					))}
 			</tbody>
 		</table>
 	);

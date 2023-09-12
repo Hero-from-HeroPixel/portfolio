@@ -6,328 +6,246 @@ import Icon, {
 	cloudinary,
 	contentful,
 	css,
-	digitalOcean,
 	elementor,
 	figma,
 	framer,
-	git,
-	graphql,
+	github,
 	html,
 	javascript,
-	mongo,
-	mysql,
-	netlify,
-	nextJS,
-	pgsql,
-	php,
-	postmark,
 	prismic,
-	react,
-	redis,
-	rest,
 	shopify,
-	tailwind,
 	typescript,
 	webflow,
-	woocommerce,
 	wordpress,
 } from '../../icons';
 import { PSIcon } from '../../icons/PS';
 import Image from 'next/image';
 import { Github } from '../../icons/Github';
+import { prismicClient } from '@/app/lib/clients';
+import SkillList from './SkillList';
+import { SkillProps } from './Skill';
 
 type Props = {};
 
-export default function TechTable({}: Props) {
+export default async function TechTable({}: Props) {
 	return (
-		<table className={styles.table}>
-			<thead>
-				<tr>
-					<th className="col-span-3">
-						<Heading as="h3">Tech Stack</Heading>
-					</th>
-					<th className="col-span-1">
-						<Heading as="h3">Design</Heading>
-					</th>
-					<th className="col-span-2">
-						<Heading as="h3">Other</Heading>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td className="col-span-3">
-						<div>
-							<Heading as="h4">Languages</Heading>
-							<p>
-								<Icon>{html}</Icon>HTML5
-							</p>
-							<p>
-								<Icon>{css}</Icon>
-								CSS3
-							</p>
-							<p>
-								<Icon>{javascript}</Icon>JavaScript
-							</p>
-							<p>
-								<Icon>{typescript}</Icon>typeScript
-							</p>
-							<p>
-								<Image
-									src="https://www.php.net//images/logos/new-php-logo.svg"
-									alt="php"
-									width={64}
-									height={64}
-								/>
-								php
-							</p>
-							<p>
-								<Image src="/icons/sql.png" alt="sql" width={32} height={32} />
-								SQL
-							</p>
-						</div>
-
-						<div>
-							<Heading as="h4">Frameworks</Heading>
-							<p>
-								<Image
-									src="/icons/react.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								React
-							</p>
-							<p>
-								<Image
-									src="/icons/nextjs.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								NextJS 13
-							</p>
-							<p>
-								<Image
-									src="/icons/node.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Node
-							</p>
-							<p>
-								<Image
-									src="/icons/express.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Express
-							</p>
-							<p>
-								<Image
-									src="/icons/tailwind.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Tailwind CSS
-							</p>
-							<p>
-								<Image
-									src="/icons/wordpress.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								WordPress
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">Databases</Heading>
-							<p>
-								<Image
-									src="/icons/pgsql.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								PostgreSQL
-							</p>
-							<p>
-								<Image
-									src="/icons/mysql.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								MySQL
-							</p>
-							<p>
-								<Image
-									src="/icons/mongo.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								MongoDB
-							</p>
-							<p>
-								<Image
-									src="/icons/redis.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Redis
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">APIS</Heading>
-							<p>
-								<Image
-									src="/icons/rest.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								RESTful
-							</p>
-							<p>
-								<Image
-									src="/icons/graphql.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								GraphQL
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">CI/CD</Heading>
-							<p>
-								<Image src="/icons/git.svg" alt="sql" width={32} height={32} />
-								Git
-							</p>
-							<p>
-								<Github />
-								GitHub
-							</p>
-							<p>
-								<Image
-									src="/icons/netlify.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Netlify
-							</p>
-							<p>
-								<Image src="/icons/do.svg" alt="sql" width={32} height={32} />
-								Digital Ocean
-							</p>
-							<p>
-								<Image
-									src="/icons/cpanel.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								cPanel
-							</p>
-						</div>
-					</td>
-					<td className="col-span-1">
-						<div>
-							<p>
-								<Icon>{figma}</Icon>Figma
-							</p>
-							<p>
-								<Icon>{PSIcon}</Icon>Photoshop
-							</p>
-							<p>
-								<Icon>{canva}</Icon>Canva
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">Web Tools</Heading>
-							<p>
-								<Icon>{elementor}</Icon>Elementor
-							</p>
-							<p>
-								<Icon>{framer}</Icon>Framer
-							</p>
-							<p>
-								<Icon>{webflow}</Icon>Webflow
-							</p>
-							<p>
-								<Icon>{prismic}</Icon>Prismic
-							</p>
-						</div>
-					</td>
-					<td className="col-span-2">
-						<div>
-							<Heading as="h4">Commerce</Heading>
-							<p>
-								<Image
-									src="/icons/medusa.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								MedusaJS
-							</p>
-							<p>
-								<Image src="/icons/woo.svg" alt="sql" width={32} height={32} />
-								WooCommerce
-							</p>
-							<p>
-								<Icon>{shopify}</Icon>Shopify
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">CMS</Heading>
-							<p>
-								<Icon>{contentful}</Icon>Contentful
-							</p>
-							<p>
-								<Icon>{wordpress}</Icon>WordPress
-							</p>
-							<p>
-								<Icon>{prismic}</Icon>Prismic
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">DAM</Heading>
-							<p>
-								<Icon>{cloudinary}</Icon>Cloudinary
-							</p>
-						</div>
-						<div>
-							<Heading as="h4">Mailing</Heading>
-							<p>
-								<Image
-									src="/icons/postmark.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Postmark
-							</p>
-							<p>
-								<Image
-									src="/icons/nodemailer.svg"
-									alt="sql"
-									width={32}
-									height={32}
-								/>
-								Nodemailer
-							</p>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div className={styles.container}>
+			<div className={`${styles.category} `}>
+				<Heading as="h3">Tech Stack</Heading>
+				<div className={styles.techList}>
+					<SkillList skillList={languages} title="Languages" />
+					<SkillList skillList={frameworks} title="Frameworks" />
+					<SkillList skillList={cicd} title="CI/CD" />
+					<SkillList skillList={databases} title="Databases" />
+					<SkillList skillList={apis} title="APIS" />
+				</div>
+			</div>
+			<div className={`${styles.category} `}>
+				<Heading as="h3">Design Stack</Heading>
+				<div className={styles.techList}>
+					<SkillList skillList={design} title="" />
+					<SkillList skillList={webTools} title="Web Tools" />
+				</div>
+			</div>
+			<div className={styles.category}>
+				<Heading as="h3">Other</Heading>
+				<div className={styles.techList}>
+					<SkillList skillList={commerce} title="Commerce" />
+					<SkillList skillList={cms} title="CMS" />
+					<SkillList skillList={dam} title="DAM" />
+					<SkillList skillList={mailing} title="Mailing" />
+				</div>
+			</div>
+		</div>
 	);
 }
+
+const languages: SkillProps[] = [
+	{
+		icon: html,
+		title: 'HTML 5',
+	},
+	{
+		icon: css,
+		title: 'CSS 3',
+	},
+	{
+		icon: javascript,
+		title: 'JavaScript',
+	},
+	{
+		icon: typescript,
+		title: 'TypeScript',
+	},
+	{
+		iconAsName: 'php',
+		title: 'php',
+	},
+	{
+		iconAsName: 'sql',
+		title: 'SQL',
+	},
+];
+
+const frameworks: SkillProps[] = [
+	{
+		title: 'React',
+		iconAsName: 'react',
+	},
+	{
+		title: 'NextJS 13',
+		iconAsName: 'nextjs',
+	},
+	{
+		title: 'Node',
+		iconAsName: 'node',
+	},
+	{
+		title: 'Express',
+		iconAsName: 'express',
+	},
+	{
+		title: 'Tailwind CSS',
+		iconAsName: 'tailwind',
+	},
+	{
+		title: 'WordPress',
+		iconAsName: 'wordpress',
+	},
+];
+
+const databases: SkillProps[] = [
+	{
+		title: 'PostgreSQL',
+		iconAsName: 'pgsql',
+	},
+	{
+		title: 'MongoDB',
+		iconAsName: 'mongo',
+	},
+	{
+		title: 'Redis',
+		iconAsName: 'redis',
+	},
+	{
+		title: 'mySQL',
+		iconAsName: 'mysql',
+	},
+];
+
+const apis: SkillProps[] = [
+	{
+		title: 'Restful',
+		iconAsName: 'rest',
+	},
+	{
+		title: 'GraphQL',
+		iconAsName: 'graphql',
+	},
+];
+
+const cicd: SkillProps[] = [
+	{
+		title: 'Git',
+		iconAsName: 'git',
+	},
+	{
+		title: 'GitHub',
+		icon: github,
+		viewBox: '0 0 512 512',
+	},
+	{
+		title: 'Netlify',
+		iconAsName: 'netlify',
+	},
+	{
+		title: 'Digital Ocean',
+		iconAsName: 'do',
+	},
+	{
+		title: 'cPanel',
+		iconAsName: 'cpanel',
+	},
+];
+
+const design: SkillProps[] = [
+	{
+		title: 'Figma',
+		icon: figma,
+	},
+	{
+		title: 'Photoshop',
+		icon: PSIcon,
+	},
+	{
+		title: 'Canva',
+		icon: canva,
+	},
+];
+
+const webTools: SkillProps[] = [
+	{
+		title: 'Elementor',
+		icon: elementor,
+	},
+	{
+		title: 'Framer',
+		icon: framer,
+	},
+	{
+		title: 'Webflow',
+		icon: webflow,
+	},
+	{
+		title: 'Prismic',
+		icon: prismic,
+	},
+];
+
+const commerce: SkillProps[] = [
+	{
+		title: 'MedusaJS',
+		iconAsName: 'medusa',
+	},
+	{
+		title: 'WooCommerce',
+		iconAsName: 'woo',
+	},
+	{
+		title: 'Shopify',
+		icon: shopify,
+	},
+];
+
+const cms: SkillProps[] = [
+	{
+		title: 'Contentful',
+		icon: contentful,
+	},
+	{
+		title: 'WordPress',
+		icon: wordpress,
+	},
+	{
+		title: 'Prismic',
+		icon: prismic,
+	},
+];
+
+const dam: SkillProps[] = [
+	{
+		title: 'Cloudinary',
+		icon: cloudinary,
+	},
+];
+
+const mailing: SkillProps[] = [
+	{
+		title: 'Postmark',
+		iconAsName: 'postmark',
+	},
+	{
+		title: 'Nodemailer',
+		iconAsName: 'nodemailer',
+	},
+];

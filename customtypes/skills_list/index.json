@@ -1,0 +1,32 @@
+{
+  "id": "skills_list",
+  "label": "Skills List",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "title",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "skill": {
+        "type": "Link",
+        "config": {
+          "label": "skill",
+          "select": "document",
+          "customtypes": ["skill"]
+        }
+      }
+    }
+  }
+}

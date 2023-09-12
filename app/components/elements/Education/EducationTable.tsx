@@ -7,7 +7,7 @@ type Props = {
 	id?: string;
 };
 
-export default function EducationTable({ id }: Props) {
+export default async function EducationTable({ id }: Props) {
 	return (
 		<BoundWrapper id={id}>
 			<Heading className="w-10/12 lg:w-full mx-auto" as="h2">

@@ -5,6 +5,49 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Content for Design Skills documents
+ */
+interface DesignSkillsDocumentData {
+  /**
+   * Title field in *Design Skills*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: design_skills.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Skills List field in *Design Skills*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: design_skills.skills_list
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skills_list: prismic.ContentRelationshipField<"skills_list">;
+}
+
+/**
+ * Design Skills document from Prismic
+ *
+ * - **API ID**: `design_skills`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type DesignSkillsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<DesignSkillsDocumentData>,
+    "design_skills",
+    Lang
+  >;
+
+/**
  * Item in *Education Entry → Content*
  */
 export interface EducationEntryDocumentDataContentItem {
@@ -349,6 +392,49 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 /**
+ * Content for Other Skills documents
+ */
+interface OtherSkillsDocumentData {
+  /**
+   * Title field in *Other Skills*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: other_skills.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Skills List field in *Other Skills*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: other_skills.skills_list
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skills_list: prismic.ContentRelationshipField<"skills_list">;
+}
+
+/**
+ * Other Skills document from Prismic
+ *
+ * - **API ID**: `other_skills`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type OtherSkillsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<OtherSkillsDocumentData>,
+    "other_skills",
+    Lang
+  >;
+
+/**
  * Item in *Settings → Open Graph*
  */
 export interface SettingsDocumentDataOpenGraphItem {
@@ -523,13 +609,143 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Skill documents
+ */
+interface SkillDocumentData {
+  /**
+   * title field in *Skill*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skill.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * icon as name field in *Skill*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skill.icon_as_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  icon_as_name: prismic.KeyTextField;
+}
+
+/**
+ * Skill document from Prismic
+ *
+ * - **API ID**: `skill`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SkillDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<SkillDocumentData>, "skill", Lang>;
+
+/**
+ * Content for Skills List documents
+ */
+interface SkillsListDocumentData {
+  /**
+   * title field in *Skills List*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skills_list.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * skill field in *Skills List*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skills_list.skill
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skill: prismic.ContentRelationshipField<"skill">;
+}
+
+/**
+ * Skills List document from Prismic
+ *
+ * - **API ID**: `skills_list`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SkillsListDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<SkillsListDocumentData>,
+    "skills_list",
+    Lang
+  >;
+
+/**
+ * Content for Tech Skills documents
+ */
+interface TechSkillsDocumentData {
+  /**
+   * Title field in *Tech Skills*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_skills.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Skills List field in *Tech Skills*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_skills.skills_list
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skills_list: prismic.ContentRelationshipField<"skills_list">;
+}
+
+/**
+ * Tech Skills document from Prismic
+ *
+ * - **API ID**: `tech_skills`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TechSkillsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<TechSkillsDocumentData>,
+    "tech_skills",
+    Lang
+  >;
+
 export type AllDocumentTypes =
+  | DesignSkillsDocument
   | EducationEntryDocument
   | FooterDocument
   | HeroIntroductionDocument
   | HomePageDocument
   | NavigationDocument
-  | SettingsDocument;
+  | OtherSkillsDocument
+  | SettingsDocument
+  | SkillDocument
+  | SkillsListDocument
+  | TechSkillsDocument;
 
 /**
  * Primary content in *Education → Primary*
@@ -673,6 +889,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      DesignSkillsDocument,
+      DesignSkillsDocumentData,
       EducationEntryDocument,
       EducationEntryDocumentData,
       FooterDocument,
@@ -684,8 +902,16 @@ declare module "@prismicio/client" {
       HomePageDocumentDataSlicesSlice,
       NavigationDocument,
       NavigationDocumentData,
+      OtherSkillsDocument,
+      OtherSkillsDocumentData,
       SettingsDocument,
       SettingsDocumentData,
+      SkillDocument,
+      SkillDocumentData,
+      SkillsListDocument,
+      SkillsListDocumentData,
+      TechSkillsDocument,
+      TechSkillsDocumentData,
       AllDocumentTypes,
       EducationSlice,
       EducationSliceDefaultPrimary,
