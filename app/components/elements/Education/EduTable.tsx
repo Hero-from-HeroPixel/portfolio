@@ -26,10 +26,10 @@ export default function EduTable({ entries }: Props) {
 		<table className={styles.table}>
 			<tbody>
 				{entries &&
-					entries.map((entry) => (
-						<>
+					entries.map((entry, x) => (
+						<React.Fragment key={entry?.id}>
 							{entry && (
-								<tr key={entry.id}>
+								<tr key={entry.id + x}>
 									<td className={styles.noUnderline}>
 										<PrismicRichText field={entry.data.title} />
 									</td>
@@ -50,7 +50,7 @@ export default function EduTable({ entries }: Props) {
 									</td>
 								</tr>
 							)}
-						</>
+						</React.Fragment>
 					))}
 			</tbody>
 		</table>

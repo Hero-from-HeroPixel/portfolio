@@ -13,8 +13,8 @@ export default async function Timeline({}: Props) {
 	}
 	return (
 		<div className="flex gap-10">
-			<div className="h-full bg-accent w-1 rounded-full"></div>
-			{jobs && jobs.map((job) => <Job key={job.id} job={job} />)}
+			<div className="h-full bg-accent w-3 rounded-full"></div>
+			{jobs && jobs.map((job) => <Job key={job.data.company} job={job} />)}
 			{!jobs && <p>Could not retrieve jobs</p>}
 		</div>
 	);

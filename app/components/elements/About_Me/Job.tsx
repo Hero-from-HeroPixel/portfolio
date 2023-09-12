@@ -17,5 +17,5 @@ export default async function Job({ className, job }: Props) {
 			}
 		}),
 	);
-	return <Card techStack={techStack} />;
+	return <Card className={className} job={job} techStack={techStack} />;
 }

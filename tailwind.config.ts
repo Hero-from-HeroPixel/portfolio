@@ -37,7 +37,7 @@ const config: Config = {
 				'text-glow': '2px 3px 18px rgba(256,256,256,1)',
 				glow: ['4px -7px 19px '],
 			},
-			backgroundImage: {
+			backgroundColor: {
 				glass_hover:
 					'linear-gradient(111deg, rgba(0, 0, 0, 0.11) 20.87%, rgba(0, 0, 0, 0.13) 72.76%), radial-gradient(101.34% 61% at 58.3% 43.12%, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.00) 100%)',
 			},
