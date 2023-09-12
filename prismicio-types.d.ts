@@ -299,6 +299,104 @@ export type HomePageDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *Job → Tech Stack*
+ */
+export interface JobDocumentDataTechStackItem {
+  /**
+   * tech field in *Job → Tech Stack*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.tech_stack[].tech
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tech: prismic.ContentRelationshipField<"skill">;
+}
+
+/**
+ * Content for Job documents
+ */
+interface JobDocumentData {
+  /**
+   * Title field in *Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.company
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  company: prismic.KeyTextField;
+
+  /**
+   * Position field in *Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.position
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  position: prismic.KeyTextField;
+
+  /**
+   * Description field in *Job*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Responsibilities field in *Job*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.responsibilities
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  responsibilities: prismic.RichTextField;
+
+  /**
+   * Duties field in *Job*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.duties
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  duties: prismic.RichTextField;
+
+  /**
+   * Tech Stack field in *Job*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.tech_stack[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tech_stack: prismic.GroupField<Simplify<JobDocumentDataTechStackItem>>;
+}
+
+/**
+ * Job document from Prismic
+ *
+ * - **API ID**: `job`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type JobDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<JobDocumentData>, "job", Lang>;
+
+/**
  * Item in *Header → Navigation*
  */
 export interface NavigationDocumentDataNavigationItem {
@@ -634,6 +732,33 @@ interface SkillDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   icon_as_name: prismic.KeyTextField;
+
+  /**
+   * icon field in *Skill*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: use Icon as Name if icon not founc
+   * - **API ID Path**: skill.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icon: prismic.SelectField<
+    | "canva"
+    | "cloudinary"
+    | "contentful"
+    | "css"
+    | "elementor"
+    | "figma"
+    | "framer"
+    | "github"
+    | "html"
+    | "javascript"
+    | "prismic"
+    | "shopify"
+    | "typescript"
+    | "webflow"
+    | "wordpress"
+  >;
 }
 
 /**
@@ -740,6 +865,7 @@ export type AllDocumentTypes =
   | FooterDocument
   | HeroIntroductionDocument
   | HomePageDocument
+  | JobDocument
   | NavigationDocument
   | OtherSkillsDocument
   | SettingsDocument
@@ -879,6 +1005,33 @@ type HeroSliceVariation = HeroSliceDefault;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Default variation for Job Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JobSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Job*
+ */
+type JobSliceVariation = JobSliceDefault;
+
+/**
+ * Job Shared Slice
+ *
+ * - **API ID**: `job`
+ * - **Description**: Job
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JobSlice = prismic.SharedSlice<"job", JobSliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -900,6 +1053,8 @@ declare module "@prismicio/client" {
       HomePageDocument,
       HomePageDocumentData,
       HomePageDocumentDataSlicesSlice,
+      JobDocument,
+      JobDocumentData,
       NavigationDocument,
       NavigationDocumentData,
       OtherSkillsDocument,
@@ -922,6 +1077,9 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      JobSlice,
+      JobSliceVariation,
+      JobSliceDefault,
     };
   }
 }

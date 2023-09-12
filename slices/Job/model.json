@@ -1,0 +1,16 @@
+{
+  "id": "job",
+  "type": "SharedSlice",
+  "name": "Job",
+  "description": "Job",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}
