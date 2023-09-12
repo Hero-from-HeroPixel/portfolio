@@ -3,6 +3,7 @@ import { JobDocument } from '@/prismicio-types';
 import { isFilled } from '@prismicio/client';
 import { prismicClient } from '@/app/lib/clients';
 import Card from './Card';
+import TimeStamp from './TimeStamp';
 
 type Props = {
 	className?: string;
@@ -17,5 +18,13 @@ export default async function Job({ className, job }: Props) {
 			}
 		}),
 	);
-	return <Card className={className} job={job} techStack={techStack} />;
+	return (
+		<div className="flex gap-10 lg:w-11/12 2xl:w-10/12 mx-auto mb-10">
+			<TimeStamp
+				startDate={job.data.start_date as string}
+				endDate={job.data.end_date as string}
+			/>
+			<Card className={className} job={job} techStack={techStack} />
+		</div>
+	);
 }

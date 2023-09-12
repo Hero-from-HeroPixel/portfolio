@@ -19,6 +19,27 @@
         },
         "type": "UID"
       },
+      "project_id": {
+        "type": "Text",
+        "config": {
+          "label": "Project ID",
+          "placeholder": ""
+        }
+      },
+      "start_date": {
+        "type": "Text",
+        "config": {
+          "label": "Start Date",
+          "placeholder": ""
+        }
+      },
+      "end_date": {
+        "type": "Text",
+        "config": {
+          "label": "End Date",
+          "placeholder": ""
+        }
+      },
       "position": {
         "type": "Text",
         "config": {

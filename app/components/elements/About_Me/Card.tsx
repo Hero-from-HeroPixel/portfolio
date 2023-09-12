@@ -7,6 +7,7 @@ import Heading from '../../UI/Heading';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import styles from '@/app/components/elements/About_Me/timeline.module.css';
 import Tech, { IconListT } from './Tech';
+import { scrollTo } from '@/app/utils/scrollTo';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => (
@@ -14,7 +15,7 @@ const components: JSXMapSerializer = {
 			initial="initial"
 			whileInView="enter"
 			variants={contentAnim}
-			viewport={{ amount: 0.3 }}
+			viewport={{ once: true, amount: 0.3 }}
 			className="leading-tight light sm">
 			{children}
 		</motion.p>
@@ -25,7 +26,7 @@ const components: JSXMapSerializer = {
 			initial="initial"
 			whileInView="enter"
 			variants={contentAnim}
-			viewport={{ amount: 0.3 }}
+			viewport={{ once: true, amount: 0.3 }}
 			className="list-disc">
 			<p className="light sm">{children}</p>
 		</motion.li>
@@ -66,33 +67,36 @@ export default function Card({ className, techStack, job }: Props) {
 	const { data } = job;
 	return (
 		<motion.div
+			onClick={() =>
+				scrollTo({ targetId: job.data.project_id as string }, { behavior: 'smooth' })
+			}
 			initial="initial"
 			variants={cardAnim}
 			whileInView="enter"
-			viewport={{ once: true, amount: 0.4 }}
+			viewport={{ once: true, amount: 0.2 }}
 			className={cn(styles.card, className)}>
 			<div className="flex flex-col">
 				<Heading as="h5">{data.company}</Heading>
 				<Heading as="h6" className="light">
 					{data.position}
 				</Heading>
-				<div className="my-6 w-3/4">
+				<div className="my-6 lg:w-3/4">
 					<PrismicRichText components={components} field={data.description} />
 				</div>
 			</div>
-			<div className="flex flex-wrap">
-				<div className="w-1/2 px-10">
+			<div className="flex flex-col lg:flex-row lg:flex-wrap lg:gap-0 gap-4">
+				<div className="lg:w-1/2 lg:px-10">
 					<p>Responsibilities</p>
 					<PrismicRichText components={components} field={data.responsibilities} />
 				</div>
-				<div className="w-1/2 flex flex-wrap gap-4">
+				<div className="lg:w-1/2 flex flex-wrap gap-4 lg:gap-4">
 					<div className="">
 						<p>Duties</p>
 						<PrismicRichText components={components} field={data.duties} />
 					</div>
 					<div className="">
 						<p>Tech Stack</p>
-						<ul className="flex flex-wrap gap-x-5 gap-y-2 w-3/4">
+						<ul className="flex flex-wrap gap-x-5 gap-y-2 lg:w-3/4">
 							{techStack.map((item) => (
 								<li key={item?.data.title}>
 									<Tech

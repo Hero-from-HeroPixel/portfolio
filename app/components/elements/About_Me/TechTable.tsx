@@ -17,8 +17,8 @@ import Icon, {
 	typescript,
 	webflow,
 	wordpress,
+	PSIcon,
 } from '../../icons';
-import { PSIcon } from '../../icons/PS';
 import { prismicClient } from '@/app/lib/clients';
 import SkillList from './SkillList';
 import { SkillProps } from './Skill';

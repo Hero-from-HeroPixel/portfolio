@@ -329,6 +329,39 @@ interface JobDocumentData {
   company: prismic.KeyTextField;
 
   /**
+   * Project ID field in *Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.project_id
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  project_id: prismic.KeyTextField;
+
+  /**
+   * Start Date field in *Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.start_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  start_date: prismic.KeyTextField;
+
+  /**
+   * End Date field in *Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.end_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  end_date: prismic.KeyTextField;
+
+  /**
    * Position field in *Job*
    *
    * - **Field Type**: Text
@@ -758,6 +791,7 @@ interface SkillDocumentData {
     | "typescript"
     | "webflow"
     | "wordpress"
+    | "photoshop"
   >;
 }
 
