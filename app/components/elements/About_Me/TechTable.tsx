@@ -47,7 +47,7 @@ export default function TechTable({}: Props) {
 						<Heading as="h3">Tech Stack</Heading>
 					</th>
 					<th className="col-span-1">
-						<Heading as="h3">Design Stack</Heading>
+						<Heading as="h3">Design</Heading>
 					</th>
 					<th className="col-span-2">
 						<Heading as="h3">Other</Heading>
