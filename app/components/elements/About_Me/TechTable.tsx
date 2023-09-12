@@ -19,8 +19,6 @@ import Icon, {
 	wordpress,
 } from '../../icons';
 import { PSIcon } from '../../icons/PS';
-import Image from 'next/image';
-import { Github } from '../../icons/Github';
 import { prismicClient } from '@/app/lib/clients';
 import SkillList from './SkillList';
 import { SkillProps } from './Skill';
@@ -30,7 +28,7 @@ type Props = {};
 export default async function TechTable({}: Props) {
 	return (
 		<div className={styles.container}>
-			<div className={`${styles.category} `}>
+			<div className={`${styles.category}`}>
 				<Heading as="h3">Tech Stack</Heading>
 				<div className={styles.techList}>
 					<SkillList skillList={languages} title="Languages" />
@@ -40,20 +38,22 @@ export default async function TechTable({}: Props) {
 					<SkillList skillList={apis} title="APIS" />
 				</div>
 			</div>
-			<div className={`${styles.category} `}>
-				<Heading as="h3">Design Stack</Heading>
-				<div className={styles.techList}>
-					<SkillList skillList={design} title="" />
-					<SkillList skillList={webTools} title="Web Tools" />
+			<div className="grid lg:grid-cols-3 gap-x-10">
+				<div className={`${styles.category} col-span-1`}>
+					<Heading as="h3">Design Stack</Heading>
+					<div className={styles.techList}>
+						<SkillList skillList={design} title="" />
+						<SkillList skillList={webTools} title="Web Tools" />
+					</div>
 				</div>
-			</div>
-			<div className={styles.category}>
-				<Heading as="h3">Other</Heading>
-				<div className={styles.techList}>
-					<SkillList skillList={commerce} title="Commerce" />
-					<SkillList skillList={cms} title="CMS" />
-					<SkillList skillList={dam} title="DAM" />
-					<SkillList skillList={mailing} title="Mailing" />
+				<div className={`${styles.category} col-span-2`}>
+					<Heading as="h3">Other</Heading>
+					<div className={styles.techList}>
+						<SkillList skillList={commerce} title="Commerce" />
+						<SkillList skillList={cms} title="CMS" />
+						<SkillList skillList={dam} title="DAM" />
+						<SkillList skillList={mailing} title="Mailing" />
+					</div>
 				</div>
 			</div>
 		</div>
