@@ -1,7 +1,7 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import { SocialButton } from '@/app/components/UI/Buttons';
 import Heading from '@/app/components/UI/Heading';
-import HeroCTA from '@/app/components/elements/HeroCTA';
+import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
 import { GithubIcon, LinkdnIcon, WhatsAppIcon } from '@/app/components/icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

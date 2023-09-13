@@ -24,7 +24,7 @@ export default async function Home() {
 			<Hero id="hero" />
 			<EducationTable id="education" />
 			<About id="about" />
-			<Experience id="experience" />
+			<Experience id="experience" />{' '}
 			<div className="h-screen w-full " id="projects"></div>
 			<div className="h-screen w-full " id="designs"></div>
 			<div className="h-screen w-full" id="enerblu"></div>

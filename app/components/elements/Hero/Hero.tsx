@@ -7,7 +7,7 @@ import { SocialButton } from '@/app/components/UI/Buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { LinkdnIcon, GithubIcon, WhatsAppIcon } from '../../icons';
-import HeroCTA from '@/app/components/elements/HeroCTA';
+import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
 import { GITHUB_LINK, LINKDN_LINK, MAIL_LINK, PHONE_LINK } from '@/app/constants/Social';
 
 const components: JSXMapSerializer = {
