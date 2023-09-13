@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/app/utils/cn';
-import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
+import { PrismicNextLink } from '@prismicio/next';
 import { Link, LinkProps } from '@nextui-org/link';
 import { FilledLinkToWebField, LinkField } from '@prismicio/client';
 import styles from '@/app/components/Navigation/links.module.css';

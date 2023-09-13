@@ -11,7 +11,77 @@
       "version": "initial",
       "description": "Default",
       "imageUrl": "",
-      "primary": {},
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "section_id": {
+          "type": "Text",
+          "config": {
+            "label": "Section ID",
+            "placeholder": ""
+          }
+        },
+        "cv_or_resume": {
+          "type": "Link",
+          "config": {
+            "label": "CV or Resume",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "github": {
+          "type": "Link",
+          "config": {
+            "label": "GitHub",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "introduction": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Introduction",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "tech_skills": {
+          "type": "Link",
+          "config": {
+            "label": "Tech Skills",
+            "select": "document",
+            "customtypes": [
+              "tech_skills"
+            ]
+          }
+        },
+        "design_skills": {
+          "type": "Link",
+          "config": {
+            "label": "Design Skills",
+            "select": "document",
+            "customtypes": [
+              "design_skills"
+            ]
+          }
+        },
+        "other_skills": {
+          "type": "Link",
+          "config": {
+            "label": "Other Skills",
+            "select": "document",
+            "customtypes": [
+              "other_skills"
+            ]
+          }
+        }
+      },
       "items": {}
     }
   ]

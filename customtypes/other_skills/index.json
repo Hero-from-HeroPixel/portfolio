@@ -13,12 +13,20 @@
           "placeholder": ""
         }
       },
-      "skills_list": {
-        "type": "Link",
+      "skill_lists": {
+        "type": "Group",
         "config": {
-          "label": "Skills List",
-          "select": "document",
-          "customtypes": ["skills_list"]
+          "label": "Skill Lists",
+          "fields": {
+            "skills_list": {
+              "type": "Link",
+              "config": {
+                "label": "Skills List",
+                "select": "document",
+                "customtypes": ["skills_list"]
+              }
+            }
+          }
         }
       }
     }

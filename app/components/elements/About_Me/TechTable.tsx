@@ -23,7 +23,9 @@ import { prismicClient } from '@/app/lib/clients';
 import SkillList from './SkillList';
 import { SkillProps } from './Skill';
 
-type Props = {};
+type Props = {
+	techStack?: '';
+};
 
 export default async function TechTable({}: Props) {
 	return (
