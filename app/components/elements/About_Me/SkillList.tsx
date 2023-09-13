@@ -1,6 +1,6 @@
 import React from 'react';
 import Skill, { SkillProps } from './Skill';
-import Heading from '../../UI/Heading';
+import Heading from '@/app/components/UI/Heading';
 
 type Props = {
 	skillList: SkillProps[];

@@ -1,7 +1,7 @@
 {
   "id": "job",
   "type": "SharedSlice",
-  "name": "Job",
+  "name": "About",
   "description": "Job",
   "variations": [
     {
@@ -10,7 +10,9 @@
       "docURL": "...",
       "version": "initial",
       "description": "Default",
-      "imageUrl": ""
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
     }
   ]
 }

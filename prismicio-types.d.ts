@@ -1040,7 +1040,7 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
- * Default variation for Job Slice
+ * Default variation for About Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -1053,12 +1053,12 @@ export type JobSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *Job*
+ * Slice variation for *About*
  */
 type JobSliceVariation = JobSliceDefault;
 
 /**
- * Job Shared Slice
+ * About Shared Slice
  *
  * - **API ID**: `job`
  * - **Description**: Job

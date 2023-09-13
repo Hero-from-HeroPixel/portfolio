@@ -1,6 +1,5 @@
 import React from 'react';
-import styles from '@/app/components/elements/About_Me/timeline.module.css';
-
+import styles from '@/app/components/elements/Experience/experience.module.css';
 type Props = {
 	startDate: string;
 	endDate: string;

@@ -1,12 +1,11 @@
-import BoundWrapper from '@/app/components/UI/BoundWrapper';
-
 import { prismicClient } from '@/app/lib/clients';
 import Hero from '@/app/components/elements/Hero/Hero';
 import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
 import EducationTable from '@/app/components/elements/Education/EducationTable';
-import About from './components/elements/About_Me/About';
+import About from '@/app/components/elements/About_Me/About';
+import Timeline from '@/app/components/elements/Experience/Experience';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -24,7 +23,8 @@ export default async function Home() {
 		<>
 			<Hero />
 			<EducationTable id="education" />
-			<About id="experience" />
+			<About id="about" />
+			<Timeline id="experience" />
 			<div className="h-screen w-full " id="projects"></div>
 			<div className="h-screen w-full " id="designs"></div>
 			<div className="h-screen w-full" id="enerblu"></div>

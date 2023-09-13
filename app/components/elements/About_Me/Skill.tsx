@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../../icons';
+import Icon from '@/app/components/icons';
 import Image from 'next/image';
 
 export type SkillProps = {

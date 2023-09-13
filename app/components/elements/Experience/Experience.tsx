@@ -1,14 +1,15 @@
 import React from 'react';
-import Job from './Job';
+import Job from '@/app/components/elements/Experience/Job';
 import { prismicClient } from '@/app/lib/clients';
-import styles from '@/app/components/elements/About_Me/timeline.module.css';
+import styles from '@/app/components/elements/Experience/experience.module.css';
 import { JobDocument } from '@/prismicio-types';
 
 type Props = {
+	id?: string;
 	jobs?: JobDocument<string>[] | undefined;
 };
 
-export default async function Timeline({ jobs }: Props) {
+export default async function Experience({ jobs, id }: Props) {
 	if (!jobs) {
 		try {
 			jobs = await prismicClient.getAllByType('job');
