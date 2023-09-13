@@ -17,7 +17,7 @@ const components: JSXMapSerializer = {
 			initial="initial"
 			whileInView="enter"
 			variants={contentAnim}
-			viewport={{ once: false, amount: 0.3 }}
+			viewport={{ once: true, amount: 0.3 }}
 			className="leading-tight light sm">
 			{children}
 		</motion.p>
@@ -28,7 +28,7 @@ const components: JSXMapSerializer = {
 			initial="initial"
 			whileInView="enter"
 			variants={contentAnim}
-			viewport={{ once: false, amount: 0.3 }}
+			viewport={{ once: true, amount: 0.3 }}
 			className="list-disc">
 			<p className="light sm">{children}</p>
 		</motion.li>
@@ -96,7 +96,7 @@ export default function Card({ className, techStack, job }: Props) {
 			initial="initial"
 			variants={cardAnim}
 			whileInView={inViewAnim}
-			viewport={{ once: false, amount: 0.2 }}
+			viewport={{ once: true, amount: 0.2 }}
 			className={cn(styles.card, className)}>
 			<div className="flex flex-col">
 				<Heading as="h5">{data.company}</Heading>
