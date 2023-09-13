@@ -634,6 +634,21 @@ export interface ProjectDocumentDataImagesItem {
 }
 
 /**
+ * Item in *Project → Mobile Photos*
+ */
+export interface ProjectDocumentDataMobilePhotosItem {
+  /**
+   * Mobile Showcase field in *Project → Mobile Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.mobile_photos[].mobile_showcase
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  mobile_showcase: prismic.ImageField<never>;
+}
+
+/**
  * Content for Project documents
  */
 interface ProjectDocumentData {
@@ -724,6 +739,19 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   images: prismic.GroupField<Simplify<ProjectDocumentDataImagesItem>>;
+
+  /**
+   * Mobile Photos field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.mobile_photos[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  mobile_photos: prismic.GroupField<
+    Simplify<ProjectDocumentDataMobilePhotosItem>
+  >;
 }
 
 /**

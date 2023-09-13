@@ -91,6 +91,22 @@
             }
           }
         }
+      },
+      "mobile_photos": {
+        "type": "Group",
+        "config": {
+          "label": "Mobile Photos",
+          "fields": {
+            "mobile_showcase": {
+              "type": "Image",
+              "config": {
+                "label": "Mobile Showcase",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
       }
     }
   }
