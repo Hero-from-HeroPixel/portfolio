@@ -1,0 +1,89 @@
+{
+  "id": "project",
+  "label": "Project",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "source_code": {
+        "type": "Link",
+        "config": {
+          "label": "Source Code",
+          "placeholder": "",
+          "select": null
+        }
+      },
+      "design_files": {
+        "type": "Link",
+        "config": {
+          "label": "Design Files",
+          "placeholder": "",
+          "select": null
+        }
+      },
+      "brief_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Brief Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "featured_image": {
+        "type": "Image",
+        "config": {
+          "label": "Featured Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "tech": {
+        "type": "Group",
+        "config": {
+          "label": "Tech",
+          "fields": {
+            "tech": {
+              "type": "Link",
+              "config": {
+                "label": "Tech",
+                "select": "document",
+                "customtypes": ["tech_skills"]
+              }
+            }
+          }
+        }
+      },
+      "images": {
+        "type": "Group",
+        "config": {
+          "label": "Images",
+          "fields": {
+            "showcase": {
+              "type": "Image",
+              "config": {
+                "label": "Showcase",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
