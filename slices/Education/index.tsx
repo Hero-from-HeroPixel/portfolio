@@ -31,7 +31,7 @@ const Education = async ({ slice }: EducationProps): Promise<JSX.Element> => {
 			data-slice-variation={slice.variation}
 			id={slice.primary.section_id}>
 			<Heading className="w-10/12 lg:w-full mx-auto" as="h2">
-				Education
+				{slice.primary.heading}
 			</Heading>
 			<EduTable entries={educationEntries} />
 		</BoundWrapper>
