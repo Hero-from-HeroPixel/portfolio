@@ -1134,6 +1134,16 @@ export type ExperienceSlice = prismic.SharedSlice<
  */
 export interface HeroSliceDefaultPrimary {
   /**
+   * Section ID field in *Hero → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
+  /**
    * Introduction field in *Hero → Primary*
    *
    * - **Field Type**: Rich Text

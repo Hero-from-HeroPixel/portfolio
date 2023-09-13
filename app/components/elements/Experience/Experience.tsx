@@ -11,7 +11,7 @@ type Props = {
 	jobs?: JobDocument<string>[] | undefined;
 };
 
-export default async function Experience({ jobs, id }: Props) {
+export default async function Experience({ jobs, id, ...restProps }: Props) {
 	if (!jobs) {
 		try {
 			jobs = await prismicClient.getAllByType('job');
@@ -22,7 +22,7 @@ export default async function Experience({ jobs, id }: Props) {
 
 	return (
 		<article>
-			<BoundWrapper>
+			<BoundWrapper id={id} {...restProps}>
 				<div className="mt-10 mb-5 lg:mt-20 lg:mb-10">
 					<Heading as="h3">Experience</Heading>
 					<p className="light my-5">

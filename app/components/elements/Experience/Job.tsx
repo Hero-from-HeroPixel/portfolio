@@ -7,10 +7,11 @@ import TimeStamp from './TimeStamp';
 
 type Props = {
 	className?: string;
-	job: JobDocument<string>;
+	job?: JobDocument<string>;
 };
 
 export default async function Job({ className, job }: Props) {
+	if (!job) return;
 	const techStack = await Promise.all(
 		job.data.tech_stack.map(({ tech }) => {
 			if (isFilled.contentRelationship(tech) && tech.uid) {

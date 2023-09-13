@@ -28,6 +28,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 const Hero = ({ slice }: HeroProps): JSX.Element => {
 	return (
 		<BoundWrapper
+			id={slice.primary.section_id}
 			data-slice-type={slice.slice_type}
 			data-slice-variation={slice.variation}
 			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12 bg-transparent">

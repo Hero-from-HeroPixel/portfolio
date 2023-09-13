@@ -21,7 +21,7 @@ export default async function Home() {
 	//*********************End Prismic Content */
 	return (
 		<>
-			<Hero />
+			<Hero id="hero" />
 			<EducationTable id="education" />
 			<About id="about" />
 			<Experience id="experience" />
