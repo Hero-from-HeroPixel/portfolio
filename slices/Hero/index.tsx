@@ -1,7 +1,7 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import { SocialButton } from '@/app/components/UI/Buttons';
 import Heading from '@/app/components/UI/Heading';
-import HeroCTA from '@/app/components/elements/HeroCTA';
+import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
 import { GithubIcon, LinkdnIcon, WhatsAppIcon } from '@/app/components/icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +28,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 const Hero = ({ slice }: HeroProps): JSX.Element => {
 	return (
 		<BoundWrapper
+			id={slice.primary.section_id}
 			data-slice-type={slice.slice_type}
 			data-slice-variation={slice.variation}
 			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12 bg-transparent">

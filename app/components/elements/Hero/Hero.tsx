@@ -7,7 +7,7 @@ import { SocialButton } from '@/app/components/UI/Buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { LinkdnIcon, GithubIcon, WhatsAppIcon } from '../../icons';
-import HeroCTA from '@/app/components/elements/HeroCTA';
+import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
 import { GITHUB_LINK, LINKDN_LINK, MAIL_LINK, PHONE_LINK } from '@/app/constants/Social';
 
 const components: JSXMapSerializer = {
@@ -19,9 +19,11 @@ const components: JSXMapSerializer = {
 	strong: ({ children }) => <strong className="text-primary">{children}</strong>,
 };
 
-type Props = {};
+type Props = {
+	id?: string;
+};
 
-export default async function Hero({}: Props) {
+export default async function Hero({ id }: Props) {
 	let hero;
 	try {
 		hero = (await prismicClient.getSingle('hero_introduction')).data;
@@ -29,7 +31,9 @@ export default async function Hero({}: Props) {
 		console.error('introduction not provided');
 	}
 	return (
-		<BoundWrapper className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12">
+		<BoundWrapper
+			id={id}
+			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12">
 			<div className="lg:w-3/4 flex flex-col lg:flex-row lg:h-[60%]">
 				<div className="relative w-fit lg:h-3/4 flex flex-col justify-center items-center lg:justify-start gap-12 lg:gap-0">
 					<Heading className="relative leading-[80%] lg:leading-[80%] tracking-[-0.37rem] lg:tracking-[-0.95rem]">

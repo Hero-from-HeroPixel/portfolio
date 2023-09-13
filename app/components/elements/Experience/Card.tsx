@@ -55,6 +55,7 @@ const cardAnim: Variants = {
 	phoneInView: {
 		translateX: 0,
 		opacity: 1,
+		borderColor: '#3300FF',
 		background: `linear-gradient(111deg, rgba(0, 0, 0, 0.11) 20.87%, rgba(0, 0, 0, 0.13) 72.76%),
 		radial-gradient(
 			101.34% 61% at 58.3% 43.12%,

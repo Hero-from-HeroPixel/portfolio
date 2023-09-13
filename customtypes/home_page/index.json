@@ -16,6 +16,12 @@
             },
             "education": {
               "type": "SharedSlice"
+            },
+            "job": {
+              "type": "SharedSlice"
+            },
+            "experience": {
+              "type": "SharedSlice"
             }
           }
         }

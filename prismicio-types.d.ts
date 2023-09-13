@@ -5,6 +5,21 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Item in *Design Skills → Skills Lists*
+ */
+export interface DesignSkillsDocumentDataSkillsListsItem {
+  /**
+   * Skills List field in *Design Skills → Skills Lists*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: design_skills.skills_lists[].skills_list
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skills_list: prismic.ContentRelationshipField<"skills_list">;
+}
+
+/**
  * Content for Design Skills documents
  */
 interface DesignSkillsDocumentData {
@@ -20,15 +35,17 @@ interface DesignSkillsDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Skills List field in *Design Skills*
+   * Skills Lists field in *Design Skills*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: design_skills.skills_list
+   * - **API ID Path**: design_skills.skills_lists[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  skills_list: prismic.ContentRelationshipField<"skills_list">;
+  skills_lists: prismic.GroupField<
+    Simplify<DesignSkillsDocumentDataSkillsListsItem>
+  >;
 }
 
 /**
@@ -232,7 +249,11 @@ export type HeroIntroductionDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomePageDocumentDataSlicesSlice = HeroSlice | EducationSlice;
+type HomePageDocumentDataSlicesSlice =
+  | HeroSlice
+  | EducationSlice
+  | JobSlice
+  | ExperienceSlice;
 
 /**
  * Content for Home Page documents
@@ -523,6 +544,21 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *Other Skills → Skill Lists*
+ */
+export interface OtherSkillsDocumentDataSkillListsItem {
+  /**
+   * Skills List field in *Other Skills → Skill Lists*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: other_skills.skill_lists[].skills_list
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skills_list: prismic.ContentRelationshipField<"skills_list">;
+}
+
+/**
  * Content for Other Skills documents
  */
 interface OtherSkillsDocumentData {
@@ -538,15 +574,17 @@ interface OtherSkillsDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Skills List field in *Other Skills*
+   * Skill Lists field in *Other Skills*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: other_skills.skills_list
+   * - **API ID Path**: other_skills.skill_lists[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  skills_list: prismic.ContentRelationshipField<"skills_list">;
+  skill_lists: prismic.GroupField<
+    Simplify<OtherSkillsDocumentDataSkillListsItem>
+  >;
 }
 
 /**
@@ -562,6 +600,173 @@ export type OtherSkillsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
     Simplify<OtherSkillsDocumentData>,
     "other_skills",
+    Lang
+  >;
+
+/**
+ * Item in *Project → Tech*
+ */
+export interface ProjectDocumentDataTechItem {
+  /**
+   * Tech field in *Project → Tech*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.tech[].tech
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tech: prismic.ContentRelationshipField<"skill">;
+}
+
+/**
+ * Item in *Project → Images*
+ */
+export interface ProjectDocumentDataImagesItem {
+  /**
+   * Showcase field in *Project → Images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.images[].showcase
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  showcase: prismic.ImageField<never>;
+}
+
+/**
+ * Item in *Project → Mobile Photos*
+ */
+export interface ProjectDocumentDataMobilePhotosItem {
+  /**
+   * Mobile Showcase field in *Project → Mobile Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.mobile_photos[].mobile_showcase
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  mobile_showcase: prismic.ImageField<never>;
+}
+
+/**
+ * Content for Project documents
+ */
+interface ProjectDocumentData {
+  /**
+   * Title field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Project Link field in *Project*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.project_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  project_link: prismic.LinkField;
+
+  /**
+   * Source Code field in *Project*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.source_code
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  source_code: prismic.LinkField;
+
+  /**
+   * Design Files field in *Project*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.design_files
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  design_files: prismic.LinkField;
+
+  /**
+   * Brief Description field in *Project*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.brief_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  brief_description: prismic.RichTextField;
+
+  /**
+   * Featured Image field in *Project*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.featured_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  featured_image: prismic.ImageField<never>;
+
+  /**
+   * Tech field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.tech[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tech: prismic.GroupField<Simplify<ProjectDocumentDataTechItem>>;
+
+  /**
+   * Images field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.images[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  images: prismic.GroupField<Simplify<ProjectDocumentDataImagesItem>>;
+
+  /**
+   * Mobile Photos field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.mobile_photos[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  mobile_photos: prismic.GroupField<
+    Simplify<ProjectDocumentDataMobilePhotosItem>
+  >;
+}
+
+/**
+ * Project document from Prismic
+ *
+ * - **API ID**: `project`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProjectDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ProjectDocumentData>,
+    "project",
     Lang
   >;
 
@@ -808,6 +1013,21 @@ export type SkillDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<SkillDocumentData>, "skill", Lang>;
 
 /**
+ * Item in *Skills List → Skills*
+ */
+export interface SkillsListDocumentDataSkillListsItem {
+  /**
+   * Skill field in *Skills List → Skills*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skills_list.skill_lists[].skill_list
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skill_list: prismic.ContentRelationshipField<"skill">;
+}
+
+/**
  * Content for Skills List documents
  */
 interface SkillsListDocumentData {
@@ -823,15 +1043,17 @@ interface SkillsListDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * skill field in *Skills List*
+   * Skills field in *Skills List*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: skills_list.skill
+   * - **API ID Path**: skills_list.skill_lists[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  skill: prismic.ContentRelationshipField<"skill">;
+  skill_lists: prismic.GroupField<
+    Simplify<SkillsListDocumentDataSkillListsItem>
+  >;
 }
 
 /**
@@ -851,6 +1073,21 @@ export type SkillsListDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *Tech Skills → Skills Lists*
+ */
+export interface TechSkillsDocumentDataSkillsListsItem {
+  /**
+   * Skills List field in *Tech Skills → Skills Lists*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_skills.skills_lists[].skills_list
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  skills_list: prismic.ContentRelationshipField<"skills_list">;
+}
+
+/**
  * Content for Tech Skills documents
  */
 interface TechSkillsDocumentData {
@@ -866,15 +1103,17 @@ interface TechSkillsDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Skills List field in *Tech Skills*
+   * Skills Lists field in *Tech Skills*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: tech_skills.skills_list
+   * - **API ID Path**: tech_skills.skills_lists[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  skills_list: prismic.ContentRelationshipField<"skills_list">;
+  skills_lists: prismic.GroupField<
+    Simplify<TechSkillsDocumentDataSkillsListsItem>
+  >;
 }
 
 /**
@@ -902,6 +1141,7 @@ export type AllDocumentTypes =
   | JobDocument
   | NavigationDocument
   | OtherSkillsDocument
+  | ProjectDocument
   | SettingsDocument
   | SkillDocument
   | SkillsListDocument
@@ -978,9 +1218,99 @@ export type EducationSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Experience → Primary*
+ */
+export interface ExperienceSliceDefaultPrimary {
+  /**
+   * Heading field in *Experience → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Section ID field in *Experience → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
+  /**
+   * Introduction field in *Experience → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.primary.introduction
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  introduction: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Experience → Items*
+ */
+export interface ExperienceSliceDefaultItem {
+  /**
+   * Jobs field in *Experience → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.items[].jobs
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  jobs: prismic.ContentRelationshipField<"job">;
+}
+
+/**
+ * Default variation for Experience Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExperienceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ExperienceSliceDefaultPrimary>,
+  Simplify<ExperienceSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Experience*
+ */
+type ExperienceSliceVariation = ExperienceSliceDefault;
+
+/**
+ * Experience Shared Slice
+ *
+ * - **API ID**: `experience`
+ * - **Description**: Experience
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExperienceSlice = prismic.SharedSlice<
+  "experience",
+  ExperienceSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Primary*
  */
 export interface HeroSliceDefaultPrimary {
+  /**
+   * Section ID field in *Hero → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
   /**
    * Introduction field in *Hero → Primary*
    *
@@ -1040,6 +1370,91 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *About → Primary*
+ */
+export interface JobSliceDefaultPrimary {
+  /**
+   * Heading field in *About → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Section ID field in *About → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
+  /**
+   * CV or Resume field in *About → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.cv_or_resume
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  cv_or_resume: prismic.LinkToMediaField;
+
+  /**
+   * GitHub field in *About → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.github
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  github: prismic.LinkField;
+
+  /**
+   * Introduction field in *About → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.introduction
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  introduction: prismic.RichTextField;
+
+  /**
+   * Tech Skills field in *About → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.tech_skills
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tech_skills: prismic.ContentRelationshipField<"tech_skills">;
+
+  /**
+   * Design Skills field in *About → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.design_skills
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  design_skills: prismic.ContentRelationshipField<"design_skills">;
+
+  /**
+   * Other Skills field in *About → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.primary.other_skills
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  other_skills: prismic.ContentRelationshipField<"other_skills">;
+}
+
+/**
  * Default variation for About Slice
  *
  * - **API ID**: `default`
@@ -1048,7 +1463,7 @@ export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
  */
 export type JobSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<JobSliceDefaultPrimary>,
   never
 >;
 
@@ -1065,6 +1480,106 @@ type JobSliceVariation = JobSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type JobSlice = prismic.SharedSlice<"job", JobSliceVariation>;
+
+/**
+ * Primary content in *Projects → Primary*
+ */
+export interface ProjectsSliceDefaultPrimary {
+  /**
+   * Heading field in *Projects → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Section ID field in *Projects → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
+  /**
+   * Feature SectionTitle field in *Projects → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.primary.feature_section_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  feature_section_title: prismic.KeyTextField;
+
+  /**
+   * Featured Project field in *Projects → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.primary.featured_project
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  featured_project: prismic.ContentRelationshipField<"project">;
+}
+
+/**
+ * Primary content in *Projects → Items*
+ */
+export interface ProjectsSliceDefaultItem {
+  /**
+   * Projects field in *Projects → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.items[].projects
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  projects: prismic.ContentRelationshipField;
+
+  /**
+   * Side Projects field in *Projects → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: projects.items[].side_projects
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  side_projects: prismic.ContentRelationshipField<"project">;
+}
+
+/**
+ * Default variation for Projects Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProjectsSliceDefaultPrimary>,
+  Simplify<ProjectsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Projects*
+ */
+type ProjectsSliceVariation = ProjectsSliceDefault;
+
+/**
+ * Projects Shared Slice
+ *
+ * - **API ID**: `projects`
+ * - **Description**: Projects
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectsSlice = prismic.SharedSlice<
+  "projects",
+  ProjectsSliceVariation
+>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -1093,6 +1608,8 @@ declare module "@prismicio/client" {
       NavigationDocumentData,
       OtherSkillsDocument,
       OtherSkillsDocumentData,
+      ProjectDocument,
+      ProjectDocumentData,
       SettingsDocument,
       SettingsDocumentData,
       SkillDocument,
@@ -1107,13 +1624,24 @@ declare module "@prismicio/client" {
       EducationSliceDefaultItem,
       EducationSliceVariation,
       EducationSliceDefault,
+      ExperienceSlice,
+      ExperienceSliceDefaultPrimary,
+      ExperienceSliceDefaultItem,
+      ExperienceSliceVariation,
+      ExperienceSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
       JobSlice,
+      JobSliceDefaultPrimary,
       JobSliceVariation,
       JobSliceDefault,
+      ProjectsSlice,
+      ProjectsSliceDefaultPrimary,
+      ProjectsSliceDefaultItem,
+      ProjectsSliceVariation,
+      ProjectsSliceDefault,
     };
   }
 }

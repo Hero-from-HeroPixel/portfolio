@@ -1,8 +1,8 @@
 {
-  "id": "hero",
+  "id": "experience",
   "type": "SharedSlice",
-  "name": "Hero",
-  "description": "Hero",
+  "name": "Experience",
+  "description": "Experience",
   "variations": [
     {
       "id": "default",
@@ -12,6 +12,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
         "section_id": {
           "type": "Text",
           "config": {
@@ -25,26 +32,22 @@
             "label": "Introduction",
             "placeholder": "",
             "allowTargetBlank": true,
-            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "cta_label": {
-          "type": "Text",
-          "config": {
-            "label": "CTA Label",
-            "placeholder": ""
-          }
-        },
-        "cta_link": {
-          "type": "Link",
-          "config": {
-            "label": "CTA Link",
-            "placeholder": "",
-            "select": null
+            "single": "paragraph,strong,em,hyperlink"
           }
         }
       },
-      "items": {}
+      "items": {
+        "jobs": {
+          "type": "Link",
+          "config": {
+            "label": "Jobs",
+            "select": "document",
+            "customtypes": [
+              "job"
+            ]
+          }
+        }
+      }
     }
   ]
 }

@@ -22,10 +22,15 @@ import Icon, {
 import { prismicClient } from '@/app/lib/clients';
 import SkillList from './SkillList';
 import { SkillProps } from './Skill';
+import { ContentRelationshipField } from '@prismicio/client';
 
-type Props = {};
+type Props = {
+	techStack?: ContentRelationshipField<'tech_skills'> | undefined;
+	designStack?: ContentRelationshipField<'design_skills'> | undefined;
+	otherSkills?: ContentRelationshipField<'other_skills'> | undefined;
+};
 
-export default async function TechTable({}: Props) {
+export default async function TechTable({ techStack, designStack, otherSkills }: Props) {
 	return (
 		<div className={styles.container}>
 			<div className={`${styles.category}`}>

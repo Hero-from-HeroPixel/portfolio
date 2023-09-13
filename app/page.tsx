@@ -5,7 +5,8 @@ import { components } from '@/slices';
 import { Metadata } from 'next';
 import EducationTable from '@/app/components/elements/Education/EducationTable';
 import About from '@/app/components/elements/About_Me/About';
-import Timeline from '@/app/components/elements/Experience/Experience';
+import Experience from '@/app/components/elements/Experience/Experience';
+import Projects from './components/elements/Projects/Projects';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -21,11 +22,11 @@ export default async function Home() {
 	//*********************End Prismic Content */
 	return (
 		<>
-			<Hero />
+			<Hero id="hero" />
 			<EducationTable id="education" />
 			<About id="about" />
-			<Timeline id="experience" />
-			<div className="h-screen w-full " id="projects"></div>
+			<Experience id="experience" />
+			<Projects id="projects" />
 			<div className="h-screen w-full " id="designs"></div>
 			<div className="h-screen w-full" id="enerblu"></div>
 			<div className="h-screen w-full " id="contact-me"></div>

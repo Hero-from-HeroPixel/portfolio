@@ -2,21 +2,36 @@ import React from 'react';
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import Intro from '@/app/components/elements/About_Me/Intro';
 import TechTable from '@/app/components/elements/About_Me/TechTable';
-import Heading from '@/app/components/UI/Heading';
+import { Content } from '@prismicio/client';
+import fallBack from '@/app/constants/About.json';
+import { GITHUB_LINK, RESUME_LINK } from '@/app/constants/Social';
 
-export default function About({ id }: PageProps) {
+interface AboutPageProps extends PageProps {
+	slice?: Content.JobSlice;
+}
+
+export default async function About({ id, slice }: AboutPageProps) {
+	const introduction = fallBack.about.introduction;
+	const techStack = slice?.primary.tech_skills;
+	const designStack = slice?.primary.design_skills;
+	const otherSkills = slice?.primary.other_skills;
 	return (
-		<BoundWrapper className="px-5 gap-8" id={id}>
-			<Intro />
-			<TechTable />
-			<div className="mt-10 mb-5 lg:mt-20 lg:mb-10">
-				<Heading as="h3">Experience</Heading>
-				<p className="light my-5">
-					I am web developer with{' '}
-					<strong className="text-primary">1-year full stack development</strong> and{' '}
-					<strong className="text-primary">2 years design experience.</strong>{' '}
-				</p>
-			</div>
+		<BoundWrapper
+			className="px-5 gap-8"
+			id={id}
+			data-slice-type={slice?.slice_type}
+			data-slice-variation={slice?.variation}>
+			<Intro
+				introduction={slice?.primary.introduction || introduction}
+				cv={slice?.primary.cv_or_resume || RESUME_LINK}
+				github={slice?.primary.github || GITHUB_LINK}
+				heading={slice?.primary.heading || 'About Me'}
+			/>
+			<TechTable
+				techStack={techStack}
+				designStack={designStack}
+				otherSkills={otherSkills}
+			/>
 		</BoundWrapper>
 	);
 }
