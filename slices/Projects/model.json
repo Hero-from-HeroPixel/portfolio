@@ -26,10 +26,10 @@
             "placeholder": ""
           }
         },
-        "feature_project_title": {
+        "feature_section_title": {
           "type": "Text",
           "config": {
-            "label": "Feature Project Title",
+            "label": "Feature SectionTitle",
             "placeholder": ""
           }
         },

@@ -19,6 +19,14 @@
         },
         "type": "UID"
       },
+      "project_link": {
+        "type": "Link",
+        "config": {
+          "label": "Project Link",
+          "placeholder": "",
+          "select": null
+        }
+      },
       "source_code": {
         "type": "Link",
         "config": {
@@ -62,7 +70,7 @@
               "config": {
                 "label": "Tech",
                 "select": "document",
-                "customtypes": ["tech_skills"]
+                "customtypes": ["skill"]
               }
             }
           }

@@ -8,11 +8,6 @@
 				"value": "hope",
 				"type": "Text"
 			},
-			"feature_project_title": {
-				"__TYPE__": "FieldContent",
-				"value": "throw",
-				"type": "Text"
-			},
 			"featured_project": {
 				"__TYPE__": "LinkContent",
 				"value": {
@@ -23,6 +18,11 @@
 			"section_id": {
 				"__TYPE__": "FieldContent",
 				"value": "number",
+				"type": "Text"
+			},
+			"feature_section_title": {
+				"__TYPE__": "FieldContent",
+				"value": "chosen",
 				"type": "Text"
 			}
 		},
