@@ -615,7 +615,7 @@ export interface ProjectDocumentDataTechItem {
    * - **API ID Path**: project.tech[].tech
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  tech: prismic.ContentRelationshipField<"tech_skills">;
+  tech: prismic.ContentRelationshipField<"skill">;
 }
 
 /**
@@ -634,6 +634,21 @@ export interface ProjectDocumentDataImagesItem {
 }
 
 /**
+ * Item in *Project → Mobile Photos*
+ */
+export interface ProjectDocumentDataMobilePhotosItem {
+  /**
+   * Mobile Showcase field in *Project → Mobile Photos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.mobile_photos[].mobile_showcase
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  mobile_showcase: prismic.ImageField<never>;
+}
+
+/**
  * Content for Project documents
  */
 interface ProjectDocumentData {
@@ -647,6 +662,17 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Project Link field in *Project*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.project_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  project_link: prismic.LinkField;
 
   /**
    * Source Code field in *Project*
@@ -713,6 +739,19 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   images: prismic.GroupField<Simplify<ProjectDocumentDataImagesItem>>;
+
+  /**
+   * Mobile Photos field in *Project*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.mobile_photos[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  mobile_photos: prismic.GroupField<
+    Simplify<ProjectDocumentDataMobilePhotosItem>
+  >;
 }
 
 /**
@@ -1467,14 +1506,14 @@ export interface ProjectsSliceDefaultPrimary {
   section_id: prismic.KeyTextField;
 
   /**
-   * Feature Project Title field in *Projects → Primary*
+   * Feature SectionTitle field in *Projects → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: projects.primary.feature_project_title
+   * - **API ID Path**: projects.primary.feature_section_title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  feature_project_title: prismic.KeyTextField;
+  feature_section_title: prismic.KeyTextField;
 
   /**
    * Featured Project field in *Projects → Primary*

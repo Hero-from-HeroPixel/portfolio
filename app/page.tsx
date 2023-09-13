@@ -25,7 +25,8 @@ export default async function Home() {
 			<Hero id="hero" />
 			<EducationTable id="education" />
 			<About id="about" />
-			<Experience id="experience" /> <Projects id="projects" />
+			<Experience id="experience" />
+			<Projects id="projects" />
 			<div className="h-screen w-full " id="designs"></div>
 			<div className="h-screen w-full" id="enerblu"></div>
 			<div className="h-screen w-full " id="contact-me"></div>
