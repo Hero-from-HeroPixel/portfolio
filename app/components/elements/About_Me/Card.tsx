@@ -1,13 +1,15 @@
 'use client';
 import { cn } from '@/app/utils/cn';
 import { JobDocument, SkillDocument } from '@/prismicio-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Variants, motion } from 'framer-motion';
 import Heading from '../../UI/Heading';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import styles from '@/app/components/elements/About_Me/timeline.module.css';
 import Tech, { IconListT } from './Tech';
 import { scrollTo } from '@/app/utils/scrollTo';
+import { useWindowSize } from '@uidotdev/usehooks';
+import { MobileScreen } from '@/app/constants/screens';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => (
@@ -15,7 +17,7 @@ const components: JSXMapSerializer = {
 			initial="initial"
 			whileInView="enter"
 			variants={contentAnim}
-			viewport={{ once: true, amount: 0.3 }}
+			viewport={{ once: false, amount: 0.3 }}
 			className="leading-tight light sm">
 			{children}
 		</motion.p>
@@ -26,7 +28,7 @@ const components: JSXMapSerializer = {
 			initial="initial"
 			whileInView="enter"
 			variants={contentAnim}
-			viewport={{ once: true, amount: 0.3 }}
+			viewport={{ once: false, amount: 0.3 }}
 			className="list-disc">
 			<p className="light sm">{children}</p>
 		</motion.li>
@@ -50,6 +52,18 @@ const cardAnim: Variants = {
 		opacity: 1,
 		transition: { delayChildren: 0.2 },
 	},
+	phoneInView: {
+		translateX: 0,
+		opacity: 1,
+		background: `linear-gradient(111deg, rgba(0, 0, 0, 0.11) 20.87%, rgba(0, 0, 0, 0.13) 72.76%),
+		radial-gradient(
+			101.34% 61% at 58.3% 43.12%,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(0, 0, 0, 0.1) 100%
+		)`,
+		boxShadow: `-2px 2px 5px 2px rgba(51, 0, 255, 0.5), 1px -3px 9px 10px rgba(51, 0, 255, 0.3)`,
+		transition: { staggerChildren: 0.2 },
+	},
 };
 
 const contentAnim: Variants = {
@@ -64,6 +78,15 @@ const contentAnim: Variants = {
 };
 
 export default function Card({ className, techStack, job }: Props) {
+	const { width: windowWidth } = useWindowSize();
+	const [inViewAnim, setInViewAnim] = useState<'enter' | 'phoneInView'>('enter');
+
+	useEffect(() => {
+		if (windowWidth !== null && windowWidth <= MobileScreen) {
+			setInViewAnim('phoneInView');
+		}
+	}, [windowWidth]);
+
 	const { data } = job;
 	return (
 		<motion.div
@@ -72,8 +95,8 @@ export default function Card({ className, techStack, job }: Props) {
 			}
 			initial="initial"
 			variants={cardAnim}
-			whileInView="enter"
-			viewport={{ once: true, amount: 0.2 }}
+			whileInView={inViewAnim}
+			viewport={{ once: false, amount: 0.2 }}
 			className={cn(styles.card, className)}>
 			<div className="flex flex-col">
 				<Heading as="h5">{data.company}</Heading>
