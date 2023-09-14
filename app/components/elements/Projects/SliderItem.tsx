@@ -1,21 +1,19 @@
-import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useRef } from 'react';
-import { PanInfo, motion, useInView } from 'framer-motion';
+import { MotionProps, PanInfo, motion, useInView } from 'framer-motion';
 import styles from '@/app/components/elements/Projects/slider.module.css';
-import { useWindowSize } from '@uidotdev/usehooks';
 import { cn } from '@/app/utils/cn';
 
 export interface TOutOfViewEvent {
 	index: number;
 	isInView: boolean;
 }
-type Props = {
+interface Props extends MotionProps {
 	index: number;
 	children: React.ReactNode;
 	container: React.RefObject<HTMLDivElement>;
 	className?: string;
 	onOutOfView?: ({ index, isInView }: TOutOfViewEvent) => void;
-};
+}
 
 export default function SliderItem({
 	onOutOfView,
@@ -23,6 +21,7 @@ export default function SliderItem({
 	index,
 	children,
 	className,
+	...restProps
 }: Props) {
 	const item = useRef(null);
 	const isInView = useInView(item, { root: container });
@@ -47,7 +46,7 @@ export default function SliderItem({
 	/**********Transform logic End */
 
 	return (
-		<motion.div className={cn(styles.item, `item${index}`, className)} ref={item}>
+		<motion.div {...restProps} className={cn(styles.item, className)} ref={item}>
 			{/* <Image
 				id={`carousel-item${index}`}
 				draggable={false}

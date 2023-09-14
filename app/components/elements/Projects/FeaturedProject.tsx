@@ -1,11 +1,12 @@
 import { Content, isFilled } from '@prismicio/client';
 import React from 'react';
-import { ExternalLink } from '../../Navigation/Links';
 import Links from './Links';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { prismicClient } from '@/app/lib/clients';
 import Tech, { IconListT } from '../Experience/Tech';
 import Slider from './Slider';
+import imgs from '@/app/assets/demoImg';
+import SliderItem from './SliderItem';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => <p className="sm light">{children}</p>,

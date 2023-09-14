@@ -3,11 +3,7 @@
 }
 
 .innerCarousel {
-	@apply flex gap-10;
-}
-
-.item {
-	min-width: 20%;
+	@apply flex  transition-transform duration-1000 ease-soft-spring;
 }
 
 .image {
