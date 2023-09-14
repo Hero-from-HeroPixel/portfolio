@@ -5,6 +5,7 @@ import Links from './Links';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { prismicClient } from '@/app/lib/clients';
 import Tech, { IconListT } from '../Experience/Tech';
+import Slider from './Slider';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => <p className="sm light">{children}</p>,
@@ -31,8 +32,9 @@ export default async function FeaturedProject({ project }: Props) {
 	}
 
 	return (
-		<div>
-			<div className="flex flex-col px-5 gap-4">
+		<>
+			<Slider />
+			<div className="flex flex-col px-5 gap-4 lg:w-10/12 2xl:w-9/12 mx-auto text-center">
 				<Links data={data} />
 				<PrismicRichText components={components} field={data.brief_description} />
 				<ul className="flex flex-wrap justify-center gap-2">
@@ -47,6 +49,6 @@ export default async function FeaturedProject({ project }: Props) {
 						))}
 				</ul>
 			</div>
-		</div>
+		</>
 	);
 }

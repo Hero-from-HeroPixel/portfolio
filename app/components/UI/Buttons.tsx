@@ -7,8 +7,16 @@ import React from 'react';
 export interface PrimaryButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
+	appearance?: {
+		className: string;
+	};
 }
-export function PrimaryButton({ className, children, ...restProps }: PrimaryButtonProps) {
+export function PrimaryButton({
+	className,
+	children,
+	appearance,
+	...restProps
+}: PrimaryButtonProps) {
 	return (
 		<Button
 			className={cn(
@@ -19,7 +27,13 @@ export function PrimaryButton({ className, children, ...restProps }: PrimaryButt
 			color="primary"
 			variant="ghost"
 			radius="full">
-			<span className="rounded-full bg-primary w-full h-full px-16">{children}</span>
+			<span
+				className={cn(
+					'rounded-full bg-primary w-full h-full px-16 flex items-center',
+					appearance?.className,
+				)}>
+				{children}
+			</span>
 		</Button>
 	);
 }

@@ -17,7 +17,7 @@ export default function Links({ data }: Props) {
 			) : (
 				<p>{data.title}</p>
 			)}
-			<div className="flex w-full justify-between lg:justify-center">
+			<div className="flex w-full lg:text-xl justify-between lg:gap-20 lg:justify-center">
 				{data.source_code && (
 					<ExternalLink className="text-primary" field={data.source_code}>
 						Source Code
