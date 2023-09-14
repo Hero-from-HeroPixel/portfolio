@@ -34,7 +34,26 @@ export default async function FeaturedProject({ project }: Props) {
 
 	return (
 		<>
-			<Slider />
+			<Slider>
+				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+					{1}
+				</div>
+				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+					{2}
+				</div>
+				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+					{3}
+				</div>
+				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+					{4}
+				</div>
+				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+					{5}
+				</div>
+				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+					{6}
+				</div>
+			</Slider>
 			<div className="flex flex-col px-5 gap-4 lg:w-10/12 2xl:w-9/12 mx-auto text-center">
 				<Links data={data} />
 				<PrismicRichText components={components} field={data.brief_description} />
