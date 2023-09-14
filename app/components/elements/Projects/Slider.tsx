@@ -53,10 +53,21 @@ export default function Slider({
 		}
 	}, [show.desktop, show.mobile, show.tablet, windowWidth]);
 
+	/**************simple slider */
+
+	const [dragConstraint, setDragConstraint] = useState(0);
+	const content = useRef<HTMLDivElement>(null);
 	useEffect(() => {
-		if (children) setLastIndex(children.length);
-		setIsInfiniteLoop(isInfiniteScroll && lastIndex > showCount);
-	}, [children, isInfiniteScroll, lastIndex, showCount]);
+		console.log(dragConstraint);
+		if (content && content.current)
+			setDragConstraint(content.current?.scrollWidth - content.current.clientWidth);
+	}, [dragConstraint]);
+	/****************Simple Slider */
+
+	// useEffect(() => {
+	// 	if (children) setLastIndex(children.length);
+	// 	setIsInfiniteLoop(isInfiniteScroll && lastIndex > showCount);
+	// }, [children, isInfiniteScroll, lastIndex, showCount]);
 
 	// useEffect(() => {
 	// 	if (isInfiniteLoop) {
@@ -67,13 +78,13 @@ export default function Slider({
 	// }, [children, currentIndex, isInfiniteLoop, lastIndex, showCount]);
 
 	/******************Debugging */
-	useEffect(() => {
-		console.log('lastindex', lastIndex);
-		console.log('show', showCount);
-		console.log('currentIndex', currentIndex);
-		console.log('transition: ', transitionEnabled);
-		console.log(childrenArray);
-	}, [lastIndex, showCount, currentIndex, childrenArray, transitionEnabled]);
+	// useEffect(() => {
+	// 	console.log('lastindex', lastIndex);
+	// 	console.log('show', showCount);
+	// 	console.log('currentIndex', currentIndex);
+	// 	console.log('transition: ', transitionEnabled);
+	// 	console.log(childrenArray);
+	// }, [lastIndex, showCount, currentIndex, childrenArray, transitionEnabled]);
 
 	/******************Debugging */
 
@@ -107,25 +118,8 @@ export default function Slider({
 		}
 	};
 
-	// const renderExtraPrev = () => {
-	//     let output = []
-	//     for (let index = 0; lastIndex < showCount; index++) {
-	//         output.push(children[length - 1 - index])
-	//     }
-	//     output.reverse()
-	//     return output
-	// }
-
-	// const renderExtraNext = () => {
-	//     let output = []
-	//     for (let index = 0; lastIndex < showCount; index++) {
-	//         output.push(children[index])
-	//     }
-	//     return output
-	// }
-
 	const outOfViewHandler = ({ index, isInView }: TOutOfViewEvent) => {
-		console.log(index, ' item is in view: ', isInView);
+		// console.log(index, ' item is in view: ', isInView);
 	};
 
 	const nextHandler = () => {
@@ -155,15 +149,20 @@ export default function Slider({
 
 	return (
 		<motion.div ref={container} className={styles.carousel} id="project-carousel">
-			{(isInfiniteScroll || currentIndex > showCount) && (
+			{/* {(isInfiniteScroll || currentIndex > showCount) && (
 				<PrimaryButton
 					onClick={prevHandler}
 					appearance={{ className: 'px-1' }}
 					className="p-1 min-w-0 absolute border-background inset-y-0 my-auto left-10 z-10 hidden lg:block">
 					<FontAwesomeIcon icon={faCircleChevronLeft} />
 				</PrimaryButton>
-			)}
+			)} */}
 			<motion.div
+				drag="x"
+				ref={content}
+				dragConstraints={{ right: 0, left: -dragConstraint }}
+				whileTap={{ cursor: 'grabbing' }}
+				dragElastic={0.2}
 				className={`${styles.innerCarousel} ${
 					transitionEnabled ? 'transition-transform' : ''
 				}`}
@@ -187,14 +186,14 @@ export default function Slider({
 						</SliderItem>
 					))}
 			</motion.div>
-			{(isInfiniteScroll || currentIndex !== lastIndex) && (
+			{/* {(isInfiniteScroll || currentIndex !== lastIndex) && (
 				<PrimaryButton
 					onClick={nextHandler}
 					appearance={{ className: 'px-1' }}
 					className="p-1 min-w-0 absolute z-10 border-background inset-y-0 my-auto right-10  hidden lg:block">
 					<FontAwesomeIcon icon={faCircleChevronRight} />
 				</PrimaryButton>
-			)}
+			)} */}
 		</motion.div>
 	);
 }
