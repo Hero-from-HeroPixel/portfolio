@@ -24,7 +24,6 @@ export default async function Projects({ id }: Props) {
 					Featured Project - Enerblu
 				</Heading>
 			</BoundWrapper>
-
 			<FeaturedProject project={featuredProject} />
 		</section>
 	);

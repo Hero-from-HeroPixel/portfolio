@@ -58,7 +58,6 @@ export default function Slider({
 	const [dragConstraint, setDragConstraint] = useState(0);
 	const content = useRef<HTMLDivElement>(null);
 	useEffect(() => {
-		console.log(dragConstraint);
 		if (content && content.current)
 			setDragConstraint(content.current?.scrollWidth - content.current.clientWidth);
 	}, [dragConstraint]);
@@ -178,7 +177,10 @@ export default function Slider({
 					childrenArray.map((child, i) => (
 						<SliderItem
 							key={i}
-							style={{ minWidth: `${100 / showCount - spacing}%` }}
+							style={{
+								minWidth: `${100 / showCount - spacing}%`,
+								maxWidth: `${100 / showCount - spacing}%`,
+							}}
 							container={container}
 							index={i}
 							onOutOfView={outOfViewHandler}>

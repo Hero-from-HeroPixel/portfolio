@@ -5,6 +5,7 @@ import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { prismicClient } from '@/app/lib/clients';
 import Tech, { IconListT } from '../Experience/Tech';
 import Slider from './Slider';
+import Image from 'next/image';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => <p className="sm light">{children}</p>,
@@ -33,36 +34,17 @@ export default async function FeaturedProject({ project }: Props) {
 	return (
 		<>
 			<Slider isInfiniteScroll>
-				<div
-					id="1"
-					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
-					{1}
-				</div>
-				<div
-					id="2"
-					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
-					{2}
-				</div>
-				<div
-					id="3"
-					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
-					{3}
-				</div>
-				<div
-					id="4"
-					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
-					{4}
-				</div>
-				<div
-					id="5"
-					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
-					{5}
-				</div>
-				<div
-					id="6"
-					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
-					{6}
-				</div>
+				{data.images.map(({ showcase }, i) => (
+					<Image
+						draggable={false}
+						width={1280}
+						height={1080}
+						className="w-full h-64 rounded-2xl border-2 shadow-lg shadow-background my-5 border-glass object-cover"
+						key={i}
+						src={showcase.url || ''}
+						alt={showcase.alt || ''}
+					/>
+				))}
 			</Slider>
 			<div className="flex flex-col px-5 gap-4 lg:w-10/12 2xl:w-9/12 mx-auto text-center">
 				<Links data={data} />
