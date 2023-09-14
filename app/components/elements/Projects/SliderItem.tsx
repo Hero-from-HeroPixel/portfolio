@@ -47,7 +47,7 @@ export default function SliderItem({
 	/**********Transform logic End */
 
 	return (
-		<motion.div className={cn(styles.item, ``, className)} ref={item}>
+		<motion.div className={cn(styles.item, `item${index}`, className)} ref={item}>
 			{/* <Image
 				id={`carousel-item${index}`}
 				draggable={false}
