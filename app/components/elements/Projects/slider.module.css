@@ -3,7 +3,7 @@
 }
 
 .innerCarousel {
-	@apply flex duration-1000 ease-soft-spring;
+	@apply flex;
 }
 
 .image {

@@ -54,8 +54,9 @@ export default function Slider({
 	}, [show.desktop, show.mobile, show.tablet, windowWidth]);
 
 	useEffect(() => {
+		if (children) setLastIndex(children.length);
 		setIsInfiniteLoop(isInfiniteScroll && lastIndex > showCount);
-	}, [windowWidth, show, isInfiniteScroll, lastIndex, showCount]);
+	}, [children, isInfiniteScroll, lastIndex, showCount]);
 
 	// useEffect(() => {
 	// 	if (isInfiniteLoop) {
@@ -71,6 +72,7 @@ export default function Slider({
 		console.log('show', showCount);
 		console.log('currentIndex', currentIndex);
 		console.log('transition: ', transitionEnabled);
+		console.log(childrenArray);
 	}, [lastIndex, showCount, currentIndex, childrenArray, transitionEnabled]);
 
 	/******************Debugging */
@@ -95,13 +97,13 @@ export default function Slider({
 
 	const handleTransitionEnd = () => {
 		if (isInfiniteLoop) {
-			if (currentIndex === 0) {
+			if (currentIndex === showCount) {
 				setTransitionEnabled(false);
-				setCurrentIndex(length);
-			} else if (currentIndex === lastIndex + showCount) {
+				setCurrentIndex(lastIndex);
+			} else if (currentIndex === lastIndex) {
 				setTransitionEnabled(false);
 				setCurrentIndex(showCount);
-			}
+			} else setTransitionEnabled(true);
 		}
 	};
 
@@ -133,6 +135,7 @@ export default function Slider({
 				const copyChildren = [...childrenArray];
 				const firstEl = copyChildren.shift();
 				setChildrenArray([...copyChildren, firstEl]);
+
 				if (currentIndex === lastIndex) setCurrentIndex(showCount);
 			}
 		}
@@ -145,7 +148,7 @@ export default function Slider({
 				const copyChildren = [...childrenArray];
 				const lastEl = copyChildren.pop();
 				setChildrenArray([lastEl, ...copyChildren]);
-				if (currentIndex === showCount) setCurrentIndex(showCount);
+				if (currentIndex === showCount) setCurrentIndex(lastIndex);
 			}
 		}
 	};
@@ -171,8 +174,7 @@ export default function Slider({
 					gap: `${spacing}%`,
 				}}
 				onTouchStart={startTouchHandler}
-				onTouchMove={handleTouchMove}
-				onTransitionEnd={() => handleTransitionEnd()}>
+				onTouchMove={handleTouchMove}>
 				{childrenArray &&
 					childrenArray.map((child, i) => (
 						<SliderItem
