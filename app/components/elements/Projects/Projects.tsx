@@ -1,12 +1,9 @@
 import React from 'react';
 import BoundWrapper from '../../UI/BoundWrapper';
-
-import Slider from './Slider';
-
 import Heading from '../../UI/Heading';
 import FeaturedProject from './FeaturedProject';
 import { prismicClient } from '@/app/lib/clients';
-import { Content } from '@prismicio/client';
+import ProjectCard from './ProjectCard';
 
 type Props = {
 	id?: string;
@@ -14,6 +11,8 @@ type Props = {
 
 export default async function Projects({ id }: Props) {
 	const featuredProject = await prismicClient.getByUID('project', 'enerblu.co.za');
+	let projects = await prismicClient.getAllByType('project');
+	const mainProjects = projects.filter((project) => project.tags.includes('Main Project'));
 	return (
 		<section className="w-screen flex flex-col gap-10" id={id}>
 			<BoundWrapper as="div">
@@ -25,6 +24,13 @@ export default async function Projects({ id }: Props) {
 				</Heading>
 			</BoundWrapper>
 			<FeaturedProject project={featuredProject} />
+			<BoundWrapper as="div" className="">
+				<ul className="flex flex-col lg:flex-row gap-8 lg:justify-between">
+					{mainProjects.map((project) => (
+						<ProjectCard project={project} key={project.id} />
+					))}
+				</ul>
+			</BoundWrapper>
 		</section>
 	);
 }

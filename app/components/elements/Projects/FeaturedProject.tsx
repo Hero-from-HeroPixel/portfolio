@@ -32,7 +32,7 @@ export default async function FeaturedProject({ project }: Props) {
 	}
 
 	return (
-		<>
+		<div id={project.data.section_id as string}>
 			<Slider isInfiniteScroll>
 				{data.images.map(({ showcase }, i) => (
 					<Image
@@ -61,6 +61,6 @@ export default async function FeaturedProject({ project }: Props) {
 						))}
 				</ul>
 			</div>
-		</>
+		</div>
 	);
 }

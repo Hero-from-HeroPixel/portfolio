@@ -18,7 +18,7 @@ export default function Intro({ heading, github, cv, introduction }: Props) {
 				<Heading as="h2">{heading || 'About Me'}</Heading>
 				<div className="flex flex-col lg:flex-row items-end lg:items-center gap-4 lg:gap-8 -mr-6 lg:mr-0">
 					<ExternalLink
-						className="btn"
+						className="btn text-foreground"
 						field={typeof github !== 'string' ? github : undefined}
 						href={typeof github === 'string' ? github : undefined}>
 						GitHub

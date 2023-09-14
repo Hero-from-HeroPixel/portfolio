@@ -19,11 +19,19 @@
         },
         "type": "UID"
       },
+      "section_id": {
+        "type": "Text",
+        "config": {
+          "label": "Section ID",
+          "placeholder": ""
+        }
+      },
       "project_link": {
         "type": "Link",
         "config": {
           "label": "Project Link",
           "placeholder": "",
+          "allowTargetBlank": true,
           "select": null
         }
       },
@@ -32,6 +40,7 @@
         "config": {
           "label": "Source Code",
           "placeholder": "",
+          "allowTargetBlank": true,
           "select": null
         }
       },
@@ -40,6 +49,7 @@
         "config": {
           "label": "Design Files",
           "placeholder": "",
+          "allowTargetBlank": true,
           "select": null
         }
       },

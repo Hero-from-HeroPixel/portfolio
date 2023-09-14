@@ -1,5 +1,5 @@
 .link {
-	@apply max-w-fit relative font-body_font hover:text-opacity-75 text-foreground cursor-pointer;
+	@apply max-w-fit relative font-body_font hover:text-opacity-75  cursor-pointer;
 }
 
 .externalLink {

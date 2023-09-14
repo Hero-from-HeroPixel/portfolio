@@ -664,6 +664,17 @@ interface ProjectDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Section ID field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.section_id
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+
+  /**
    * Project Link field in *Project*
    *
    * - **Field Type**: Link
