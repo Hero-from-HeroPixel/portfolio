@@ -29,7 +29,7 @@
 	);
 	animation: rotate 20s infinite;
 	z-index: 1;
-	@apply h-52 lg:h-96 opacity-60 2xl:opacity-80;
+	@apply h-52 lg:h-96 opacity-80 2xl:opacity-80;
 }
 
 .blur {
