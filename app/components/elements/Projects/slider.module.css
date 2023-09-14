@@ -3,7 +3,7 @@
 }
 
 .innerCarousel {
-	@apply flex  transition-transform duration-1000 ease-soft-spring;
+	@apply flex duration-1000 ease-soft-spring;
 }
 
 .image {

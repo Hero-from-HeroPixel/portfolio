@@ -17,34 +17,63 @@ export type SliderProps = {
 	};
 	spacing?: number;
 	children?: React.ReactNode[];
-	infiniteScroll?: boolean;
+	isInfiniteScroll?: boolean;
 };
 
 export default function Slider({
 	show = { desktop: 4, tablet: 2, mobile: 1 },
 	spacing = 1,
 	children,
+	isInfiniteScroll = false,
 }: SliderProps) {
 	const container = useRef(null);
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
+	const [currentIndex, setCurrentIndex] = useState<number>(showCount);
+	const [lastIndex, setLastIndex] = useState(children?.length || 0);
+	const [touchPosition, setTouchPosition] = useState<number | null>(null);
+	const [isInfiniteLoop, setIsInfiniteLoop] = useState(
+		isInfiniteScroll && lastIndex > showCount,
+	);
+	const [transitionEnabled, setTransitionEnabled] = useState(true);
+	const [childrenArray, setChildrenArray] = useState<React.ReactNode[]>(children || []);
+
 	useEffect(() => {
 		if (windowWidth !== null) {
-			if (windowWidth <= MobileScreen) setShowCount(show.mobile);
-			else if (windowWidth <= tabletScreen) setShowCount(show.tablet);
-			else setShowCount(show.desktop);
+			if (windowWidth <= MobileScreen) {
+				setShowCount(show.mobile);
+				setCurrentIndex(show.mobile);
+			} else if (windowWidth <= tabletScreen) {
+				setShowCount(show.tablet);
+				setCurrentIndex(show.tablet);
+			} else {
+				setShowCount(show.desktop);
+				setCurrentIndex(show.desktop);
+			}
 		}
-	}, [windowWidth, show]);
-	const [lastIndex, setLastIndex] = useState(children?.length || 0);
-	const [currentIndex, setCurrentIndex] = useState(showCount);
-	const [touchPosition, setTouchPosition] = useState<number | null>(null);
+	}, [show.desktop, show.mobile, show.tablet, windowWidth]);
 
+	useEffect(() => {
+		setIsInfiniteLoop(isInfiniteScroll && lastIndex > showCount);
+	}, [windowWidth, show, isInfiniteScroll, lastIndex, showCount]);
+
+	// useEffect(() => {
+	// 	if (isInfiniteLoop) {
+	// 		// if (currentIndex === showCount || currentIndex === lastIndex) {
+	// 		// 	setTransitionEnabled(true);
+	// 		// }
+	// 	}
+	// }, [children, currentIndex, isInfiniteLoop, lastIndex, showCount]);
+
+	/******************Debugging */
 	useEffect(() => {
 		console.log('lastindex', lastIndex);
 		console.log('show', showCount);
 		console.log('currentIndex', currentIndex);
-		console.log((100 / showCount) * (currentIndex - showCount));
-	}, [lastIndex, showCount, currentIndex]);
+		console.log('transition: ', transitionEnabled);
+	}, [lastIndex, showCount, currentIndex, childrenArray, transitionEnabled]);
+
+	/******************Debugging */
 
 	const startTouchHandler = (e: React.TouchEvent<HTMLDivElement>) => {
 		const touchDown = e.touches[0].clientX;
@@ -64,25 +93,66 @@ export default function Slider({
 		setTouchPosition(null);
 	};
 
+	const handleTransitionEnd = () => {
+		if (isInfiniteLoop) {
+			if (currentIndex === 0) {
+				setTransitionEnabled(false);
+				setCurrentIndex(length);
+			} else if (currentIndex === lastIndex + showCount) {
+				setTransitionEnabled(false);
+				setCurrentIndex(showCount);
+			}
+		}
+	};
+
+	// const renderExtraPrev = () => {
+	//     let output = []
+	//     for (let index = 0; lastIndex < showCount; index++) {
+	//         output.push(children[length - 1 - index])
+	//     }
+	//     output.reverse()
+	//     return output
+	// }
+
+	// const renderExtraNext = () => {
+	//     let output = []
+	//     for (let index = 0; lastIndex < showCount; index++) {
+	//         output.push(children[index])
+	//     }
+	//     return output
+	// }
+
 	const outOfViewHandler = ({ index, isInView }: TOutOfViewEvent) => {
 		console.log(index, ' item is in view: ', isInView);
 	};
 
 	const nextHandler = () => {
-		if (currentIndex < lastIndex) {
+		if (isInfiniteLoop || currentIndex < lastIndex) {
 			setCurrentIndex((prevState) => prevState + 1);
+			if (isInfiniteLoop) {
+				const copyChildren = [...childrenArray];
+				const firstEl = copyChildren.shift();
+				setChildrenArray([...copyChildren, firstEl]);
+				if (currentIndex === lastIndex) setCurrentIndex(showCount);
+			}
 		}
 	};
 
 	const prevHandler = () => {
-		if (currentIndex > showCount) {
+		if (isInfiniteLoop || currentIndex > showCount) {
 			setCurrentIndex((prevState) => prevState - 1);
+			if (isInfiniteLoop) {
+				const copyChildren = [...childrenArray];
+				const lastEl = copyChildren.pop();
+				setChildrenArray([lastEl, ...copyChildren]);
+				if (currentIndex === showCount) setCurrentIndex(showCount);
+			}
 		}
 	};
 
 	return (
 		<motion.div ref={container} className={styles.carousel} id="project-carousel">
-			{currentIndex > showCount && (
+			{(isInfiniteScroll || currentIndex > showCount) && (
 				<PrimaryButton
 					onClick={prevHandler}
 					appearance={{ className: 'px-1' }}
@@ -91,7 +161,9 @@ export default function Slider({
 				</PrimaryButton>
 			)}
 			<motion.div
-				className={styles.innerCarousel}
+				className={`${styles.innerCarousel} ${
+					transitionEnabled ? 'transition-transform' : ''
+				}`}
 				style={{
 					transform: `translateX(-${
 						(currentIndex - showCount) * (100 / showCount)
@@ -99,9 +171,10 @@ export default function Slider({
 					gap: `${spacing}%`,
 				}}
 				onTouchStart={startTouchHandler}
-				onTouchMove={handleTouchMove}>
-				{children &&
-					children.map((child, i) => (
+				onTouchMove={handleTouchMove}
+				onTransitionEnd={() => handleTransitionEnd()}>
+				{childrenArray &&
+					childrenArray.map((child, i) => (
 						<SliderItem
 							key={i}
 							style={{ minWidth: `${100 / showCount - spacing}%` }}
@@ -112,9 +185,9 @@ export default function Slider({
 						</SliderItem>
 					))}
 			</motion.div>
-			{currentIndex !== lastIndex && (
+			{(isInfiniteScroll || currentIndex !== lastIndex) && (
 				<PrimaryButton
-					onPress={nextHandler}
+					onClick={nextHandler}
 					appearance={{ className: 'px-1' }}
 					className="p-1 min-w-0 absolute z-10 border-background inset-y-0 my-auto right-10  hidden lg:block">
 					<FontAwesomeIcon icon={faCircleChevronRight} />

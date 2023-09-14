@@ -32,23 +32,35 @@ export default async function FeaturedProject({ project }: Props) {
 
 	return (
 		<>
-			<Slider>
-				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+			<Slider isInfiniteScroll>
+				<div
+					id="1"
+					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
 					{1}
 				</div>
-				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+				<div
+					id="2"
+					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
 					{2}
 				</div>
-				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+				<div
+					id="3"
+					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
 					{3}
 				</div>
-				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+				<div
+					id="4"
+					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
 					{4}
 				</div>
-				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+				<div
+					id="5"
+					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
 					{5}
 				</div>
-				<div className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
+				<div
+					id="6"
+					className="h-52 flex justify-center items-center text-black bg-white rounded-3xl text-9xl">
 					{6}
 				</div>
 			</Slider>

@@ -24,10 +24,10 @@ export default function SliderItem({
 	...restProps
 }: Props) {
 	const item = useRef(null);
-	const isInView = useInView(item, { root: container });
+	const isInView = useInView(item);
 
 	useEffect(() => {
-		if (!isInView && onOutOfView) {
+		if (onOutOfView) {
 			onOutOfView({ isInView, index });
 		}
 	}, [isInView, index, onOutOfView]);
