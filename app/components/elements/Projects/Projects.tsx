@@ -13,6 +13,7 @@ export default async function Projects({ id }: Props) {
 	const featuredProject = await prismicClient.getByUID('project', 'enerblu.co.za');
 	let projects = await prismicClient.getAllByType('project');
 	const mainProjects = projects.filter((project) => project.tags.includes('Main Project'));
+	const sideProjects = projects.filter((project) => project.tags.includes('Side Project'));
 	return (
 		<section className="w-screen flex flex-col gap-10" id={id}>
 			<BoundWrapper as="div">
@@ -24,12 +25,23 @@ export default async function Projects({ id }: Props) {
 				</Heading>
 			</BoundWrapper>
 			<FeaturedProject project={featuredProject} />
-			<BoundWrapper as="div" className="">
+			<BoundWrapper as="div" className="gap-40">
 				<ul className="flex flex-col lg:flex-row gap-8 lg:justify-between">
 					{mainProjects.map((project) => (
 						<ProjectCard project={project} key={project.id} />
 					))}
 				</ul>
+				<div className="flex flex-col gap-10">
+					<Heading as="h3">
+						<span className="relative">Tutorial</span>/
+						<span className="relative">Side Projects</span>{' '}
+					</Heading>
+					<ul className="flex flex-col lg:flex-row gap-5 lg:gap-20">
+						{sideProjects.map((project) => (
+							<ProjectCard key={project.id} project={project} minify />
+						))}
+					</ul>
+				</div>
 			</BoundWrapper>
 		</section>
 	);

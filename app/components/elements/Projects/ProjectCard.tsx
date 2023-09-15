@@ -12,6 +12,7 @@ import styles from '@/app/components/elements/Projects/projects.module.css';
 type Props = {
 	project: Content.ProjectDocument<string>;
 	className?: string;
+	minify?: boolean;
 };
 
 const components: JSXMapSerializer = {
@@ -19,7 +20,7 @@ const components: JSXMapSerializer = {
 	strong: ({ children }) => <strong className="text-primary light sm">{children}</strong>,
 };
 
-export default async function ProjectCard({ project, className }: Props) {
+export default async function ProjectCard({ project, className, minify }: Props) {
 	let techStack;
 	try {
 		techStack = await Promise.all(
@@ -42,24 +43,28 @@ export default async function ProjectCard({ project, className }: Props) {
 				<ExternalLink
 					className={`text-xl text-center lg:text-2xl ${styles.ProjectLink}`}
 					field={project.data.project_link}>
-					<Image
-						src={project.data.featured_image.url || ''}
-						alt={project.data.featured_image.alt || ''}
-						width={500}
-						height={500}
-						className="border-2 my-5 border-accent hover:shadow-glow rounded-3xl shadow-lg w-full aspect-square object-cover"
-					/>
+					{!minify && (
+						<Image
+							src={project.data.featured_image.url || ''}
+							alt={project.data.featured_image.alt || ''}
+							width={500}
+							height={500}
+							className="border-2 my-5 border-accent hover:shadow-glow rounded-3xl shadow-lg w-full aspect-square object-cover"
+						/>
+					)}
 					{project.data.title}
 				</ExternalLink>
 			) : (
 				<div className={`${styles.ProjectLink}`}>
-					<Image
-						src={project.data.featured_image.url || ''}
-						alt={project.data.featured_image.alt || ''}
-						width={500}
-						height={500}
-						className="border-2 my-5 border-accent hover:shadow-glow rounded-3xl shadow-lg w-full aspect-square object-cover"
-					/>
+					{!minify && (
+						<Image
+							src={project.data.featured_image.url || ''}
+							alt={project.data.featured_image.alt || ''}
+							width={500}
+							height={500}
+							className="border-2 my-5 border-accent hover:shadow-glow rounded-3xl shadow-lg w-full aspect-square object-cover"
+						/>
+					)}
 					<p className="text-center">{project.data.title}</p>
 				</div>
 			)}
