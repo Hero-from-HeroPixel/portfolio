@@ -35,7 +35,7 @@ export default async function Experience({ jobs, id, ...restProps }: Props) {
 			</BoundWrapper>
 			<div className="flex relative">
 				<div className={styles.timeline}></div>
-				<div className="flex flex-col-reverse">
+				<div className="flex flex-col">
 					{jobs && jobs.map((job) => <Job key={job.data.company} job={job} />)}
 				</div>
 				{!jobs && <p>Could not retrieve jobs</p>}

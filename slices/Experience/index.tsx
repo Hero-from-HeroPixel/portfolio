@@ -1,7 +1,7 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import Heading from '@/app/components/UI/Heading';
 import { Content, isFilled } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
 import styles from '@/app/components/elements/Experience/experience.module.css';
 import Job from '@/app/components/elements/Experience/Job';
 import { prismicClient } from '@/app/lib/clients';
@@ -30,12 +30,7 @@ const Experience = async ({ slice }: ExperienceProps): Promise<JSX.Element> => {
 				data-slice-variation={slice.variation}>
 				<div className="mt-10 mb-5 lg:mt-20 lg:mb-10">
 					<Heading as="h3">Experience</Heading>
-					<p className="light my-5">
-						I am web developer with{' '}
-						<strong className="text-primary">1-year full stack development</strong>{' '}
-						and{' '}
-						<strong className="text-primary">2 years design experience.</strong>{' '}
-					</p>
+					<PrismicRichText field={slice.primary.introduction} />
 				</div>
 			</BoundWrapper>
 			<div className="flex relative">
