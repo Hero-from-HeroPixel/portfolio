@@ -27,7 +27,7 @@ type Props = {
 
 const validation = Yup.object({
 	// captcha: Yup.string().required('required'),
-	name: Yup.string().required('required'),
+	name: Yup.boolean().required('required'),
 	email: Yup.string().email('email invalid').required('required'),
 	phone: Yup.string(),
 	subject: Yup.string().required('required'),
@@ -35,7 +35,7 @@ const validation = Yup.object({
 });
 
 const initialValues = {
-	captcha: '',
+	captcha: false, //start with fail state
 	lastname: '', //honeypot field
 	name: '',
 	email: '',
@@ -45,7 +45,7 @@ const initialValues = {
 };
 
 interface Values {
-	[value: string]: string;
+	[value: string]: string | boolean;
 }
 
 export default function ContactForm({ className }: Props) {
@@ -54,6 +54,10 @@ export default function ContactForm({ className }: Props) {
 
 	const submitHandler = async (values: Values) => {
 		if (values.lastname !== '') return;
+		if (values.captcha) {
+			setSubmitState('error');
+			console.error('Captcha failed');
+		}
 		setSubmitState('submitting');
 		console.log(values);
 		try {
@@ -214,15 +218,16 @@ export default function ContactForm({ className }: Props) {
 							onBlur={handleBlur}
 							value={values.message}
 						/>
-						{/* <div className="">
+						<div className="">
 							<HCaptcha
-								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+								theme="dark"
+								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access
 								onVerify={onHCaptchaChange}
 							/>
 							{errors.captcha && (
 								<p className="light sm text-danger">please fill out captcha</p>
 							)}
-						</div> */}
+						</div>
 
 						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
 							<PrimaryButton
