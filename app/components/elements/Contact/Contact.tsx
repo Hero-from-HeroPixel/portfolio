@@ -17,7 +17,7 @@ export default function Contact({ id }: Props) {
 			stretch
 			className="bg-default grid grid-cols-1 lg:grid-cols-2 place-items-center py-20"
 			id={id}>
-			<div className="border-1 flex flex-col justify-between border-accent bg-background rounded-3xl p-12 gap-20">
+			<div className="relative border-2 flex flex-col justify-between border-accent bg-background rounded-3xl p-12 gap-20 overflow-hidden">
 				<div className="">
 					<Heading as="h3">Contact Information</Heading>
 					<p className="light">Feel free to contact me at anytime.</p>
@@ -50,7 +50,15 @@ export default function Contact({ id }: Props) {
 						<LinkdnIcon />
 					</SocialButton>
 				</div>
+				<CircleGraphic r={60} className="absolute right-8 bottom-8 fill-accent" />
+				<CircleGraphic className="absolute -right-14 -bottom-14 fill-accent" />
 			</div>
 		</BoundWrapper>
 	);
 }
+
+const CircleGraphic = ({ className, r = 90 }: { className?: string; r?: number }) => (
+	<svg height={r * 2} width={r * 2} className={className}>
+		<circle r={r} cy={r} cx={r} stroke="none" stroke-width="3" opacity="50%" />
+	</svg>
+);
