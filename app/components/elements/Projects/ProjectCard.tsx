@@ -2,12 +2,12 @@ import { cn } from '@/app/utils/cn';
 import { Content, isFilled } from '@prismicio/client';
 import Image from 'next/image';
 import React from 'react';
-import { ExternalLink } from '../../Navigation/Links';
+import { ExternalLink } from '@/app/components/Navigation/Links';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { prismicClient } from '@/app/lib/clients';
-import Tech, { IconListT } from '../Experience/Tech';
+import Tech, { IconListT } from '@/app/components/elements/Experience/Tech';
 import styles from '@/app/components/elements/Projects/projects.module.css';
-import Indicator from './indicator';
+import Indicator from '@/app/components/elements/Projects/Indicator';
 
 type Props = {
 	project: Content.ProjectDocument<string>;
@@ -57,7 +57,7 @@ export default async function ProjectCard({ project, className, minify }: Props)
 								alt={project.data.featured_image.alt || ''}
 								width={500}
 								height={500}
-								className="border-2 my-5 border-accent hover:shadow-glow rounded-3xl shadow-lg w-full aspect-square object-cover"
+								className="border-3 my-5 hover:border-accent hover:shadow-glow border-glass transition-all duration-300 ease-in rounded-3xl shadow-2xl w-full aspect-square object-cover"
 							/>
 						)}
 						{project.data.title}
@@ -70,7 +70,7 @@ export default async function ProjectCard({ project, className, minify }: Props)
 								alt={project.data.featured_image.alt || ''}
 								width={500}
 								height={500}
-								className="border-2 my-5 border-accent hover:shadow-glow rounded-3xl shadow-lg w-full aspect-square object-cover"
+								className="border-3 my-5 hover:border-accent hover:shadow-glow border-glass transition-all duration-300 ease-in rounded-3xl shadow-2xl w-full aspect-square object-cover"
 							/>
 						)}
 						<p className="text-center">{project.data.title}</p>

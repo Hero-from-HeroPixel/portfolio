@@ -23,7 +23,7 @@ function touchEventHandler(e: TouchEvent) {
 	const x = e.touches[0].screenX;
 	const y = e.touches[0].screenY;
 
-	if (blobEl) blobAnimate(blobEl, x / 2, screenHeight + y, 1500);
+	if (blobEl) blobAnimate(blobEl, x / 2, screenHeight + y, 2500);
 }
 
 export default function Blob({}: Props) {
@@ -37,7 +37,7 @@ export default function Blob({}: Props) {
 				} else {
 					window.onpointermove = (e) => {
 						const { clientX, clientY } = e;
-						blobAnimate(blobEl, clientX, clientY, 2000);
+						blobAnimate(blobEl, clientX, clientY, 2500);
 					};
 				}
 			}

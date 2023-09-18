@@ -253,7 +253,8 @@ type HomePageDocumentDataSlicesSlice =
   | HeroSlice
   | EducationSlice
   | JobSlice
-  | ExperienceSlice;
+  | ExperienceSlice
+  | ProjectsSlice;
 
 /**
  * Content for Home Page documents

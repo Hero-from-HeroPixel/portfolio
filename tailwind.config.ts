@@ -28,7 +28,7 @@ const config: Config = {
 				'fade-white': 'rgba(256, 256, 256, 0.15)',
 				overlay: 'rgba(0,0,0,0.6)',
 				'fade-primary': 'rgba(204, 255, 0, 0.6)',
-				glass: '#FFFFFF05',
+				glass: '#FFFFFF15',
 			},
 			boxShadow: {
 				glow: '0px 0px 15px 4px rgba(51, 0, 255, 0.81), 3px 8px 14px 12px rgba(51, 0, 255, 0.07)',

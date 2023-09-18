@@ -22,6 +22,9 @@
             },
             "experience": {
               "type": "SharedSlice"
+            },
+            "projects": {
+              "type": "SharedSlice"
             }
           }
         }
