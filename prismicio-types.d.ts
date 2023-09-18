@@ -181,21 +181,6 @@ export type EducationEntryDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *Footer → Credits*
- */
-export interface FooterDocumentDataCreditsItem {
-  /**
-   * Credit field in *Footer → Credits*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.credits[].credit
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  credit: prismic.RichTextField;
-}
-
-/**
  * Item in *Footer → Quick Links*
  */
 export interface FooterDocumentDataQuickLinksItem {
@@ -237,17 +222,6 @@ interface FooterDocumentData {
   logo: prismic.SelectField<"Light" | "Dark", "filled">;
 
   /**
-   * Credits field in *Footer*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: footer.credits[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  credits: prismic.GroupField<Simplify<FooterDocumentDataCreditsItem>>;
-
-  /**
    * Quick Links field in *Footer*
    *
    * - **Field Type**: Group
@@ -257,6 +231,17 @@ interface FooterDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   quick_links: prismic.GroupField<Simplify<FooterDocumentDataQuickLinksItem>>;
+
+  /**
+   * Credits field in *Footer*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer.credits
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  credits: prismic.ContentRelationshipField<"credits">;
 }
 
 /**

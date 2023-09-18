@@ -15,23 +15,6 @@
           "default_value": "Light"
         }
       },
-      "credits": {
-        "type": "Group",
-        "config": {
-          "label": "Credits",
-          "fields": {
-            "credit": {
-              "type": "StructuredText",
-              "config": {
-                "label": "Credit",
-                "placeholder": "",
-                "allowTargetBlank": true,
-                "single": "paragraph,strong,em,hyperlink"
-              }
-            }
-          }
-        }
-      },
       "quick_links": {
         "type": "Group",
         "config": {
@@ -53,6 +36,14 @@
               }
             }
           }
+        }
+      },
+      "credits": {
+        "type": "Link",
+        "config": {
+          "label": "Credits",
+          "select": "document",
+          "customtypes": ["credits"]
         }
       }
     }

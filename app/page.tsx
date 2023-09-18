@@ -24,9 +24,9 @@ export default async function Home() {
 	return (
 		<>
 			<Hero id="hero" />
-			<EducationTable id="education" />
 			<About id="about" />
 			<Experience id="experience" />
+			<EducationTable id="education" />
 			<Projects id="projects" />
 			<Contact id="contact-me" />
 		</>

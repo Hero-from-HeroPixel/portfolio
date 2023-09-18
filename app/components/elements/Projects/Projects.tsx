@@ -17,7 +17,7 @@ export default async function Projects({ id }: Props) {
 	const mainProjects = projects.filter((project) => project.tags.includes('Main Project'));
 	const sideProjects = projects.filter((project) => project.tags.includes('Side Project'));
 	return (
-		<section className="w-screen flex flex-col gap-10" id={id}>
+		<section className="w-screen flex flex-col gap-20" id={id}>
 			<BoundWrapper as="div">
 				<Heading className=" w-11/12 mx-auto" as="h2">
 					Projects

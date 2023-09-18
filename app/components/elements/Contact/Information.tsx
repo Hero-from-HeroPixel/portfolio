@@ -6,6 +6,7 @@ import { SocialButton } from '../../UI/Buttons';
 import { GithubIcon, LinkdnIcon, WhatsAppIcon } from '../../icons';
 import { GITHUB_LINK, LINKDN_LINK, MAIL_LINK, PHONE_LINK } from '@/app/constants/Social';
 import { cn } from '@/app/utils/cn';
+import Link from 'next/link';
 
 type Props = {
 	className?: string;
@@ -15,7 +16,7 @@ export default function Information({ className }: Props) {
 	return (
 		<div
 			className={cn(
-				'relative border-2 flex flex-col justify-between border-accent bg-background rounded-3xl px-12 py-20 gap-20 overflow-hidden',
+				'relative border-2 flex flex-col justify-between font-body_font border-accent bg-background rounded-3xl px-12 py-20 gap-20 overflow-hidden',
 				className,
 			)}>
 			<div className="">
@@ -25,11 +26,23 @@ export default function Information({ className }: Props) {
 			<div className="flex flex-col gap-8">
 				<div className="flex gap-4 items-center">
 					<FontAwesomeIcon icon={faPhoneVolume} />
-					<p className="light sm">+27 60 732 6830</p>
+					<Link
+						rel="noreferrer"
+						target="_blank"
+						href="tel:+27607326830"
+						className="light sm">
+						+27 60 732 6830
+					</Link>
 				</div>
 				<div className="flex gap-4 items-center">
 					<FontAwesomeIcon icon={faEnvelope} />
-					<p className="light sm">dev@heropixel.co.za</p>
+					<Link
+						target="_blank"
+						rel="noreferrer"
+						href="mailto:dev@heropixel.co.za"
+						className="light sm">
+						dev@heropixel.co.za
+					</Link>
 				</div>
 				<div className="flex gap-4 items-center">
 					<FontAwesomeIcon icon={faLocationDot} />

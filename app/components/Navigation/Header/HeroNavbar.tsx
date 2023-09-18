@@ -135,7 +135,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 									className="w-3/4 mx-auto"
 									links={data.navigation}></HeroNavbarContent>
 							</div>
-							<CreditsModal openButton={{ className: 'mb-5' }} />
+							{/* <CreditsModal modalTitle={} openButton={{ className: 'mb-5' }} /> */}
 							<Curve />
 						</motion.div>
 					)}
