@@ -70,6 +70,14 @@
           "thumbnails": []
         }
       },
+      "type": {
+        "type": "Select",
+        "config": {
+          "label": "Type",
+          "placeholder": "",
+          "options": ["Tutorial", "Side Project", "Paid Project"]
+        }
+      },
       "tech": {
         "type": "Group",
         "config": {

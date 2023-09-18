@@ -4,6 +4,8 @@ import Heading from '../../UI/Heading';
 import FeaturedProject from './FeaturedProject';
 import { prismicClient } from '@/app/lib/clients';
 import ProjectCard from './ProjectCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCodeBranch, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	id?: string;
@@ -32,9 +34,22 @@ export default async function Projects({ id }: Props) {
 					))}
 				</ul>
 				<div className="flex flex-col gap-10">
-					<Heading as="h3">
-						<span className="relative">Tutorial</span>/
-						<span className="relative">Side Projects</span>{' '}
+					<Heading className="flex items-center" as="h3">
+						<span className="flex items-start gap-1">
+							Tutorial
+							<FontAwesomeIcon
+								className="w-4 h-fit text-primary"
+								icon={faGraduationCap}
+							/>
+						</span>
+						/
+						<span className="flex items-start gap-1">
+							Side Projects
+							<FontAwesomeIcon
+								className="w-4 h-fit text-accent"
+								icon={faCodeBranch}
+							/>
+						</span>{' '}
 					</Heading>
 					<ul className="flex flex-col lg:flex-row gap-5 lg:gap-20">
 						{sideProjects.map((project) => (

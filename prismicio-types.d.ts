@@ -730,6 +730,17 @@ interface ProjectDocumentData {
   featured_image: prismic.ImageField<never>;
 
   /**
+   * Type field in *Project*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.type
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  type: prismic.SelectField<"Tutorial" | "Side Project" | "Paid Project">;
+
+  /**
    * Tech field in *Project*
    *
    * - **Field Type**: Group
