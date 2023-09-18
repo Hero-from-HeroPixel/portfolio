@@ -62,7 +62,7 @@ export default function ContactForm({ className }: Props) {
 				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 				body: JSON.stringify({
 					access_key: process.env.NEXT_PUBLIC_CONTACT_FORM_API,
-					subject: 'Lead from portfolio',
+					subject: values.subject,
 					from_name: 'Portfolio',
 					...values,
 				}),
