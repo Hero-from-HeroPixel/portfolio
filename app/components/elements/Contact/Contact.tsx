@@ -17,7 +17,7 @@ export default function Contact({ id }: Props) {
 			stretch
 			className="bg-default grid grid-cols-1 lg:grid-cols-2 place-items-center py-20"
 			id={id}>
-			<div className="border-1 flex flex-col justify-between border-accent bg-background rounded-xl py-10 px- gap-20">
+			<div className="border-1 flex flex-col justify-between border-accent bg-background rounded-3xl p-12 gap-20">
 				<div className="">
 					<Heading as="h3">Contact Information</Heading>
 					<p className="light">Feel free to contact me at anytime.</p>
