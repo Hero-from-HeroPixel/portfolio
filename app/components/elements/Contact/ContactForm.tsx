@@ -26,8 +26,8 @@ type Props = {
 };
 
 const validation = Yup.object({
-	// captcha: Yup.string().required('required'),
-	name: Yup.boolean().required('required'),
+	captcha: Yup.string().required('required'),
+	name: Yup.string().required('required'),
 	email: Yup.string().email('email invalid').required('required'),
 	phone: Yup.string(),
 	subject: Yup.string().required('required'),
@@ -35,7 +35,7 @@ const validation = Yup.object({
 });
 
 const initialValues = {
-	captcha: false, //start with fail state
+	captcha: '', //start with fail state
 	lastname: '', //honeypot field
 	name: '',
 	email: '',
@@ -45,7 +45,7 @@ const initialValues = {
 };
 
 interface Values {
-	[value: string]: string | boolean;
+	[value: string]: string;
 }
 
 export default function ContactForm({ className }: Props) {
@@ -149,6 +149,7 @@ export default function ContactForm({ className }: Props) {
 			validationSchema={validation}>
 			{({ errors, handleChange, handleBlur, values, setFieldValue }) => {
 				const onHCaptchaChange = (token: string) => {
+					console.log(token);
 					setFieldValue('captcha', token);
 				};
 				return (
@@ -218,8 +219,9 @@ export default function ContactForm({ className }: Props) {
 							onBlur={handleBlur}
 							value={values.message}
 						/>
-						<div className="">
+						<div className="rounded-3xl">
 							<HCaptcha
+								size="normal"
 								theme="dark"
 								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access
 								onVerify={onHCaptchaChange}

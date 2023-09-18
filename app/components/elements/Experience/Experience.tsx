@@ -26,10 +26,11 @@ export default async function Experience({ jobs, id, ...restProps }: Props) {
 				<div className="mt-10 mb-5 lg:mt-20 lg:mb-10">
 					<Heading as="h3">Experience</Heading>
 					<p className="light my-5">
-						I am web developer with{' '}
-						<strong className="text-primary">1-year full stack development</strong>{' '}
-						and{' '}
-						<strong className="text-primary">2 years design experience.</strong>{' '}
+						I am full stack web developer that leans toward the front-end. I have
+						experience in{' '}
+						<span className="text-primary">
+							web development, design, web related technologies and e-commerce.{' '}
+						</span>
 					</p>
 				</div>
 			</BoundWrapper>
