@@ -29,11 +29,11 @@ export default function Contact({ id }: Props) {
 					</div>
 					<div className="flex gap-4 items-center">
 						<FontAwesomeIcon icon={faEnvelope} />
-						<p>dev@heropixel.co.za</p>
+						<p className="light sm">dev@heropixel.co.za</p>
 					</div>
 					<div className="flex gap-4 items-center">
 						<FontAwesomeIcon icon={faLocationDot} />
-						<p>Pretoria, Gauteng - South Africa</p>
+						<p className="light sm">Pretoria, Gauteng - South Africa</p>
 					</div>
 				</div>
 				<div className="flex gap-5">
