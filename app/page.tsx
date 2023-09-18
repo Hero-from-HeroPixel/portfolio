@@ -7,6 +7,7 @@ import EducationTable from '@/app/components/elements/Education/EducationTable';
 import About from '@/app/components/elements/About_Me/About';
 import Experience from '@/app/components/elements/Experience/Experience';
 import Projects from './components/elements/Projects/Projects';
+import Contact from './components/elements/Contact/Contact';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -27,7 +28,7 @@ export default async function Home() {
 			<About id="about" />
 			<Experience id="experience" />
 			<Projects id="projects" />
-
+			<Contact id="contact" />
 			<div className="h-screen w-full " id="contact-me"></div>
 		</>
 	);
