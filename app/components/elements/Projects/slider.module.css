@@ -1,0 +1,14 @@
+.carousel {
+	@apply cursor-grab overflow-hidden relative;
+}
+
+.innerCarousel {
+	@apply flex;
+}
+
+.image {
+	@apply rounded-3xl pointer-events-none;
+}
+
+.item0 {
+}

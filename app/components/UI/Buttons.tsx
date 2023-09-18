@@ -2,14 +2,21 @@
 import { cn } from '@/app/utils/cn';
 import { Button, ButtonProps } from '@nextui-org/button';
 import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 
 export interface PrimaryButtonProps extends ButtonProps {
 	className?: string;
 	children: React.ReactNode;
+	appearance?: {
+		className: string;
+	};
 }
-export function PrimaryButton({ className, children, ...restProps }: PrimaryButtonProps) {
+export function PrimaryButton({
+	className,
+	children,
+	appearance,
+	...restProps
+}: PrimaryButtonProps) {
 	return (
 		<Button
 			className={cn(
@@ -20,7 +27,13 @@ export function PrimaryButton({ className, children, ...restProps }: PrimaryButt
 			color="primary"
 			variant="ghost"
 			radius="full">
-			<span className="rounded-full bg-primary w-full h-full px-16">{children}</span>
+			<span
+				className={cn(
+					'rounded-full justify-center bg-primary w-full h-full px-16 flex items-center',
+					appearance?.className,
+				)}>
+				{children}
+			</span>
 		</Button>
 	);
 }
@@ -33,11 +46,11 @@ export function SecondaryButton({ className, children, ...restProps }: Secondary
 	return (
 		<Button
 			{...restProps}
-			variant="bordered"
+			variant="ghost"
 			color="primary"
 			radius="full"
 			className={cn(
-				'btn lg:px-12 px-6 py-1 max-w-fit hover:bg-primary hover:text-background',
+				'btn lg:px-12 px-6 py-1 max-w-fit hover:text-background',
 				className,
 			)}>
 			{children}

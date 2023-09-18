@@ -22,15 +22,14 @@
 	border-radius: 50%;
 	background: linear-gradient(
 		139deg,
-		rgba(51, 0, 255, 1) 21.56%,
+		rgba(51, 0, 255, 1) 30%,
 		rgba(255, 255, 255, 1) 40.54%,
 		rgba(204, 255, 0, 1) 60.51%,
 		rgba(17, 17, 17, 1) 83.1%
 	);
 	animation: rotate 20s infinite;
-	opacity: 1;
 	z-index: 1;
-	@apply h-52 lg:h-96;
+	@apply h-52 lg:h-96 opacity-80 2xl:opacity-90;
 }
 
 .blur {
@@ -38,5 +37,5 @@
 	width: 100%;
 	position: fixed;
 	z-index: 2;
-	backdrop-filter: blur(10vmax);
+	backdrop-filter: blur(8vmax);
 }

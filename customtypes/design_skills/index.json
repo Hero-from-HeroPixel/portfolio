@@ -1,0 +1,34 @@
+{
+  "id": "design_skills",
+  "label": "Design Skills",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "skills_lists": {
+        "type": "Group",
+        "config": {
+          "label": "Skills Lists",
+          "fields": {
+            "skills_list": {
+              "type": "Link",
+              "config": {
+                "label": "Skills List",
+                "select": "document",
+                "customtypes": ["skills_list"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

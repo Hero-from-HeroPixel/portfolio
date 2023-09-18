@@ -1,0 +1,3 @@
+.ProjectLink:hover img {
+	@apply shadow-glow;
+}

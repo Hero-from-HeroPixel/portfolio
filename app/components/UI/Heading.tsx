@@ -26,7 +26,9 @@ export default function Heading({
 				Comp &&
 					Comp === 'h2' &&
 					'2xl:text-[5.3125rem] lg:text-6xl md:text-5xl text-[2.5rem]',
-				Comp && Comp === 'h3' && '2xl:text-[2.5rem] lg:text-4xl text-[1.75rem]',
+				Comp &&
+					Comp === 'h3' &&
+					'2xl:text-[2.5rem] lg:text-4xl text-[1.75rem] tracking-wide',
 				Comp && Comp === 'h4' && 'text-[1.125rem] lg:text-[1.5rem]',
 				Comp &&
 					Comp === 'h5' &&

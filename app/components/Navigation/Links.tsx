@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/app/utils/cn';
-import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
+import { PrismicNextLink } from '@prismicio/next';
 import { Link, LinkProps } from '@nextui-org/link';
 import { FilledLinkToWebField, LinkField } from '@prismicio/client';
 import styles from '@/app/components/Navigation/links.module.css';
@@ -224,7 +224,7 @@ export function ExternalLink({
 					className={cn(`${styles.externalLink} ${styles.link}`, className)}>
 					{children}
 					<FontAwesomeIcon
-						className="w-3 ms-2 text-primary text-opacity-75"
+						className="w-3 ms-2 text-opacity-75"
 						icon={faArrowUpRightFromSquare}
 					/>
 				</PrismicNextLink>
@@ -238,7 +238,7 @@ export function ExternalLink({
 					className={cn(`${styles.externalLink} ${styles.link}`, className)}>
 					{children}
 					<FontAwesomeIcon
-						className="w-3 ms-2 text-primary text-opacity-75 "
+						className="w-3 ms-2 text-opacity-75 "
 						icon={faArrowUpRightFromSquare}
 					/>
 				</Link>

@@ -1,0 +1,56 @@
+{
+  "id": "skill",
+  "label": "Skill",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "title",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "icon_as_name": {
+        "type": "Text",
+        "config": {
+          "label": "icon as name",
+          "placeholder": ""
+        }
+      },
+      "icon": {
+        "type": "Select",
+        "config": {
+          "label": "icon",
+          "placeholder": "use Icon as Name if icon not founc",
+          "options": [
+            "canva",
+            "cloudinary",
+            "contentful",
+            "css",
+            "elementor",
+            "figma",
+            "framer",
+            "github",
+            "html",
+            "javascript",
+            "prismic",
+            "shopify",
+            "typescript",
+            "webflow",
+            "wordpress",
+            "photoshop"
+          ]
+        }
+      }
+    }
+  }
+}

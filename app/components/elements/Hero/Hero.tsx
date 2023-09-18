@@ -1,13 +1,14 @@
 import React from 'react';
-import BoundWrapper from '../UI/BoundWrapper';
+import BoundWrapper from '../../UI/BoundWrapper';
 import Heading from '@/app/components/UI/Heading';
 import { prismicClient } from '@/app/lib/clients';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { SocialButton } from '@/app/components/UI/Buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { LinkdnIcon, GithubIcon, WhatsAppIcon } from '../icons';
-import HeroCTA from '@/app/components/elements/HeroCTA';
+import { LinkdnIcon, GithubIcon, WhatsAppIcon } from '../../icons';
+import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
+import { GITHUB_LINK, LINKDN_LINK, MAIL_LINK, PHONE_LINK } from '@/app/constants/Social';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => (
@@ -18,9 +19,11 @@ const components: JSXMapSerializer = {
 	strong: ({ children }) => <strong className="text-primary">{children}</strong>,
 };
 
-type Props = {};
+type Props = {
+	id?: string;
+};
 
-export default async function Hero({}: Props) {
+export default async function Hero({ id }: Props) {
 	let hero;
 	try {
 		hero = (await prismicClient.getSingle('hero_introduction')).data;
@@ -28,8 +31,10 @@ export default async function Hero({}: Props) {
 		console.error('introduction not provided');
 	}
 	return (
-		<BoundWrapper className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12">
-			<div className="lg:w-3/4 flex flex-col lg:flex-row lg:h-[65%]">
+		<BoundWrapper
+			id={id}
+			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12">
+			<div className="lg:w-3/4 flex flex-col lg:flex-row lg:h-[60%]">
 				<div className="relative w-fit lg:h-3/4 flex flex-col justify-center items-center lg:justify-start gap-12 lg:gap-0">
 					<Heading className="relative leading-[80%] lg:leading-[80%] tracking-[-0.37rem] lg:tracking-[-0.95rem]">
 						hero{' '}
@@ -52,21 +57,21 @@ export default async function Hero({}: Props) {
 						</span>
 					)}
 				</div>
-				<HeroCTA />
+				<HeroCTA targetId={'education'} />
 			</div>
-			<div className="flex flex-col items-center lg:gap-4">
+			<div className="flex flex-col items-center gap-2 lg:gap-4">
 				<div className="w-full h-2 lg:w-2 lg:h-24 bg-accent"></div>
 				<div className="flex lg:flex-col gap-2">
-					<SocialButton href="https://github.com/Hero-from-HeroPixel">
+					<SocialButton href={GITHUB_LINK}>
 						<GithubIcon />
 					</SocialButton>
-					<SocialButton href="mailto:dev@heropixel.co.za">
-						<FontAwesomeIcon icon={faEnvelope} />
+					<SocialButton href={MAIL_LINK}>
+						<FontAwesomeIcon className="w-full h-full" icon={faEnvelope} />
 					</SocialButton>
-					<SocialButton href="tel:+27607326830">
+					<SocialButton href={PHONE_LINK}>
 						<WhatsAppIcon />
 					</SocialButton>
-					<SocialButton href="https://www.linkedin.com/in/jean-jacques-grobler/">
+					<SocialButton href={LINKDN_LINK}>
 						<LinkdnIcon />
 					</SocialButton>
 				</div>

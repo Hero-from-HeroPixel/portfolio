@@ -1,0 +1,44 @@
+{
+  "id": "education",
+  "type": "SharedSlice",
+  "name": "Education",
+  "description": "Education",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "section_id": {
+          "type": "Text",
+          "config": {
+            "label": "Section ID",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "education_entry": {
+          "type": "Link",
+          "config": {
+            "label": "Education Entry",
+            "select": "document",
+            "customtypes": [
+              "education_entry"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

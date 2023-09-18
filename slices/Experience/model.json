@@ -1,0 +1,53 @@
+{
+  "id": "experience",
+  "type": "SharedSlice",
+  "name": "Experience",
+  "description": "Experience",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "section_id": {
+          "type": "Text",
+          "config": {
+            "label": "Section ID",
+            "placeholder": ""
+          }
+        },
+        "introduction": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Introduction",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong,em,hyperlink"
+          }
+        }
+      },
+      "items": {
+        "jobs": {
+          "type": "Link",
+          "config": {
+            "label": "Jobs",
+            "select": "document",
+            "customtypes": [
+              "job"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationDocumentData, Simplify } from '@/prismicio-types';
 import { DefaultButton } from '@/app/components/UI/Buttons';
 import { scrollTo } from '@/app/utils/scrollTo';
@@ -14,6 +14,7 @@ import { useWindowSize } from '@uidotdev/usehooks';
 import Brand from '@/app/components/Navigation/Brand';
 import Curve from '@/app/components/Navigation/Header/Curve';
 import CreditsModal from '@/app/components/Navigation/CreditsModal';
+import { MobileScreen } from '@/app/constants/screens';
 
 type Props = {
 	theme?: 'dark' | 'light';
@@ -26,7 +27,18 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	const [headerMinify, setHeaderMinify] = useState(true);
 	const { width: windowWidth } = useWindowSize();
 
-	scroll((progress) => (progress > 0.05 ? setHeaderMinify(true) : setHeaderMinify(false)));
+	useEffect(() => {
+		scroll((progress) => {
+			if (progress > 0.05) {
+				setHeaderMinify(true);
+			} else {
+				isMenuOpen && windowWidth !== null && windowWidth >= MobileScreen
+					? setIsMenuOpen(false)
+					: null;
+				setHeaderMinify(false);
+			}
+		});
+	}, [isMenuOpen, windowWidth]);
 
 	const ctaHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setIsMenuOpen(false);
@@ -54,7 +66,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 				initial={false}
 				animate={isMenuOpen ? 'open' : 'closed'}
 				custom={height}
-				className={`relative ${theme} text-foreground bg-transparent w-full lg:px-10 lg:pt-5 sticky top-0 z-50`}>
+				className={`relative ${theme} text-foreground bg-transparent w-full h-14 lg:px-10 lg:pt-5 sticky top-0 z-50`}>
 				<AnimatePresence mode="wait">
 					{!headerMinify && (
 						<motion.div
@@ -80,11 +92,11 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 					{(headerMinify || (windowWidth !== null && windowWidth <= 1024)) && (
 						<motion.div
 							initial={{ opacity: 0, x: 80 }}
-							animate={{ opacity: 100, x: 0, transition: { delay: 0.5 } }}
+							animate={{ opacity: 100, x: 0, transition: { delay: 0.3 } }}
 							exit={{ x: 200 }}
-							className="fixed top-1 right-5 z-10 ">
+							className="fixed lg:top-2 right-0 z-10 ">
 							<MenuToggle
-								className={`flex bg-default `}
+								className={`flex bg-default lg:px-5`}
 								onClick={() => setIsMenuOpen((current) => !current)}
 								isOpen={isMenuOpen}
 							/>
@@ -123,7 +135,7 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 									className="w-3/4 mx-auto"
 									links={data.navigation}></HeroNavbarContent>
 							</div>
-							<CreditsModal openButton={{ className: 'mb-5' }} />
+							{/* <CreditsModal modalTitle={} openButton={{ className: 'mb-5' }} /> */}
 							<Curve />
 						</motion.div>
 					)}

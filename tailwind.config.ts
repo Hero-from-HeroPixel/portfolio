@@ -16,7 +16,7 @@ const config: Config = {
 				body_font: ['var(--font-league-spartan)'],
 			},
 			colors: {
-				base: '#212121',
+				dark: '#212121',
 				primary: '#CCFF00',
 				secondary: '#ffffff',
 				accent: '#3300FF',
@@ -28,6 +28,7 @@ const config: Config = {
 				'fade-white': 'rgba(256, 256, 256, 0.15)',
 				overlay: 'rgba(0,0,0,0.6)',
 				'fade-primary': 'rgba(204, 255, 0, 0.6)',
+				glass: '#FFFFFF15',
 			},
 			boxShadow: {
 				glow: '0px 0px 15px 4px rgba(51, 0, 255, 0.81), 3px 8px 14px 12px rgba(51, 0, 255, 0.07)',
@@ -35,6 +36,10 @@ const config: Config = {
 			dropShadow: {
 				'text-glow': '2px 3px 18px rgba(256,256,256,1)',
 				glow: ['4px -7px 19px '],
+			},
+			backgroundColor: {
+				glass_hover:
+					'linear-gradient(111deg, rgba(0, 0, 0, 0.11) 20.87%, rgba(0, 0, 0, 0.13) 72.76%), radial-gradient(101.34% 61% at 58.3% 43.12%, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.00) 100%)',
 			},
 		},
 	},

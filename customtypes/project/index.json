@@ -1,0 +1,131 @@
+{
+  "id": "project",
+  "label": "Project",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "section_id": {
+        "type": "Text",
+        "config": {
+          "label": "Section ID",
+          "placeholder": ""
+        }
+      },
+      "project_link": {
+        "type": "Link",
+        "config": {
+          "label": "Project Link",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "source_code": {
+        "type": "Link",
+        "config": {
+          "label": "Source Code",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "design_files": {
+        "type": "Link",
+        "config": {
+          "label": "Design Files",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "brief_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Brief Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "featured_image": {
+        "type": "Image",
+        "config": {
+          "label": "Featured Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "type": {
+        "type": "Select",
+        "config": {
+          "label": "Type",
+          "placeholder": "",
+          "options": ["Tutorial", "Side Project", "Paid Project"]
+        }
+      },
+      "tech": {
+        "type": "Group",
+        "config": {
+          "label": "Tech",
+          "fields": {
+            "tech": {
+              "type": "Link",
+              "config": {
+                "label": "Tech",
+                "select": "document",
+                "customtypes": ["skill"]
+              }
+            }
+          }
+        }
+      },
+      "images": {
+        "type": "Group",
+        "config": {
+          "label": "Images",
+          "fields": {
+            "showcase": {
+              "type": "Image",
+              "config": {
+                "label": "Showcase",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      },
+      "mobile_photos": {
+        "type": "Group",
+        "config": {
+          "label": "Mobile Photos",
+          "fields": {
+            "mobile_showcase": {
+              "type": "Image",
+              "config": {
+                "label": "Mobile Showcase",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
