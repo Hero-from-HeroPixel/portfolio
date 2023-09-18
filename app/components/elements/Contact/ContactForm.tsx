@@ -149,7 +149,10 @@ export default function ContactForm({ className }: Props) {
 				};
 				return (
 					<Form
-						className={cn('grid grid-cols-2 gap-10 font-body_font', className)}
+						className={cn(
+							'grid grid-cols-1 lg:grid-cols-2 gap-10 font-body_font lg:px-0 px-10',
+							className,
+						)}
 						data-netlify="true"
 						data-netlify-honeypot="lastname"
 						name="Contact-form">
@@ -203,7 +206,7 @@ export default function ContactForm({ className }: Props) {
 							label="Message"
 							labelPlacement="outside"
 							placeholder="Write your message here"
-							className="col-span-2"
+							className="lg:col-span-2"
 							description="Send me a message about work, future projects or ask me any web related question."
 							name="message"
 							errorMessage={errors.message}
@@ -221,8 +224,11 @@ export default function ContactForm({ className }: Props) {
 							)}
 						</div> */}
 
-						<div className="flex flex-col col-span-2 w-10/12">
-							<PrimaryButton onPress={onOpen} className="ms-auto" type="submit">
+						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
+							<PrimaryButton
+								onPress={onOpen}
+								className="lg:ms-auto mx-auto"
+								type="submit">
 								Send Message
 							</PrimaryButton>
 							<Image

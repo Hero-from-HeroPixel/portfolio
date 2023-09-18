@@ -1,5 +1,5 @@
 .link {
-	@apply max-w-fit relative font-body_font   cursor-pointer;
+	@apply max-w-fit relative font-body_font cursor-pointer;
 }
 
 .externalLink {

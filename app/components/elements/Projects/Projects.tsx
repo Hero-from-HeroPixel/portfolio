@@ -28,7 +28,7 @@ export default async function Projects({ id }: Props) {
 			</BoundWrapper>
 			<FeaturedProject project={featuredProject} />
 			<BoundWrapper as="div" className="gap-40">
-				<ul className="flex flex-col lg:flex-row gap-8 lg:justify-between">
+				<ul className="flex flex-col lg:flex-row gap-10 lg:gap-16 lg:justify-between">
 					{mainProjects.map((project) => (
 						<ProjectCard project={project} key={project.id} />
 					))}
@@ -51,7 +51,7 @@ export default async function Projects({ id }: Props) {
 							/>
 						</span>{' '}
 					</Heading>
-					<ul className="flex flex-col lg:flex-row gap-5 lg:gap-20">
+					<ul className="flex flex-col lg:flex-row gap-16 lg:gap-20">
 						{sideProjects.map((project) => (
 							<ProjectCard key={project.id} project={project} minify />
 						))}

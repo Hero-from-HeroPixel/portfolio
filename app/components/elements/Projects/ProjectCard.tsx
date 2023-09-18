@@ -42,14 +42,14 @@ export default async function ProjectCard({ project, className, minify }: Props)
 			className={cn(
 				`min-h-fit flex flex-col ${
 					minify ? 'items-start gap-3' : 'items-center gap-8'
-				}  w-1/4`,
+				}  lg:w-1/4 px-5 lg:px-0 sm:w-1/2 mx-auto lg:mx-0`,
 				className,
 			)}>
 			<div className=" flex items-start gap-1">
 				{project.data.type && <Indicator type={project.data.type} />}
 				{hasProjectLink ? (
 					<ExternalLink
-						className={`text-xl text-center lg:text-2xl ${styles.ProjectLink}`}
+						className={`w-full text-xl text-center lg:text-2xl ${styles.ProjectLink}`}
 						field={project.data.project_link}>
 						{!minify && (
 							<Image
@@ -57,7 +57,7 @@ export default async function ProjectCard({ project, className, minify }: Props)
 								alt={project.data.featured_image.alt || ''}
 								width={500}
 								height={500}
-								className="border-3 my-5 hover:border-accent hover:shadow-glow border-glass transition-all duration-300 ease-in rounded-3xl shadow-2xl w-full aspect-square object-cover"
+								className="border-3 my-5 hover:border-accent hover:shadow-glow border-glass transition-all duration-300 ease-in rounded-3xl shadow-2xl w-96  aspect-square object-cover"
 							/>
 						)}
 						{project.data.title}
@@ -70,7 +70,7 @@ export default async function ProjectCard({ project, className, minify }: Props)
 								alt={project.data.featured_image.alt || ''}
 								width={500}
 								height={500}
-								className="border-3 my-5 hover:border-accent hover:shadow-glow border-glass transition-all duration-300 ease-in rounded-3xl shadow-2xl w-full aspect-square object-cover"
+								className="border-3 my-5 hover:border-accent hover:shadow-glow border-glass transition-all duration-300 ease-in rounded-3xl shadow-2xl w-96 aspect-square object-cover"
 							/>
 						)}
 						<p className="text-center">{project.data.title}</p>

@@ -46,10 +46,10 @@ export default async function FeaturedProject({ project }: Props) {
 					/>
 				))}
 			</Slider>
-			<div className="flex flex-col px-5 gap-4 lg:w-10/12 2xl:w-9/12 mx-auto text-center">
+			<div className="flex flex-col px-5 gap-4 lg:w-10/12 2xl:w-9/12 mx-auto lg:text-center">
 				<Links data={data} />
 				<PrismicRichText components={components} field={data.brief_description} />
-				<ul className="flex flex-wrap justify-center gap-2">
+				<ul className="flex flex-wrap lg:justify-center gap-2">
 					{techStack &&
 						techStack.map((item) => (
 							<li key={item?.data.title}>

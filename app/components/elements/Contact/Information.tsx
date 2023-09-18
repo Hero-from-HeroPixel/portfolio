@@ -49,7 +49,7 @@ export default function Information({ className }: Props) {
 					<p className="light sm">Pretoria, Gauteng - South Africa</p>
 				</div>
 			</div>
-			<div className="flex gap-5">
+			<div className="flex gap-5 z-10">
 				<SocialButton href={GITHUB_LINK}>
 					<GithubIcon />
 				</SocialButton>
@@ -63,7 +63,7 @@ export default function Information({ className }: Props) {
 					<LinkdnIcon />
 				</SocialButton>
 			</div>
-			<CircleGraphic r={60} className="absolute right-8 bottom-8 fill-accent" />
+			<CircleGraphic r={60} className=" absolute right-8 bottom-8 fill-accent" />
 			<CircleGraphic className="absolute -right-14 -bottom-14 fill-accent" />
 		</div>
 	);
