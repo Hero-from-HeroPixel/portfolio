@@ -25,15 +25,15 @@ export default function Contact({ id }: Props) {
 				<div className="flex flex-col gap-8">
 					<div className="flex gap-4 items-center">
 						<FontAwesomeIcon icon={faPhoneVolume} />
-						+27 60 732 6830
+						<p className="light sm">+27 60 732 6830</p>
 					</div>
 					<div className="flex gap-4 items-center">
 						<FontAwesomeIcon icon={faEnvelope} />
-						dev@heropixel.co.za
+						<p>dev@heropixel.co.za</p>
 					</div>
 					<div className="flex gap-4 items-center">
 						<FontAwesomeIcon icon={faLocationDot} />
-						Pretoria, Gauteng - South Africa
+						<p>Pretoria, Gauteng - South Africa</p>
 					</div>
 				</div>
 				<div className="flex gap-5">
