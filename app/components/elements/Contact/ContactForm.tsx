@@ -1,17 +1,32 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Input, Textarea } from '@nextui-org/react';
+import {
+	Button,
+	Input,
+	Modal,
+	ModalBody,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	Textarea,
+	useDisclosure,
+} from '@nextui-org/react';
 import { PrimaryButton } from '../../UI/Buttons';
 import { cn } from '@/app/utils/cn';
 import Image from 'next/image';
+import Honeypot from './Honeypot';
+import Loader from '../../UI/Loader';
+import Heading from '../../UI/Heading';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 type Props = {
 	className?: string;
 };
 
 const validation = Yup.object({
+	// captcha: Yup.string().required('required'),
 	name: Yup.string().required('required'),
 	email: Yup.string().email('email invalid').required('required'),
 	phone: Yup.string(),
@@ -20,6 +35,8 @@ const validation = Yup.object({
 });
 
 const initialValues = {
+	captcha: '',
+	lastname: '', //honeypot field
 	name: '',
 	email: '',
 	phone: '',
@@ -28,26 +45,115 @@ const initialValues = {
 };
 
 interface Values {
-	name: string;
-	email: string;
-	phone: string;
-	subject: string;
-	message: string;
+	[value: string]: string;
 }
 
 export default function ContactForm({ className }: Props) {
+	const [submitState, setSubmitState] = useState<'submitting' | 'success' | 'error'>();
+	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
 	const submitHandler = async (values: Values) => {
-		await new Promise((r) => setTimeout(r, 500));
-		alert(JSON.stringify(values, null, 2));
+		if (values.lastname !== '') return;
+		setSubmitState('submitting');
+		console.log(values);
+		try {
+			const res = await fetch('https://api.web3forms.com/submit', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify({
+					access_key: process.env.NEXT_PUBLIC_CONTACT_FORM_API,
+					subject: 'Lead from portfolio',
+					from_name: 'Portfolio',
+					...values,
+				}),
+			});
+			console.log(res);
+			if (!res.ok) return setSubmitState('error');
+			setSubmitState('success');
+			if (!isOpen) onOpen();
+		} catch (error) {
+			setSubmitState('error');
+			if (!isOpen) onOpen();
+			console.error(error);
+		}
 	};
+
+	const FormModal = (
+		<Modal
+			className="dark text-foreground bg-background"
+			isOpen={isOpen}
+			onOpenChange={onOpenChange}>
+			<ModalContent>
+				{(onClose) => (
+					<>
+						<ModalHeader className="">
+							<Heading
+								as="h3"
+								className={`${
+									(submitState === 'error' && 'text-danger') ||
+									(submitState === 'submitting' && 'text-foreground-100') ||
+									(submitState === 'success' && 'text-primary')
+								}`}>
+								{submitState === 'error' && 'Oh no!'}
+								{submitState === 'submitting' && 'Sending message'}
+								{submitState === 'success' && 'Sent message'}
+							</Heading>
+						</ModalHeader>
+						<ModalBody>
+							{submitState === 'error' && (
+								<p>Failed to send message. Please try again later.</p>
+							)}
+							{submitState === 'submitting' && (
+								<div className="flex items-center gap-3">
+									<p>
+										<strong className="font-medium">
+											Sending your message to me.
+										</strong>
+									</p>
+									<Loader />
+								</div>
+							)}
+							{submitState === 'success' && (
+								<p>
+									<strong className="">Thank you.</strong> Successfully sent
+									a message. I will be in contact with you shortly.
+								</p>
+							)}
+						</ModalBody>
+						<ModalFooter>
+							{submitState === 'error' ||
+								(submitState === 'success' && (
+									<Button
+										color={
+											submitState === 'success' ? 'primary' : 'danger'
+										}
+										variant="light"
+										onPress={onClose}>
+										Close
+									</Button>
+								))}
+						</ModalFooter>
+					</>
+				)}
+			</ModalContent>
+		</Modal>
+	);
 	return (
 		<Formik
 			initialValues={initialValues}
 			onSubmit={submitHandler}
 			validationSchema={validation}>
-			{({ errors, handleChange, handleBlur, values }) => {
+			{({ errors, handleChange, handleBlur, values, setFieldValue }) => {
+				const onHCaptchaChange = (token: string) => {
+					setFieldValue('captcha', token);
+				};
 				return (
-					<Form className={cn('grid grid-cols-2 gap-10 font-body_font', className)}>
+					<Form
+						className={cn('grid grid-cols-2 gap-10 font-body_font', className)}
+						data-netlify="true"
+						data-netlify-honeypot="lastname"
+						name="Contact-form">
+						<Honeypot label="last name" name="lastname" />
 						<Input
 							isRequired
 							type="text"
@@ -105,8 +211,18 @@ export default function ContactForm({ className }: Props) {
 							onBlur={handleBlur}
 							value={values.message}
 						/>
+						{/* <div className="">
+							<HCaptcha
+								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+								onVerify={onHCaptchaChange}
+							/>
+							{errors.captcha && (
+								<p className="light sm text-danger">please fill out captcha</p>
+							)}
+						</div> */}
+
 						<div className="flex flex-col col-span-2 w-10/12">
-							<PrimaryButton className="ms-auto" type="submit">
+							<PrimaryButton onPress={onOpen} className="ms-auto" type="submit">
 								Send Message
 							</PrimaryButton>
 							<Image
@@ -116,6 +232,7 @@ export default function ContactForm({ className }: Props) {
 								height={250}
 								className="mx-auto w-1/2 aspect-video opacity-90"
 							/>
+							{!Object.values(errors).length && FormModal}
 						</div>
 					</Form>
 				);
