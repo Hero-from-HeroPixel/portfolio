@@ -39,6 +39,7 @@
           "config": {
             "label": "GitHub",
             "placeholder": "",
+            "allowTargetBlank": true,
             "select": null
           }
         },

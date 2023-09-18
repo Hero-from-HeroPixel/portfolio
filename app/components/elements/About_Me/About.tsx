@@ -23,7 +23,7 @@ export default async function About({ id, slice }: AboutPageProps) {
 			data-slice-variation={slice?.variation}>
 			<Intro
 				introduction={slice?.primary.introduction || introduction}
-				cv={slice?.primary.cv_or_resume || RESUME_LINK}
+				cv={RESUME_LINK || slice?.primary.cv_or_resume}
 				github={slice?.primary.github || GITHUB_LINK}
 				heading={slice?.primary.heading || 'About Me'}
 			/>
