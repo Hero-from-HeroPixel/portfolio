@@ -5,6 +5,64 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Item in *Credits → credits*
+ */
+export interface CreditsDocumentDataCreditsItem {
+  /**
+   * credit field in *Credits → credits*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: credits.credits[].credit
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  credit: prismic.RichTextField;
+}
+
+/**
+ * Content for Credits documents
+ */
+interface CreditsDocumentData {
+  /**
+   * Heading field in *Credits*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: credits.heading
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * credits field in *Credits*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: credits.credits[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  credits: prismic.GroupField<Simplify<CreditsDocumentDataCreditsItem>>;
+}
+
+/**
+ * Credits document from Prismic
+ *
+ * - **API ID**: `credits`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CreditsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<CreditsDocumentData>,
+    "credits",
+    Lang
+  >;
+
+/**
  * Item in *Design Skills → Skills Lists*
  */
 export interface DesignSkillsDocumentDataSkillsListsItem {
@@ -1156,6 +1214,7 @@ export type TechSkillsDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | CreditsDocument
   | DesignSkillsDocument
   | EducationEntryDocument
   | FooterDocument
@@ -1614,6 +1673,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      CreditsDocument,
+      CreditsDocumentData,
       DesignSkillsDocument,
       DesignSkillsDocumentData,
       EducationEntryDocument,

@@ -55,3 +55,7 @@ p.display1 {
 p.display2 {
 	@apply lg:text-xl text-lg;
 }
+
+label {
+	@apply !text-foreground !font-normal;
+}

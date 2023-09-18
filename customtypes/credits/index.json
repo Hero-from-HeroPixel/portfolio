@@ -1,0 +1,35 @@
+{
+  "id": "credits",
+  "label": "Credits",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "heading": {
+        "type": "Text",
+        "config": {
+          "label": "Heading",
+          "placeholder": ""
+        }
+      },
+      "credits": {
+        "type": "Group",
+        "config": {
+          "label": "credits",
+          "fields": {
+            "credit": {
+              "type": "StructuredText",
+              "config": {
+                "label": "credit",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "single": "paragraph,strong,em,hyperlink"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

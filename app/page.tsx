@@ -28,7 +28,7 @@ export default async function Home() {
 			<About id="about" />
 			<Experience id="experience" />
 			<Projects id="projects" />
-			<Contact id="contact" />
+			<Contact id="contact-me" />
 		</>
 	);
 }

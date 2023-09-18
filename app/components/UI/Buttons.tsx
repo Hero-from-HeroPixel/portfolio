@@ -29,7 +29,7 @@ export function PrimaryButton({
 			radius="full">
 			<span
 				className={cn(
-					'rounded-full bg-primary w-full h-full px-16 flex items-center',
+					'rounded-full justify-center bg-primary w-full h-full px-16 flex items-center',
 					appearance?.className,
 				)}>
 				{children}
