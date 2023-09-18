@@ -58,6 +58,6 @@ export default function Information({ className }: Props) {
 
 const CircleGraphic = ({ className, r = 90 }: { className?: string; r?: number }) => (
 	<svg height={r * 2} width={r * 2} className={className}>
-		<circle r={r} cy={r} cx={r} stroke="none" stroke-width="3" opacity="50%" />
+		<circle r={r} cy={r} cx={r} stroke="none" strokeWidth="3" opacity="50%" />
 	</svg>
 );
