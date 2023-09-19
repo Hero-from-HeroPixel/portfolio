@@ -53,13 +53,13 @@ export default function ContactForm({ className }: Props) {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
 	const submitHandler = async (values: Values) => {
+		console.log(values);
 		if (values.lastname !== '') return;
 		if (values.captcha) {
 			setSubmitState('error');
 			console.error('Captcha failed');
 		}
 		setSubmitState('submitting');
-		console.log(values);
 		try {
 			const res = await fetch('https://api.web3forms.com/submit', {
 				method: 'POST',
@@ -234,7 +234,7 @@ export default function ContactForm({ className }: Props) {
 						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
 							<PrimaryButton
 								onPress={onOpen}
-								className="lg:ms-auto mx-auto"
+								className="lg:ms-auto lg:mx-0 mx-auto"
 								type="submit">
 								Send Message
 							</PrimaryButton>
