@@ -87,23 +87,23 @@ export default function Slider({
 
 	/******************Debugging */
 
-	const startTouchHandler = (e: React.TouchEvent<HTMLDivElement>) => {
-		const touchDown = e.touches[0].clientX;
-		setTouchPosition(touchDown);
-	};
-	const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-		const startTouch = touchPosition;
+	// const startTouchHandler = (e: React.TouchEvent<HTMLDivElement>) => {
+	// 	const touchDown = e.touches[0].clientX;
+	// 	setTouchPosition(touchDown);
+	// };
+	// const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+	// 	const startTouch = touchPosition;
 
-		if (startTouch === null) return;
+	// 	if (startTouch === null) return;
 
-		const currentTouch = e.touches[0].clientX;
-		const swipeDiff = startTouch - currentTouch;
+	// 	const currentTouch = e.touches[0].clientX;
+	// 	const swipeDiff = startTouch - currentTouch;
 
-		if (swipeDiff > 5) nextHandler();
-		if (swipeDiff < -5) prevHandler();
+	// 	if (swipeDiff > 5) nextHandler();
+	// 	if (swipeDiff < -5) prevHandler();
 
-		setTouchPosition(null);
-	};
+	// 	setTouchPosition(null);
+	// };
 
 	const handleTransitionEnd = () => {
 		if (isInfiniteLoop) {
@@ -156,7 +156,7 @@ export default function Slider({
 					<FontAwesomeIcon icon={faCircleChevronLeft} />
 				</PrimaryButton>
 			)} */}
-			<motion.div
+			{/* <motion.div
 				drag="x"
 				ref={content}
 				dragConstraints={{ right: 0, left: -dragConstraint }}
@@ -172,7 +172,22 @@ export default function Slider({
 					gap: `${spacing}%`,
 				}}
 				onTouchStart={startTouchHandler}
-				onTouchMove={handleTouchMove}>
+				onTouchMove={handleTouchMove}> */}
+			<motion.div
+				drag="x"
+				ref={content}
+				dragConstraints={{ right: 0, left: -dragConstraint }}
+				whileTap={{ cursor: 'grabbing' }}
+				dragElastic={0.2}
+				className={`${styles.innerCarousel} ${
+					transitionEnabled ? 'transition-transform' : ''
+				}`}
+				style={{
+					transform: `translateX(-${
+						(currentIndex - showCount) * (100 / showCount)
+					}%)`,
+					gap: `${spacing}%`,
+				}}>
 				{childrenArray &&
 					childrenArray.map((child, i) => (
 						<SliderItem
