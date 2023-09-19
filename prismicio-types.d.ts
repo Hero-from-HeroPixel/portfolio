@@ -297,7 +297,8 @@ type HomePageDocumentDataSlicesSlice =
   | EducationSlice
   | JobSlice
   | ExperienceSlice
-  | ProjectsSlice;
+  | ProjectsSlice
+  | ContactSlice;
 
 /**
  * Content for Home Page documents
