@@ -1,6 +1,6 @@
 'use client';
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
+import React, { useRef, useState } from 'react';
+import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import {
 	Button,
@@ -45,21 +45,34 @@ const initialValues = {
 };
 
 interface Values {
-	[value: string]: string;
+	captcha: string; //start with fail state
+	lastname: string; //honeypot field
+	name: string;
+	email: string;
+	phone: string;
+	subject: string;
+	message: string;
 }
+
+// interface Values {
+// 	[value: string]: string;
+// }
 
 export default function ContactForm({ className }: Props) {
 	const [submitState, setSubmitState] = useState<'submitting' | 'success' | 'error'>();
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+	const captcha = useRef<HCaptcha>(null);
 
-	const submitHandler = async (values: Values) => {
+	const submitHandler = async (values: Values, actions: FormikHelpers<Values>) => {
 		if (values.lastname !== '') return;
-		if (values.captcha) {
+		if (values.captcha === '') {
 			setSubmitState('error');
+			if (!isOpen) onOpen();
 			console.error('Captcha failed');
 		}
 		setSubmitState('submitting');
-		console.log(values);
+		if (captcha) captcha.current?.resetCaptcha();
+		onOpen();
 		try {
 			const res = await fetch('https://api.web3forms.com/submit', {
 				method: 'POST',
@@ -67,13 +80,19 @@ export default function ContactForm({ className }: Props) {
 				body: JSON.stringify({
 					access_key: process.env.NEXT_PUBLIC_CONTACT_FORM_API,
 					subject: values.subject,
-					from_name: 'Portfolio',
-					...values,
+					from_name: values.name,
+					name: values.name,
+					email: values.email,
+					phone: values?.phone,
+					message: values.message,
 				}),
 			});
-			console.log(res);
+
 			if (!res.ok) return setSubmitState('error');
 			setSubmitState('success');
+			actions.resetForm({
+				values: initialValues,
+			});
 			if (!isOpen) onOpen();
 		} catch (error) {
 			setSubmitState('error');
@@ -149,7 +168,6 @@ export default function ContactForm({ className }: Props) {
 			validationSchema={validation}>
 			{({ errors, handleChange, handleBlur, values, setFieldValue }) => {
 				const onHCaptchaChange = (token: string) => {
-					console.log(token);
 					setFieldValue('captcha', token);
 				};
 				return (
@@ -222,6 +240,7 @@ export default function ContactForm({ className }: Props) {
 						<div className="rounded-3xl">
 							<HCaptcha
 								size="normal"
+								ref={captcha}
 								theme="dark"
 								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access
 								onVerify={onHCaptchaChange}
@@ -233,8 +252,7 @@ export default function ContactForm({ className }: Props) {
 
 						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
 							<PrimaryButton
-								onPress={onOpen}
-								className="lg:ms-auto mx-auto"
+								className="lg:ms-auto lg:mx-0 mx-auto"
 								type="submit">
 								Send Message
 							</PrimaryButton>
@@ -243,7 +261,7 @@ export default function ContactForm({ className }: Props) {
 								alt=""
 								width={500}
 								height={250}
-								className="mx-auto w-1/2 aspect-video opacity-90"
+								className="lg:mx-auto w-1/2 aspect-video opacity-90"
 							/>
 							{!Object.values(errors).length && FormModal}
 						</div>
