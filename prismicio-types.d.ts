@@ -1215,6 +1215,51 @@ export type AllDocumentTypes =
   | TechSkillsDocument;
 
 /**
+ * Primary content in *Contact → Primary*
+ */
+export interface ContactSliceDefaultPrimary {
+  /**
+   * Section ID field in *Contact → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact.primary.section_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_id: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Contact Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Contact*
+ */
+type ContactSliceVariation = ContactSliceDefault;
+
+/**
+ * Contact Shared Slice
+ *
+ * - **API ID**: `contact`
+ * - **Description**: Contact
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSlice = prismic.SharedSlice<
+  "contact",
+  ContactSliceVariation
+>;
+
+/**
  * Primary content in *Education → Primary*
  */
 export interface EducationSliceDefaultPrimary {
@@ -1688,6 +1733,10 @@ declare module "@prismicio/client" {
       TechSkillsDocument,
       TechSkillsDocumentData,
       AllDocumentTypes,
+      ContactSlice,
+      ContactSliceDefaultPrimary,
+      ContactSliceVariation,
+      ContactSliceDefault,
       EducationSlice,
       EducationSliceDefaultPrimary,
       EducationSliceDefaultItem,

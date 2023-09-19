@@ -1,0 +1,14 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"section_id": {
+				"__TYPE__": "FieldContent",
+				"value": "length",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
