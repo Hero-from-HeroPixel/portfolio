@@ -44,7 +44,7 @@ const Experience = async ({ slice }: ExperienceProps): Promise<JSX.Element> => {
 			</BoundWrapper>
 			<div className="flex relative">
 				<div className={styles.timeline}></div>
-				<div className="flex flex-col-reverse">
+				<div className="flex flex-col">
 					{jobs && jobs.map((job) => <Job key={job?.id} job={job} />)}
 				</div>
 				{!jobs && <p>Could not retrieve jobs</p>}
