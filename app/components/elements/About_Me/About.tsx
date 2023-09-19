@@ -2,7 +2,7 @@ import React from 'react';
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import Intro from '@/app/components/elements/About_Me/Intro';
 import TechTable from '@/app/components/elements/About_Me/TechTable';
-import { Content } from '@prismicio/client';
+import { Content, FilledLinkToMediaField } from '@prismicio/client';
 import fallBack from '@/app/constants/About.json';
 import { GITHUB_LINK, RESUME_LINK } from '@/app/constants/Social';
 
@@ -15,6 +15,7 @@ export default async function About({ id, slice }: AboutPageProps) {
 	const techStack = slice?.primary.tech_skills;
 	const designStack = slice?.primary.design_skills;
 	const otherSkills = slice?.primary.other_skills;
+	const cvField = slice?.primary.cv_or_resume as FilledLinkToMediaField;
 	return (
 		<BoundWrapper
 			className="px-5 gap-8"
@@ -23,7 +24,7 @@ export default async function About({ id, slice }: AboutPageProps) {
 			data-slice-variation={slice?.variation}>
 			<Intro
 				introduction={slice?.primary.introduction || introduction}
-				cv={RESUME_LINK || slice?.primary.cv_or_resume}
+				cv={cvField.url}
 				github={slice?.primary.github || GITHUB_LINK}
 				heading={slice?.primary.heading || 'About Me'}
 			/>
