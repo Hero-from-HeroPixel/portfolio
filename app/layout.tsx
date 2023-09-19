@@ -8,6 +8,8 @@ import { Metadata } from 'next';
 import Header from '@/app/components/Navigation/Header/Header';
 import Footer from '@/app/components/Navigation/Footer';
 import Blob from '@/app/components/elements/Blob';
+import { PrismicPreview } from '@prismicio/next';
+import { repositoryName } from '@/prismicio';
 
 const bebas_neue = Bebas_Neue({
 	weight: ['400'],
@@ -67,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</Main>
 					<Footer />
 				</Providers>
+				<PrismicPreview repositoryName={repositoryName} />
 			</body>
 		</html>
 	);
