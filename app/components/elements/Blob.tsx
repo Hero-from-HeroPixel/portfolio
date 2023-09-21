@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styles from '@/app/components/elements/Blob.module.css';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen } from '@/app/constants/screens';
@@ -26,6 +26,18 @@ function touchEventHandler(e: TouchEvent) {
 	if (blobEl) blobAnimate(blobEl, x / 2, screenHeight + y, 2500);
 }
 
+function touchMoveHandler(e: TouchEvent) {
+	const blobEl = document.getElementById('blob');
+	const screenHeight = window.innerHeight;
+	const screenWidth = window.innerWidth;
+	const x = e.touches[0].screenX;
+	const y = e.touches[0].screenY;
+	console.log('y', -y);
+	console.log('x', x);
+
+	if (blobEl) blobAnimate(blobEl, x / 2, y, 500);
+}
+
 export default function Blob({}: Props) {
 	const { width: windowWidth, height: windowHeight } = useWindowSize();
 	useEffect(() => {
@@ -34,6 +46,7 @@ export default function Blob({}: Props) {
 			if (blobEl) {
 				if (windowWidth !== null && windowWidth <= MobileScreen) {
 					window.addEventListener('touchstart', touchEventHandler);
+					window.addEventListener('touchmove', touchMoveHandler);
 				} else {
 					window.onpointermove = (e) => {
 						const { clientX, clientY } = e;
