@@ -184,7 +184,7 @@ export default function ContactForm({ className }: Props) {
 							isRequired
 							type="text"
 							variant={'underlined'}
-							label="Your Name"
+							label="Name"
 							name="name"
 							onChange={handleChange}
 							onBlur={handleBlur}
@@ -195,7 +195,7 @@ export default function ContactForm({ className }: Props) {
 							isRequired
 							type="email"
 							variant={'underlined'}
-							label="Your Email"
+							label="Email"
 							name="email"
 							errorMessage={errors.email}
 							onChange={handleChange}
@@ -205,7 +205,7 @@ export default function ContactForm({ className }: Props) {
 						<Input
 							type="text"
 							variant={'underlined'}
-							label="Your Contact no."
+							label="Contact no."
 							description="Fill in if you prefer a callback"
 							name="phone"
 							errorMessage={errors.phone}
