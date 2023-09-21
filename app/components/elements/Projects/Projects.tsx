@@ -6,7 +6,6 @@ import { prismicClient } from '@/app/lib/clients';
 import ProjectCard from './ProjectCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCodeBranch, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
-import { ProjectsProps } from '@/slices/Projects';
 import { Content } from '@prismicio/client';
 
 type Props = {

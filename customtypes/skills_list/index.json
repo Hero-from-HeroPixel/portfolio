@@ -19,12 +19,12 @@
         },
         "type": "UID"
       },
-      "skill_lists": {
+      "Skills": {
         "type": "Group",
         "config": {
           "label": "Skills",
           "fields": {
-            "skill_list": {
+            "skill": {
               "type": "Link",
               "config": {
                 "label": "Skill",

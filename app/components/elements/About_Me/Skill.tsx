@@ -1,20 +1,72 @@
 import React from 'react';
-import Icon from '@/app/components/icons';
 import Image from 'next/image';
+import Icon, {
+	canva,
+	cloudinary,
+	contentful,
+	css,
+	elementor,
+	figma,
+	framer,
+	github,
+	html,
+	javascript,
+	prismic,
+	shopify,
+	typescript,
+	webflow,
+	wordpress,
+	photoshop,
+} from '../../icons';
 
 export type SkillProps = {
-	icon?: React.ReactNode;
+	icon?:
+		| 'canva'
+		| 'cloudinary'
+		| 'contentful'
+		| 'css'
+		| 'elementor'
+		| 'figma'
+		| 'framer'
+		| 'github'
+		| 'html'
+		| 'javascript'
+		| 'prismic'
+		| 'shopify'
+		| 'typescript'
+		| 'webflow'
+		| 'wordpress'
+		| 'photoshop';
 	title: string;
 	iconAsName?: string;
 	viewBox?: string;
 };
 
+const IconList = {
+	canva,
+	cloudinary,
+	contentful,
+	css,
+	elementor,
+	figma,
+	framer,
+	github,
+	html,
+	javascript,
+	prismic,
+	shopify,
+	typescript,
+	webflow,
+	wordpress,
+	photoshop,
+};
+
 export default function Skill({ icon, title, iconAsName, viewBox }: SkillProps) {
 	return (
-		<li className="flex gap-2">
+		<li className="flex gap-2 my-2">
 			{icon && (
 				<Icon viewBox={viewBox} className="w-6 aspect-square fill-white">
-					{icon}
+					{IconList[icon]}
 				</Icon>
 			)}
 			{iconAsName && (

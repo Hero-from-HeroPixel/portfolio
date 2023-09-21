@@ -1055,7 +1055,6 @@ interface SkillDocumentData {
     | "elementor"
     | "figma"
     | "framer"
-    | "github"
     | "html"
     | "javascript"
     | "prismic"
@@ -1082,16 +1081,16 @@ export type SkillDocument<Lang extends string = string> =
 /**
  * Item in *Skills List → Skills*
  */
-export interface SkillsListDocumentDataSkillListsItem {
+export interface SkillsListDocumentDataSkillsItem {
   /**
    * Skill field in *Skills List → Skills*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: skills_list.skill_lists[].skill_list
+   * - **API ID Path**: skills_list.Skills[].skill
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  skill_list: prismic.ContentRelationshipField<"skill">;
+  skill: prismic.ContentRelationshipField<"skill">;
 }
 
 /**
@@ -1114,13 +1113,11 @@ interface SkillsListDocumentData {
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: skills_list.skill_lists[]
+   * - **API ID Path**: skills_list.Skills[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  skill_lists: prismic.GroupField<
-    Simplify<SkillsListDocumentDataSkillListsItem>
-  >;
+  Skills: prismic.GroupField<Simplify<SkillsListDocumentDataSkillsItem>>;
 }
 
 /**
