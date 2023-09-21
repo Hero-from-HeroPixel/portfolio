@@ -1,5 +1,5 @@
 .timeline {
-	@apply absolute -z-10 2xl:left-[18.5%] lg:left-[18.4%] left-[4%] top-0 h-full bg-accent w-3 rounded-full;
+	@apply absolute -z-10 2xl:left-[18.5%] lg:left-[18.4%] left-[5%] top-0 h-full bg-accent w-1 sm:w-2  lg:w-3 rounded-full;
 }
 
 .card {

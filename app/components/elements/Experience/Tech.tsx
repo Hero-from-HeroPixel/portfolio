@@ -17,7 +17,7 @@ import Icon, {
 	typescript,
 	webflow,
 	wordpress,
-	PSIcon,
+	photoshop,
 } from '../../icons';
 
 export type IconListT =
@@ -36,7 +36,7 @@ export type IconListT =
 	| 'typescript'
 	| 'webflow'
 	| 'wordpress'
-	| 'PSIcon'
+	| 'photoshop'
 	| undefined;
 
 export type TechProps = {
@@ -62,7 +62,7 @@ export default function Tech({ icon, iconAsName, viewBox }: TechProps) {
 		typescript,
 		webflow,
 		wordpress,
-		PSIcon,
+		photoshop,
 	};
 	return (
 		<i className="flex gap-2 sm light">

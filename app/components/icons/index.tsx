@@ -27,7 +27,7 @@ export default function Icon({ children, className, viewBox }: Props) {
 	);
 }
 
-export const PSIcon = (
+export const photoshop = (
 	<>
 		<path
 			fill="#001E36"

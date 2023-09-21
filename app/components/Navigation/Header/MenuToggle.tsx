@@ -27,14 +27,17 @@ export const MenuToggle = ({ isOpen, onClick, children, className }: MenuToggleP
 		onClick={onClick}
 		aria-label={isOpen ? 'Close menu' : 'Open menu'}
 		className={cn(
-			` p-5 min-w-0 absolute top-5 right-5 lg:top-10 lg:right-10 stroke-foreground lg:bg-transparent hover:stroke-background `,
-			isOpen ? 'bg-transparent ' : 'bg-secondary',
+			` p-5 min-w-0 absolute hover:stroke-background top-5 right-5 lg:top-10 lg:right-10 stroke-foreground`,
+			isOpen ? 'bg-transparent' : 'bg-default',
 			className,
 		)}>
-		<svg className="" width="23" height="23" viewBox="0 0 23 23">
+		<svg
+			className={`stroke-inherit ${isOpen ? 'stroke-background' : 'stroke-foreground'}`}
+			width="23"
+			height="23"
+			viewBox="0 0 23 23">
 			<Path
 				className="stroke-inherit"
-				color={isOpen ? 'dark' : 'light'}
 				variants={{
 					closed: { d: 'M 2 2.5 L 20 2.5' },
 					open: { d: 'M 3 16.5 L 17 2.5' },
@@ -42,7 +45,6 @@ export const MenuToggle = ({ isOpen, onClick, children, className }: MenuToggleP
 			/>
 			<Path
 				className="stroke-inherit"
-				color={isOpen ? 'dark' : 'light'}
 				d="M 2 9.423 L 20 9.423"
 				variants={{
 					closed: { opacity: 1 },

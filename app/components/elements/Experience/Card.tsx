@@ -109,28 +109,37 @@ export default function Card({ className, techStack, job }: Props) {
 				</div>
 			</div>
 			<div className="flex flex-col lg:flex-row lg:flex-wrap lg:gap-0 gap-4">
-				<div className="lg:w-1/2 lg:px-10">
-					<p>Responsibilities</p>
-					<PrismicRichText components={components} field={data.responsibilities} />
-				</div>
+				{data.responsibilities.length > 0 && (
+					<div className="lg:w-1/2 lg:px-10">
+						<p>Responsibilities</p>
+						<PrismicRichText
+							components={components}
+							field={data.responsibilities}
+						/>
+					</div>
+				)}
 				<div className="lg:w-1/2 flex flex-wrap gap-4 lg:gap-4">
-					<div className="">
-						<p>Duties</p>
-						<PrismicRichText components={components} field={data.duties} />
-					</div>
-					<div className="">
-						<p>Tech Stack</p>
-						<ul className="flex flex-wrap gap-x-5 gap-y-2 lg:w-3/4">
-							{techStack.map((item) => (
-								<li key={item?.data.title}>
-									<Tech
-										icon={item?.data.icon as IconListT}
-										iconAsName={item?.data.icon_as_name}
-									/>
-								</li>
-							))}
-						</ul>
-					</div>
+					{data.duties.length > 0 && (
+						<div className="">
+							<p>Duties</p>
+							<PrismicRichText components={components} field={data.duties} />
+						</div>
+					)}
+					{data.tech_stack.length > 0 && (
+						<div className="">
+							<p>Tech Stack</p>
+							<ul className="flex flex-wrap gap-x-5 gap-y-2 lg:w-3/4">
+								{techStack.map((item) => (
+									<li key={item?.data.title}>
+										<Tech
+											icon={item?.data.icon as IconListT}
+											iconAsName={item?.data.icon_as_name}
+										/>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
 				</div>
 			</div>
 		</motion.div>

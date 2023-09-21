@@ -39,6 +39,7 @@ export default async function ProjectCard({ project, className, minify }: Props)
 	const hasSourceCode = project.data.source_code.link_type === 'Web';
 	return (
 		<li
+			id={project.data.section_id as string}
 			className={cn(
 				`min-h-fit flex flex-col ${
 					minify ? 'items-start gap-3' : 'items-center gap-8'

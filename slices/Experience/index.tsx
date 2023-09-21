@@ -28,9 +28,8 @@ const Experience = async ({ slice }: ExperienceProps): Promise<JSX.Element> => {
 		}),
 	);
 	return (
-		<article>
+		<article id={slice.primary.section_id as string}>
 			<BoundWrapper
-				id={slice.primary.section_id}
 				data-slice-type={slice.slice_type}
 				data-slice-variation={slice.variation}
 				className="px-5 mb-5">

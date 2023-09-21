@@ -1,256 +1,95 @@
 import React from 'react';
 import Heading from '@/app/components/UI/Heading';
 import styles from '@/app/components/elements/About_Me/techTable.module.css';
-import Icon, {
-	canva,
-	cloudinary,
-	contentful,
-	css,
-	elementor,
-	figma,
-	framer,
-	github,
-	html,
-	javascript,
-	prismic,
-	shopify,
-	typescript,
-	webflow,
-	wordpress,
-	PSIcon,
-} from '../../icons';
 import { prismicClient } from '@/app/lib/clients';
 import SkillList from './SkillList';
-import { SkillProps } from './Skill';
-import { ContentRelationshipField } from '@prismicio/client';
+import { ContentRelationshipField, isFilled } from '@prismicio/client';
 
 type Props = {
-	techStack?: ContentRelationshipField<'tech_skills'> | undefined;
-	designStack?: ContentRelationshipField<'design_skills'> | undefined;
-	otherSkills?: ContentRelationshipField<'other_skills'> | undefined;
+	techStack: ContentRelationshipField<'tech_skills'> | undefined;
+	designStack: ContentRelationshipField<'design_skills'> | undefined;
+	otherStack: ContentRelationshipField<'other_skills'> | undefined;
 };
 
-export default async function TechTable({ techStack, designStack, otherSkills }: Props) {
+export default async function TechTable({ techStack, designStack, otherStack }: Props) {
+	let techSkills;
+	let designSkills;
+	let otherSkills;
+
+	techSkills = await prismicClient.getSingle('tech_skills');
+	designSkills = await prismicClient.getSingle('design_skills');
+	otherSkills = await prismicClient.getSingle('other_skills');
+
+	const techSkillLists = await Promise.all(
+		techSkills.data.skills_lists.map(({ skills_list }) => {
+			if (isFilled.contentRelationship(skills_list) && skills_list.uid) {
+				return prismicClient.getByUID('skills_list', skills_list.uid);
+			}
+		}),
+	);
+
+	const designSkillsLists = await Promise.all(
+		designSkills.data.skills_lists.map(({ skills_list }) => {
+			if (isFilled.contentRelationship(skills_list) && skills_list.uid) {
+				return prismicClient.getByUID('skills_list', skills_list.uid);
+			}
+		}),
+	);
+
+	const otherSkillsLists = await Promise.all(
+		otherSkills.data.skill_lists.map(({ skills_list }) => {
+			if (isFilled.contentRelationship(skills_list) && skills_list.uid) {
+				return prismicClient.getByUID('skills_list', skills_list.uid);
+			}
+		}),
+	);
+
 	return (
 		<div className={styles.container}>
 			<div className={`${styles.category}`}>
-				<Heading as="h3">Tech Stack</Heading>
-				<div className={styles.techList}>
-					<SkillList skillList={languages} title="Languages" />
-					<SkillList skillList={frameworks} title="Frameworks" />
-					<SkillList skillList={cicd} title="CI/CD" />
-					<SkillList skillList={databases} title="Databases" />
-					<SkillList skillList={apis} title="APIS" />
-				</div>
+				<Heading as="h3">{techSkills.data.title}</Heading>
+				<ul className={styles.techList}>
+					{techSkillLists.map((skillList) => {
+						return (
+							<SkillList
+								title={skillList?.data.title as string}
+								key={skillList?.id}
+								skills={skillList?.data.Skills}
+							/>
+						);
+					})}
+				</ul>
 			</div>
 			<div className="grid lg:grid-cols-3 gap-x-10">
 				<div className={`${styles.category} col-span-1`}>
-					<Heading as="h3">Design Stack</Heading>
-					<div className={styles.techList}>
-						<SkillList skillList={design} title="" />
-						<SkillList skillList={webTools} title="Web Tools" />
-					</div>
+					<Heading as="h3">{designSkills.data.title}</Heading>
+					<ul className={styles.techList}>
+						{designSkillsLists.map((skillList) => {
+							return (
+								<SkillList
+									title={skillList?.data.title as string}
+									key={skillList?.id}
+									skills={skillList?.data.Skills}
+								/>
+							);
+						})}
+					</ul>
 				</div>
 				<div className={`${styles.category} col-span-2`}>
-					<Heading as="h3">Other</Heading>
-					<div className={styles.techList}>
-						<SkillList skillList={commerce} title="Commerce" />
-						<SkillList skillList={cms} title="CMS" />
-						<SkillList skillList={dam} title="DAM" />
-						<SkillList skillList={mailing} title="Mailing" />
-					</div>
+					<Heading as="h3">{otherSkills.data.title}</Heading>
+					<ul className={styles.techList}>
+						{otherSkillsLists.map((skillList) => {
+							return (
+								<SkillList
+									title={skillList?.data.title as string}
+									key={skillList?.id}
+									skills={skillList?.data.Skills}
+								/>
+							);
+						})}
+					</ul>
 				</div>
 			</div>
 		</div>
 	);
 }
-
-const languages: SkillProps[] = [
-	{
-		icon: html,
-		title: 'HTML 5',
-	},
-	{
-		icon: css,
-		title: 'CSS 3',
-	},
-	{
-		icon: javascript,
-		title: 'JavaScript',
-	},
-	{
-		icon: typescript,
-		title: 'TypeScript',
-	},
-	{
-		iconAsName: 'php',
-		title: 'php',
-	},
-	{
-		iconAsName: 'sql',
-		title: 'SQL',
-	},
-];
-
-const frameworks: SkillProps[] = [
-	{
-		title: 'React',
-		iconAsName: 'react',
-	},
-	{
-		title: 'NextJS 13',
-		iconAsName: 'nextjs',
-	},
-	{
-		title: 'Node',
-		iconAsName: 'node',
-	},
-	{
-		title: 'Express',
-		iconAsName: 'express',
-	},
-	{
-		title: 'Tailwind CSS',
-		iconAsName: 'tailwind',
-	},
-	{
-		title: 'WordPress',
-		iconAsName: 'wordpress',
-	},
-];
-
-const databases: SkillProps[] = [
-	{
-		title: 'PostgreSQL',
-		iconAsName: 'pgsql',
-	},
-	{
-		title: 'MongoDB',
-		iconAsName: 'mongo',
-	},
-	{
-		title: 'Redis',
-		iconAsName: 'redis',
-	},
-	{
-		title: 'mySQL',
-		iconAsName: 'mysql',
-	},
-];
-
-const apis: SkillProps[] = [
-	{
-		title: 'Restful',
-		iconAsName: 'rest',
-	},
-	{
-		title: 'GraphQL',
-		iconAsName: 'graphql',
-	},
-];
-
-const cicd: SkillProps[] = [
-	{
-		title: 'Git',
-		iconAsName: 'git',
-	},
-	{
-		title: 'GitHub',
-		icon: github,
-		viewBox: '0 0 512 512',
-	},
-	{
-		title: 'Netlify',
-		iconAsName: 'netlify',
-	},
-	{
-		title: 'Digital Ocean',
-		iconAsName: 'do',
-	},
-	{
-		title: 'cPanel',
-		iconAsName: 'cpanel',
-	},
-];
-
-const design: SkillProps[] = [
-	{
-		title: 'Figma',
-		icon: figma,
-	},
-	{
-		title: 'Photoshop',
-		icon: PSIcon,
-	},
-	{
-		title: 'Canva',
-		icon: canva,
-	},
-];
-
-const webTools: SkillProps[] = [
-	{
-		title: 'Elementor',
-		icon: elementor,
-	},
-	{
-		title: 'Framer',
-		icon: framer,
-	},
-	{
-		title: 'Webflow',
-		icon: webflow,
-	},
-	{
-		title: 'Prismic',
-		icon: prismic,
-	},
-];
-
-const commerce: SkillProps[] = [
-	{
-		title: 'MedusaJS',
-		iconAsName: 'medusa',
-	},
-	{
-		title: 'WooCommerce',
-		iconAsName: 'woo',
-	},
-	{
-		title: 'Shopify',
-		icon: shopify,
-	},
-];
-
-const cms: SkillProps[] = [
-	{
-		title: 'Contentful',
-		icon: contentful,
-	},
-	{
-		title: 'WordPress',
-		icon: wordpress,
-	},
-	{
-		title: 'Prismic',
-		icon: prismic,
-	},
-];
-
-const dam: SkillProps[] = [
-	{
-		title: 'Cloudinary',
-		icon: cloudinary,
-	},
-];
-
-const mailing: SkillProps[] = [
-	{
-		title: 'Postmark',
-		iconAsName: 'postmark',
-	},
-	{
-		title: 'Nodemailer',
-		iconAsName: 'nodemailer',
-	},
-];
