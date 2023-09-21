@@ -11,7 +11,7 @@ export type SkillProps = {
 
 export default function Skill({ icon, title, iconAsName, viewBox }: SkillProps) {
 	return (
-		<p className="flex gap-2 sm light">
+		<li className="flex gap-2">
 			{icon && (
 				<Icon viewBox={viewBox} className="w-6 aspect-square fill-white">
 					{icon}
@@ -27,7 +27,7 @@ export default function Skill({ icon, title, iconAsName, viewBox }: SkillProps) 
 					className="w-6 aspect-square"
 				/>
 			)}
-			{title}
-		</p>
+			<p className="sm light">{title}</p>
+		</li>
 	);
 }

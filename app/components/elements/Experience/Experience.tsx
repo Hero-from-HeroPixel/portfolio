@@ -21,7 +21,7 @@ export default async function Experience({ jobs, id, ...restProps }: Props) {
 	}
 
 	return (
-		<article>
+		<article id={id}>
 			<BoundWrapper id={id} {...restProps}>
 				<div className="mt-10 mb-5 lg:mt-20 lg:mb-10">
 					<Heading as="h3">Experience</Heading>

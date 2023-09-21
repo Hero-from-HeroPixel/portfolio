@@ -31,7 +31,7 @@ export default async function About({ id, slice }: AboutPageProps) {
 			<TechTable
 				techStack={techStack}
 				designStack={designStack}
-				otherSkills={otherSkills}
+				otherStack={otherSkills}
 			/>
 		</BoundWrapper>
 	);

@@ -22,42 +22,86 @@ import Icon, {
 import { prismicClient } from '@/app/lib/clients';
 import SkillList from './SkillList';
 import { SkillProps } from './Skill';
-import { ContentRelationshipField } from '@prismicio/client';
+import { ContentRelationshipField, isFilled } from '@prismicio/client';
+import { fetchContentRelationship } from '@/app/utils/fetchContentRelationship';
+import { SkillsListDocument } from '@/prismicio-types';
 
 type Props = {
-	techStack?: ContentRelationshipField<'tech_skills'> | undefined;
-	designStack?: ContentRelationshipField<'design_skills'> | undefined;
-	otherSkills?: ContentRelationshipField<'other_skills'> | undefined;
+	techStack: ContentRelationshipField<'tech_skills'> | undefined;
+	designStack: ContentRelationshipField<'design_skills'> | undefined;
+	otherStack: ContentRelationshipField<'other_skills'> | undefined;
 };
 
-export default async function TechTable({ techStack, designStack, otherSkills }: Props) {
+export default async function TechTable({ techStack, designStack, otherStack }: Props) {
+	let techSkills;
+	let designSkills;
+	let otherSkills;
+
+	techSkills = await prismicClient.getSingle('tech_skills');
+	designSkills = await prismicClient.getSingle('design_skills');
+	otherSkills = await prismicClient.getSingle('other_skills');
+
 	return (
 		<div className={styles.container}>
 			<div className={`${styles.category}`}>
-				<Heading as="h3">Tech Stack</Heading>
+				<Heading as="h3">{techSkills.data.title}</Heading>
 				<div className={styles.techList}>
-					<SkillList skillList={languages} title="Languages" />
-					<SkillList skillList={frameworks} title="Frameworks" />
-					<SkillList skillList={cicd} title="CI/CD" />
-					<SkillList skillList={databases} title="Databases" />
-					<SkillList skillList={apis} title="APIS" />
+					{techSkills.data.skills_lists.map(async ({ skills_list }) => {
+						if (isFilled.contentRelationship(skills_list)) {
+							const skills = (await prismicClient.getByID(
+								skills_list.id,
+							)) as SkillsListDocument;
+
+							return (
+								<SkillList
+									key={skills_list.id}
+									title={skills.data.title as string}
+									skillList={skills.data.skill_lists}
+								/>
+							);
+						}
+					})}
 				</div>
 			</div>
 			<div className="grid lg:grid-cols-3 gap-x-10">
 				<div className={`${styles.category} col-span-1`}>
-					<Heading as="h3">Design Stack</Heading>
+					<Heading as="h3">{designSkills.data.title}</Heading>
 					<div className={styles.techList}>
-						<SkillList skillList={design} title="" />
-						<SkillList skillList={webTools} title="Web Tools" />
+						{designSkills.data.skills_lists.map(async ({ skills_list }) => {
+							if (isFilled.contentRelationship(skills_list)) {
+								const skills = (await prismicClient.getByID(
+									skills_list.id,
+								)) as SkillsListDocument;
+
+								return (
+									<SkillList
+										key={skills_list.id}
+										title={skills.data.title as string}
+										skillList={skills.data.skill_lists}
+									/>
+								);
+							}
+						})}
 					</div>
 				</div>
 				<div className={`${styles.category} col-span-2`}>
-					<Heading as="h3">Other</Heading>
+					<Heading as="h3">{otherSkills.data.title}</Heading>
 					<div className={styles.techList}>
-						<SkillList skillList={commerce} title="Commerce" />
-						<SkillList skillList={cms} title="CMS" />
-						<SkillList skillList={dam} title="DAM" />
-						<SkillList skillList={mailing} title="Mailing" />
+						{otherSkills.data.skill_lists.map(async ({ skills_list }) => {
+							if (isFilled.contentRelationship(skills_list)) {
+								const skills = (await prismicClient.getByID(
+									skills_list.id,
+								)) as SkillsListDocument;
+
+								return (
+									<SkillList
+										key={skills_list.id}
+										title={skills.data.title as string}
+										skillList={skills.data.skill_lists}
+									/>
+								);
+							}
+						})}
 					</div>
 				</div>
 			</div>
