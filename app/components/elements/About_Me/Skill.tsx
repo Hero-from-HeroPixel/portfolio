@@ -36,7 +36,8 @@ export type SkillProps = {
 		| 'typescript'
 		| 'webflow'
 		| 'wordpress'
-		| 'photoshop';
+		| 'photoshop'
+		| null;
 	title: string;
 	iconAsName?: string;
 	viewBox?: string;
