@@ -226,6 +226,7 @@ export default function ContactForm({ className }: Props) {
 						/>
 						<Textarea
 							variant={'underlined'}
+							isRequired
 							label="Message"
 							labelPlacement="outside"
 							placeholder="Write your message here"
