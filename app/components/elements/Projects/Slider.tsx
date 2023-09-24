@@ -83,8 +83,9 @@ export default function Slider({
 		{ left: number; right: number } | undefined
 	>(undefined);
 	const content = useRef<HTMLDivElement>(null);
+
 	useEffect(() => {
-		if (content && content.current && !isInfiniteLoop)
+		if (content && content.current && !isInfiniteLoop) {
 			setDragConstraint({
 				left: center
 					? -(
@@ -95,6 +96,7 @@ export default function Slider({
 					: -(content.current.scrollWidth - content.current.clientWidth),
 				right: center ? content.current.clientWidth / showCount / 2 : 0,
 			});
+		}
 	}, [center, isInfiniteLoop, showCount]);
 	/****************Simple Slider */
 
@@ -113,11 +115,11 @@ export default function Slider({
 
 	/******************Debugging */
 	useEffect(() => {
-		console.log('prev', prevIndex);
-		console.log('next', nextIndex);
-		console.log('show', showCount);
-		console.log('active', activeIndex);
-		console.log(childrenArray);
+		// console.log('prev', prevIndex);
+		// console.log('next', nextIndex);
+		// console.log('show', showCount);
+		// console.log('active', activeIndex);
+		// console.log(childrenArray);
 		console.log('drags', dragConstraint);
 	}, [showCount, childrenArray, nextIndex, activeIndex, prevIndex, dragConstraint]);
 
@@ -154,7 +156,7 @@ export default function Slider({
 	// };
 
 	const outOfViewHandler = ({ index, isInView }: TOutOfViewEvent) => {
-		console.log(index, ' item is in view: ', isInView);
+		// console.log(index, ' item is in view: ', isInView);
 	};
 
 	// const nextHandler = () => {
@@ -221,6 +223,7 @@ export default function Slider({
 				style={{
 					translateX: `${transformX}%`,
 					gap: `${spacing}%`,
+					touchAction: 'none',
 				}}>
 				{childrenArray &&
 					childrenArray.map((child, i) => (
