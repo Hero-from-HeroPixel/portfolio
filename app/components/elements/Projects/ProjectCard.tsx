@@ -2,7 +2,7 @@ import { cn } from '@/app/utils/cn';
 import { Content, isFilled } from '@prismicio/client';
 import Image from 'next/image';
 import React from 'react';
-import { ExternalLink } from '@/app/components/Navigation/Links';
+import { ExternalLink } from '@/app/components/Navigation/ExternalLink';
 import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { prismicClient } from '@/app/lib/clients';
 import Tech, { IconListT } from '@/app/components/elements/Experience/Tech';
@@ -50,7 +50,7 @@ export default async function ProjectCard({ project, className, minify }: Props)
 				{project.data.type && <Indicator type={project.data.type} />}
 				{hasProjectLink ? (
 					<ExternalLink
-						className={`w-full text-xl text-center lg:text-2xl ${styles.ProjectLink}`}
+						className={`flex-col w-full text-xl text-center lg:text-2xl ${styles.ProjectLink}`}
 						field={project.data.project_link}>
 						{!minify && (
 							<Image

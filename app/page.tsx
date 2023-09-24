@@ -8,7 +8,6 @@ import About from '@/app/components/elements/About_Me/About';
 import Experience from '@/app/components/elements/Experience/Experience';
 import Projects from './components/elements/Projects/Projects';
 import Contact from './components/elements/Contact/Contact';
-import Clip from './components/elements/Projects/Clip';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -22,16 +21,7 @@ export default async function Home() {
 
 	if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
 	//*********************End Prismic Content */
-	return (
-		<>
-			<Hero id="hero" />
-			<About id="about" />
-			<Experience id="experience" />
-			<EducationTable id="education" />
-			<Projects id="projects" />
-			<Contact id="contact-me" />
-		</>
-	);
+	
 }
 
 export async function generateMetadata(): Promise<Metadata> {

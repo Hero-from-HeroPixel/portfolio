@@ -2,10 +2,6 @@
 	@apply max-w-fit relative font-body_font cursor-pointer;
 }
 
-.externalLink {
-	@apply items-start;
-}
-
 .link::after {
 	content: '';
 	@apply bg-primary h-1 w-0 block hover:w-full absolute top-full left-1/2 -translate-x-1/2 transition-width duration-500 ease-soft-spring active:w-[150%];

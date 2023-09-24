@@ -23,7 +23,7 @@ export default async function SkillList({ skills, title }: Props) {
 	}
 
 	return (
-		<div className="flex flex-col gap-2 w-40">
+		<li className="flex flex-col gap-2 w-40">
 			<Heading className="mt-5" as="h4">
 				{title}
 			</Heading>
@@ -37,6 +37,6 @@ export default async function SkillList({ skills, title }: Props) {
 					/>
 				))}
 			</ul>
-		</div>
+		</li>
 	);
 }
