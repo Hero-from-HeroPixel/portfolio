@@ -50,16 +50,16 @@ export default function Information({ className }: Props) {
 				</div>
 			</div>
 			<div className="flex gap-5 z-10">
-				<SocialButton href={GITHUB_LINK}>
+				<SocialButton ariaLabel="Github Link" href={GITHUB_LINK}>
 					<GithubIcon />
 				</SocialButton>
-				<SocialButton href={MAIL_LINK}>
+				<SocialButton ariaLabel="Email Link" href={MAIL_LINK}>
 					<FontAwesomeIcon className="w-full h-full" icon={faEnvelope} />
 				</SocialButton>
-				<SocialButton href={PHONE_LINK}>
+				<SocialButton ariaLabel="Phone Link" href={PHONE_LINK}>
 					<WhatsAppIcon />
 				</SocialButton>
-				<SocialButton href={LINKDN_LINK}>
+				<SocialButton ariaLabel="Linkedin Link" href={LINKDN_LINK}>
 					<LinkdnIcon />
 				</SocialButton>
 			</div>

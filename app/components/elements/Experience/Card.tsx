@@ -100,8 +100,8 @@ export default function Card({ className, techStack, job }: Props) {
 			viewport={{ once: true, amount: 0.2 }}
 			className={cn(styles.card, className)}>
 			<div className="flex flex-col">
-				<Heading as="h5">{data.company}</Heading>
-				<Heading as="h6" className="light">
+				<Heading as="h4">{data.company}</Heading>
+				<Heading as="h5" className="light">
 					{data.position}
 				</Heading>
 				<div className="my-6 lg:w-3/4">

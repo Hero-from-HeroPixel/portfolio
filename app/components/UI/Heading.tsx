@@ -29,10 +29,10 @@ export default function Heading({
 				Comp &&
 					Comp === 'h3' &&
 					'2xl:text-[2.5rem] lg:text-4xl text-[1.75rem] tracking-wide',
-				Comp && Comp === 'h4' && 'text-[1.125rem] lg:text-[1.5rem]',
 				Comp &&
-					Comp === 'h5' &&
-					'text-[1.125rem] lg:text-[1.5rem] font-body_font font-bold ',
+					Comp === 'h4' &&
+					'text-[1.125rem] lg:text-[1.5rem] font-body_font font-bold',
+				Comp && Comp === 'h5' && 'text-[1rem] lg:text-[1.5rem] font-body_font',
 				Comp && Comp === 'h6' && 'text-[1rem] lg:text-[1.5rem] font-body_font',
 				size && size === 'xl' && 'text-5xl md:text-7xl',
 				size && size === 'lg' && 'text-4xl md:text-5xl',

@@ -113,14 +113,14 @@ export default function Slider({
 	// }, [children, currentIndex, isInfiniteLoop, lastIndex, showCount]);
 
 	/******************Debugging */
-	useEffect(() => {
-		// console.log('prev', prevIndex);
-		// console.log('next', nextIndex);
-		// console.log('show', showCount);
-		// console.log('active', activeIndex);
-		// console.log(childrenArray);
-		console.log('drags', dragConstraint);
-	}, [showCount, childrenArray, nextIndex, activeIndex, prevIndex, dragConstraint]);
+	// useEffect(() => {
+	// 	// console.log('prev', prevIndex);
+	// 	// console.log('next', nextIndex);
+	// 	// console.log('show', showCount);
+	// 	// console.log('active', activeIndex);
+	// 	// console.log(childrenArray);
+	// 	console.log('drags', dragConstraint);
+	// }, [showCount, childrenArray, nextIndex, activeIndex, prevIndex, dragConstraint]);
 
 	/******************Debugging */
 
