@@ -35,7 +35,6 @@ export default function Slider({
 	const [isInfiniteLoop, setIsInfiniteLoop] = useState(
 		isInfiniteScroll && lastIndex > showCount,
 	);
-	const [transitionEnabled, setTransitionEnabled] = useState(true);
 	const [childrenArray, setChildrenArray] = useState<React.ReactNode[]>(children || []);
 
 	useEffect(() => {
@@ -53,68 +52,33 @@ export default function Slider({
 		}
 	}, [show.desktop, show.mobile, show.tablet, windowWidth]);
 
-	/**************simple slider */
-
-	const [dragConstraint, setDragConstraint] = useState(0);
-	const content = useRef<HTMLDivElement>(null);
+	/******************Debugging */
 	useEffect(() => {
-		if (content && content.current)
-			setDragConstraint(content.current?.scrollWidth - content.current.clientWidth);
-	}, [dragConstraint]);
-	/****************Simple Slider */
+		console.log('lastindex', lastIndex);
+		console.log('show', showCount);
+		console.log('currentIndex', currentIndex);
 
-	// useEffect(() => {
-	// 	if (children) setLastIndex(children.length);
-	// 	setIsInfiniteLoop(isInfiniteScroll && lastIndex > showCount);
-	// }, [children, isInfiniteScroll, lastIndex, showCount]);
-
-	// useEffect(() => {
-	// 	if (isInfiniteLoop) {
-	// 		// if (currentIndex === showCount || currentIndex === lastIndex) {
-	// 		// 	setTransitionEnabled(true);
-	// 		// }
-	// 	}
-	// }, [children, currentIndex, isInfiniteLoop, lastIndex, showCount]);
-
-	/******************Debugging */
-	// useEffect(() => {
-	// 	console.log('lastindex', lastIndex);
-	// 	console.log('show', showCount);
-	// 	console.log('currentIndex', currentIndex);
-	// 	console.log('transition: ', transitionEnabled);
-	// 	console.log(childrenArray);
-	// }, [lastIndex, showCount, currentIndex, childrenArray, transitionEnabled]);
+		console.log(childrenArray);
+	}, [lastIndex, showCount, currentIndex, childrenArray]);
 
 	/******************Debugging */
 
-	// const startTouchHandler = (e: React.TouchEvent<HTMLDivElement>) => {
-	// 	const touchDown = e.touches[0].clientX;
-	// 	setTouchPosition(touchDown);
-	// };
-	// const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-	// 	const startTouch = touchPosition;
+	const startTouchHandler = (e: React.TouchEvent<HTMLDivElement>) => {
+		const touchDown = e.touches[0].clientX;
+		setTouchPosition(touchDown);
+	};
+	const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+		const startTouch = touchPosition;
 
-	// 	if (startTouch === null) return;
+		if (startTouch === null) return;
 
-	// 	const currentTouch = e.touches[0].clientX;
-	// 	const swipeDiff = startTouch - currentTouch;
+		const currentTouch = e.touches[0].clientX;
+		const swipeDiff = startTouch - currentTouch;
 
-	// 	if (swipeDiff > 5) nextHandler();
-	// 	if (swipeDiff < -5) prevHandler();
+		if (swipeDiff > 5) nextHandler();
+		if (swipeDiff < -5) prevHandler();
 
-	// 	setTouchPosition(null);
-	// };
-
-	const handleTransitionEnd = () => {
-		if (isInfiniteLoop) {
-			if (currentIndex === showCount) {
-				setTransitionEnabled(false);
-				setCurrentIndex(lastIndex);
-			} else if (currentIndex === lastIndex) {
-				setTransitionEnabled(false);
-				setCurrentIndex(showCount);
-			} else setTransitionEnabled(true);
-		}
+		setTouchPosition(null);
 	};
 
 	const outOfViewHandler = ({ index, isInView }: TOutOfViewEvent) => {
@@ -148,23 +112,17 @@ export default function Slider({
 
 	return (
 		<motion.div ref={container} className={styles.carousel} id="project-carousel">
-			{/* {(isInfiniteScroll || currentIndex > showCount) && (
+			{(isInfiniteScroll || currentIndex > showCount) && (
 				<PrimaryButton
 					onClick={prevHandler}
 					appearance={{ className: 'px-1' }}
 					className="p-1 min-w-0 absolute border-background inset-y-0 my-auto left-10 z-10 hidden lg:block">
 					<FontAwesomeIcon icon={faCircleChevronLeft} />
 				</PrimaryButton>
-			)} */}
-			{/* <motion.div
-				drag="x"
-				ref={content}
-				dragConstraints={{ right: 0, left: -dragConstraint }}
+			)}
+			<motion.div
 				whileTap={{ cursor: 'grabbing' }}
-				dragElastic={0.2}
-				className={`${styles.innerCarousel} ${
-					transitionEnabled ? 'transition-transform' : ''
-				}`}
+				className={`${styles.innerCarousel}`}
 				style={{
 					transform: `translateX(-${
 						(currentIndex - showCount) * (100 / showCount)
@@ -172,45 +130,40 @@ export default function Slider({
 					gap: `${spacing}%`,
 				}}
 				onTouchStart={startTouchHandler}
-				onTouchMove={handleTouchMove}> */}
-			<motion.div
-				drag="x"
-				ref={content}
-				dragConstraints={{ right: 0, left: -dragConstraint }}
-				whileTap={{ cursor: 'grabbing' }}
-				dragElastic={0.2}
-				className={`${styles.innerCarousel} ${
-					transitionEnabled ? 'transition-transform' : ''
-				}`}
-				style={{
-					transform: `translateX(-${
-						(currentIndex - showCount) * (100 / showCount)
-					}%)`,
-					gap: `${spacing}%`,
-				}}>
-				{childrenArray &&
-					childrenArray.map((child, i) => (
-						<SliderItem
-							key={i}
-							style={{
-								minWidth: `${100 / showCount - spacing}%`,
-								maxWidth: `${100 / showCount - spacing}%`,
-							}}
-							container={container}
-							index={i}
-							onOutOfView={outOfViewHandler}>
-							{child}
-						</SliderItem>
-					))}
+				onTouchMove={handleTouchMove}>
+				<motion.div
+					whileTap={{ cursor: 'grabbing' }}
+					className={`${styles.innerCarousel}`}
+					style={{
+						transform: `translateX(-${
+							(currentIndex - showCount) * (100 / showCount)
+						}%)`,
+						gap: `${spacing}%`,
+					}}>
+					{childrenArray &&
+						childrenArray.map((child, i) => (
+							<SliderItem
+								key={i}
+								style={{
+									minWidth: `${100 / showCount - spacing}%`,
+									maxWidth: `${100 / showCount - spacing}%`,
+								}}
+								container={container}
+								index={i}
+								onOutOfView={outOfViewHandler}>
+								{child}
+							</SliderItem>
+						))}
+				</motion.div>
+				{(isInfiniteScroll || currentIndex !== lastIndex) && (
+					<PrimaryButton
+						onClick={nextHandler}
+						appearance={{ className: 'px-1' }}
+						className="p-1 min-w-0 absolute z-10 border-background inset-y-0 my-auto right-10  hidden lg:block">
+						<FontAwesomeIcon icon={faCircleChevronRight} />
+					</PrimaryButton>
+				)}
 			</motion.div>
-			{/* {(isInfiniteScroll || currentIndex !== lastIndex) && (
-				<PrimaryButton
-					onClick={nextHandler}
-					appearance={{ className: 'px-1' }}
-					className="p-1 min-w-0 absolute z-10 border-background inset-y-0 my-auto right-10  hidden lg:block">
-					<FontAwesomeIcon icon={faCircleChevronRight} />
-				</PrimaryButton>
-			)} */}
 		</motion.div>
 	);
 }
