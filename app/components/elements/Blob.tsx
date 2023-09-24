@@ -32,10 +32,8 @@ function touchMoveHandler(e: TouchEvent) {
 	const screenWidth = window.innerWidth;
 	const x = e.touches[0].screenX;
 	const y = e.touches[0].screenY;
-	console.log('y', -y);
-	console.log('x', x);
 
-	if (blobEl) blobAnimate(blobEl, x / 2, y, 500);
+	if (blobEl) blobAnimate(blobEl, x, y, 500);
 }
 
 export default function Blob({}: Props) {

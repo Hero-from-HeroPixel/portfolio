@@ -34,14 +34,18 @@ export default async function ProjectsSlice({ id }: Props): Promise<JSX.Element>
 	return (
 		<section className="w-screen flex flex-col gap-20" id={id}>
 			<BoundWrapper as="div">
-				<Heading className=" w-11/12 mx-auto" as="h2">
+				<Heading className="w-11/12 mx-auto" as="h2">
 					Projects
 				</Heading>
-				<Heading className="w-11/12 mx-auto" as="h3">
-					Featured Project - Enerblu
-				</Heading>
 			</BoundWrapper>
-			{featuredProject && <FeaturedProject project={featuredProject} />}
+
+			<div className="">
+				<Heading className="w-11/12 lg:w-10/12 2xl:w-9/12 mx-auto" as="h3">
+					Featured Project - {featuredProject.data.title}
+				</Heading>
+				{featuredProject && <FeaturedProject project={featuredProject} />}
+			</div>
+
 			<BoundWrapper as="div" className="gap-40 px-5">
 				<ul className="flex flex-col lg:flex-row gap-10 lg:gap-16 lg:justify-between">
 					{mainProjects &&
