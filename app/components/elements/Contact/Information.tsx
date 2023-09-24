@@ -25,7 +25,7 @@ export default function Information({ className }: Props) {
 			</div>
 			<div className="flex flex-col gap-8">
 				<div className="flex gap-4 items-center">
-					<FontAwesomeIcon icon={faPhoneVolume} />
+					<FontAwesomeIcon className="w-5" icon={faPhoneVolume} />
 					<Link
 						rel="noreferrer"
 						target="_blank"
@@ -35,7 +35,7 @@ export default function Information({ className }: Props) {
 					</Link>
 				</div>
 				<div className="flex gap-4 items-center">
-					<FontAwesomeIcon icon={faEnvelope} />
+					<FontAwesomeIcon className="w-5" icon={faEnvelope} />
 					<Link
 						target="_blank"
 						rel="noreferrer"
@@ -45,7 +45,7 @@ export default function Information({ className }: Props) {
 					</Link>
 				</div>
 				<div className="flex gap-4 items-center">
-					<FontAwesomeIcon icon={faLocationDot} />
+					<FontAwesomeIcon className="w-5" icon={faLocationDot} />
 					<p className="light sm">Pretoria, Gauteng - South Africa</p>
 				</div>
 			</div>

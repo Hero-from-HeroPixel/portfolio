@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink } from '../../Navigation/Links';
+import { ExternalLink } from '../../Navigation/ExternalLink';
 import { Simplify } from '@/prismicio-types';
 import { Content } from '@prismicio/client';
 

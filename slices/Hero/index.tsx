@@ -60,16 +60,20 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 			<div className="flex flex-col items-center gap-1 lg:gap-4">
 				<div className="w-full h-2 lg:w-2 lg:h-24 bg-accent"></div>
 				<div className="flex lg:flex-col gap-2">
-					<SocialButton href="https://github.com/Hero-from-HeroPixel">
+					<SocialButton
+						ariaLabel="Github Link"
+						href="https://github.com/Hero-from-HeroPixel">
 						<GithubIcon />
 					</SocialButton>
-					<SocialButton href="mailto:dev@heropixel.co.za">
+					<SocialButton ariaLabel="Email Link" href="mailto:dev@heropixel.co.za">
 						<FontAwesomeIcon className="w-full h-full" icon={faEnvelope} />
 					</SocialButton>
-					<SocialButton href="tel:+27607326830">
+					<SocialButton ariaLabel="Phone Link" href="tel:+27607326830">
 						<WhatsAppIcon />
 					</SocialButton>
-					<SocialButton href="https://www.linkedin.com/in/jean-jacques-grobler/">
+					<SocialButton
+						ariaLabel="Linkedin Link"
+						href="https://www.linkedin.com/in/jean-jacques-grobler/">
 						<LinkdnIcon />
 					</SocialButton>
 				</div>

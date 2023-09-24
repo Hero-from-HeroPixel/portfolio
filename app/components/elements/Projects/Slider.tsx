@@ -6,7 +6,6 @@ import SliderItem, { TOutOfViewEvent } from './SliderItem';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen, tabletScreen } from '@/app/constants/screens';
 import { cn } from '@/app/utils/cn';
-import Clip from './Clip';
 
 export type SliderProps = {
 	show?: {

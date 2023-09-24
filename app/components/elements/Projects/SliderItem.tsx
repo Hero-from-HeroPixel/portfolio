@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { MotionProps, PanInfo, motion, useInView } from 'framer-motion';
+import { MotionProps, motion, useInView } from 'framer-motion';
 import styles from '@/app/components/elements/Projects/slider.module.css';
 import { cn } from '@/app/utils/cn';
 

@@ -28,8 +28,6 @@ function touchEventHandler(e: TouchEvent) {
 
 function touchMoveHandler(e: TouchEvent) {
 	const blobEl = document.getElementById('blob');
-	const screenHeight = window.innerHeight;
-	const screenWidth = window.innerWidth;
 	const x = e.touches[0].screenX;
 	const y = e.touches[0].screenY;
 
@@ -37,7 +35,7 @@ function touchMoveHandler(e: TouchEvent) {
 }
 
 export default function Blob({}: Props) {
-	const { width: windowWidth, height: windowHeight } = useWindowSize();
+	const { width: windowWidth } = useWindowSize();
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			const blobEl = document.getElementById('blob');

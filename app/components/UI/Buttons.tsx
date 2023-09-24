@@ -83,6 +83,7 @@ export interface SocialButtonsProps extends LinkProps {
 	children: React.ReactNode;
 	href: string;
 	external?: boolean;
+	ariaLabel?: string;
 }
 
 export function SocialButton({
@@ -90,6 +91,7 @@ export function SocialButton({
 	href,
 	className,
 	children,
+	ariaLabel,
 	...restProps
 }: SocialButtonsProps) {
 	return (
@@ -97,6 +99,7 @@ export function SocialButton({
 			target={external ? '_blank' : '_self'}
 			rel={external ? 'noreferrer' : ''}
 			href={href}
+			aria-label={ariaLabel}
 			{...restProps}
 			className={cn(
 				'w-10 h-10 bg-transparent border-none sm:border-2 p-2 lg:p-1 fill-secondary hover:fill-background hover:text-background hover:bg-foreground rounded-xl transition-all duration-200 ease-out',

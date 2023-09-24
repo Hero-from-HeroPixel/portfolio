@@ -1,6 +1,6 @@
 import React from 'react';
 import Heading from '@/app/components/UI/Heading';
-import { ExternalLink } from '@/app/components/Navigation/Links';
+import { ExternalLink } from '@/app/components/Navigation/ExternalLink';
 import { KeyTextField, LinkField, RichTextField } from '@prismicio/client';
 import { PrismicRichText } from '@prismicio/react';
 
@@ -24,6 +24,9 @@ export default function Intro({ heading, github, cv, introduction }: Props) {
 						GitHub
 					</ExternalLink>
 					<ExternalLink
+						appearance={{
+							icon: '-translate-y-1',
+						}}
 						field={typeof cv !== 'string' ? cv : undefined}
 						href={typeof cv === 'string' ? cv : undefined}
 						className="btn border-2 px-3 lg:px-4 lg:py-2 py-0 rounded-full border-primary bg-none text-primary hover:text-background hover:bg-primary hover:after:!w-0 hover:!text-opacity-100 transition-all duration-200 ease-out">
