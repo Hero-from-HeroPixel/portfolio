@@ -9,6 +9,6 @@
 .image {
 	@apply rounded-3xl pointer-events-none;
 }
-
-.item0 {
+.carouselItem {
+	@apply duration-300 ease-soft-spring;
 }

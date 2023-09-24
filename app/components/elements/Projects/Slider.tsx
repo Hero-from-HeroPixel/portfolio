@@ -3,11 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from '@/app/components/elements/Projects/slider.module.css';
 import SliderItem, { TOutOfViewEvent } from './SliderItem';
-import { PrimaryButton } from '../../UI/Buttons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen, tabletScreen } from '@/app/constants/screens';
+import { cn } from '@/app/utils/cn';
+import Clip from './Clip';
 
 export type SliderProps = {
 	show?: {
@@ -17,50 +16,86 @@ export type SliderProps = {
 	};
 	spacing?: number;
 	children?: React.ReactNode[];
-	isInfiniteScroll?: boolean;
+	appearance: {
+		container?: string;
+		wrapper?: string;
+		items?: string;
+	};
+	isInfinite?: boolean;
+	center?: boolean;
 };
 
 export default function Slider({
+	isInfinite,
+	appearance,
 	show = { desktop: 4, tablet: 2, mobile: 1 },
 	spacing = 1,
+	center,
 	children,
-	isInfiniteScroll = false,
 }: SliderProps) {
 	const container = useRef(null);
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
-	const [currentIndex, setCurrentIndex] = useState<number>(showCount);
-	const [lastIndex, setLastIndex] = useState(children?.length || 0);
-	const [touchPosition, setTouchPosition] = useState<number | null>(null);
-	const [isInfiniteLoop, setIsInfiniteLoop] = useState(
-		isInfiniteScroll && lastIndex > showCount,
-	);
-	const [transitionEnabled, setTransitionEnabled] = useState(true);
+	const [activeIndex, setActiveIndex] = useState<number>();
+	const [prevIndex, setPrevIndex] = useState<number>();
+	const [nextIndex, setNextIndex] = useState<number>();
 	const [childrenArray, setChildrenArray] = useState<React.ReactNode[]>(children || []);
+	const [isInfiniteLoop, setIsInfiniteLoop] = useState<boolean>();
+	const [transformX, setTransformX] = useState(0);
 
 	useEffect(() => {
 		if (windowWidth !== null) {
 			if (windowWidth <= MobileScreen) {
 				setShowCount(show.mobile);
-				setCurrentIndex(show.mobile);
 			} else if (windowWidth <= tabletScreen) {
 				setShowCount(show.tablet);
-				setCurrentIndex(show.tablet);
 			} else {
 				setShowCount(show.desktop);
-				setCurrentIndex(show.desktop);
 			}
 		}
-	}, [show.desktop, show.mobile, show.tablet, windowWidth]);
+
+		if (isInfinite && childrenArray.length > showCount) setIsInfiniteLoop(true);
+
+		if (isInfiniteLoop || center) {
+			setTransformX(-(100 / showCount));
+		}
+	}, [
+		center,
+		childrenArray.length,
+		isInfinite,
+		isInfiniteLoop,
+		show.desktop,
+		show.mobile,
+		show.tablet,
+		showCount,
+		windowWidth,
+	]);
+
+	useEffect(() => {
+		setActiveIndex(0);
+		setNextIndex(1);
+		setPrevIndex(childrenArray.length - 1);
+	}, [childrenArray.length]);
 
 	/**************simple slider */
 
-	const [dragConstraint, setDragConstraint] = useState(0);
+	const [dragConstraint, setDragConstraint] = useState<
+		{ left: number; right: number } | undefined
+	>(undefined);
 	const content = useRef<HTMLDivElement>(null);
 	useEffect(() => {
-		if (content && content.current)
-			setDragConstraint(content.current?.scrollWidth - content.current.clientWidth);
-	}, [dragConstraint]);
+		if (content && content.current && !isInfiniteLoop)
+			setDragConstraint({
+				left: center
+					? -(
+							content.current.scrollWidth -
+							content.current.clientWidth -
+							content.current.clientWidth / showCount / 2
+					  )
+					: -(content.current.scrollWidth - content.current.clientWidth),
+				right: center ? content.current.clientWidth / showCount / 2 : 0,
+			});
+	}, [center, isInfiniteLoop, showCount]);
 	/****************Simple Slider */
 
 	// useEffect(() => {
@@ -77,13 +112,14 @@ export default function Slider({
 	// }, [children, currentIndex, isInfiniteLoop, lastIndex, showCount]);
 
 	/******************Debugging */
-	// useEffect(() => {
-	// 	console.log('lastindex', lastIndex);
-	// 	console.log('show', showCount);
-	// 	console.log('currentIndex', currentIndex);
-	// 	console.log('transition: ', transitionEnabled);
-	// 	console.log(childrenArray);
-	// }, [lastIndex, showCount, currentIndex, childrenArray, transitionEnabled]);
+	useEffect(() => {
+		console.log('prev', prevIndex);
+		console.log('next', nextIndex);
+		console.log('show', showCount);
+		console.log('active', activeIndex);
+		console.log(childrenArray);
+		console.log('drags', dragConstraint);
+	}, [showCount, childrenArray, nextIndex, activeIndex, prevIndex, dragConstraint]);
 
 	/******************Debugging */
 
@@ -105,49 +141,52 @@ export default function Slider({
 	// 	setTouchPosition(null);
 	// };
 
-	const handleTransitionEnd = () => {
-		if (isInfiniteLoop) {
-			if (currentIndex === showCount) {
-				setTransitionEnabled(false);
-				setCurrentIndex(lastIndex);
-			} else if (currentIndex === lastIndex) {
-				setTransitionEnabled(false);
-				setCurrentIndex(showCount);
-			} else setTransitionEnabled(true);
-		}
-	};
+	// const handleTransitionEnd = () => {
+	// 	if (isInfiniteLoop) {
+	// 		if (currentIndex === showCount) {
+	// 			setTransitionEnabled(false);
+	// 			setCurrentIndex(lastIndex);
+	// 		} else if (currentIndex === lastIndex) {
+	// 			setTransitionEnabled(false);
+	// 			setCurrentIndex(showCount);
+	// 		} else setTransitionEnabled(true);
+	// 	}
+	// };
 
 	const outOfViewHandler = ({ index, isInView }: TOutOfViewEvent) => {
-		// console.log(index, ' item is in view: ', isInView);
+		console.log(index, ' item is in view: ', isInView);
 	};
 
-	const nextHandler = () => {
-		if (isInfiniteLoop || currentIndex < lastIndex) {
-			setCurrentIndex((prevState) => prevState + 1);
-			if (isInfiniteLoop) {
-				const copyChildren = [...childrenArray];
-				const firstEl = copyChildren.shift();
-				setChildrenArray([...copyChildren, firstEl]);
+	// const nextHandler = () => {
+	// 	if (isInfiniteLoop || currentIndex < lastIndex) {
+	// 		setCurrentIndex((prevState) => prevState + 1);
+	// 		if (isInfiniteLoop) {
+	// 			const copyChildren = [...childrenArray];
+	// 			const firstEl = copyChildren.shift();
+	// 			setChildrenArray([...copyChildren, firstEl]);
 
-				if (currentIndex === lastIndex) setCurrentIndex(showCount);
-			}
-		}
-	};
+	// 			if (currentIndex === lastIndex) setCurrentIndex(showCount);
+	// 		}
+	// 	}
+	// };
 
-	const prevHandler = () => {
-		if (isInfiniteLoop || currentIndex > showCount) {
-			setCurrentIndex((prevState) => prevState - 1);
-			if (isInfiniteLoop) {
-				const copyChildren = [...childrenArray];
-				const lastEl = copyChildren.pop();
-				setChildrenArray([lastEl, ...copyChildren]);
-				if (currentIndex === showCount) setCurrentIndex(lastIndex);
-			}
-		}
-	};
+	// const prevHandler = () => {
+	// 	if (isInfiniteLoop || currentIndex > showCount) {
+	// 		setCurrentIndex((prevState) => prevState - 1);
+	// 		if (isInfiniteLoop) {
+	// 			const copyChildren = [...childrenArray];
+	// 			const lastEl = copyChildren.pop();
+	// 			setChildrenArray([lastEl, ...copyChildren]);
+	// 			if (currentIndex === showCount) setCurrentIndex(lastIndex);
+	// 		}
+	// 	}
+	// };
 
 	return (
-		<motion.div ref={container} className={styles.carousel} id="project-carousel">
+		<motion.div
+			ref={container}
+			className={cn(styles.carousel, appearance.container)}
+			id="project-carousel">
 			{/* {(isInfiniteScroll || currentIndex > showCount) && (
 				<PrimaryButton
 					onClick={prevHandler}
@@ -174,31 +213,27 @@ export default function Slider({
 				onTouchStart={startTouchHandler}
 				onTouchMove={handleTouchMove}> */}
 			<motion.div
-				drag="x"
 				ref={content}
-				dragConstraints={{ right: 0, left: -dragConstraint }}
+				dragConstraints={dragConstraint}
+				drag="x"
 				whileTap={{ cursor: 'grabbing' }}
-				dragElastic={0.2}
-				className={`${styles.innerCarousel} ${
-					transitionEnabled ? 'transition-transform' : ''
-				}`}
+				className={cn(`${styles.innerCarousel}`, appearance.wrapper)}
 				style={{
-					transform: `translateX(-${
-						(currentIndex - showCount) * (100 / showCount)
-					}%)`,
+					translateX: `${transformX}%`,
 					gap: `${spacing}%`,
 				}}>
 				{childrenArray &&
 					childrenArray.map((child, i) => (
 						<SliderItem
+							container={container}
+							onOutOfView={outOfViewHandler}
+							className={cn('', appearance.items)}
 							key={i}
 							style={{
 								minWidth: `${100 / showCount - spacing}%`,
 								maxWidth: `${100 / showCount - spacing}%`,
 							}}
-							container={container}
-							index={i}
-							onOutOfView={outOfViewHandler}>
+							index={i}>
 							{child}
 						</SliderItem>
 					))}
