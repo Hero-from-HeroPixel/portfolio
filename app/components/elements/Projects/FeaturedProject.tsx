@@ -36,8 +36,9 @@ export default async function FeaturedProject({ project }: Props) {
 			className="border-t-2 border-b-2 border-accent rounded-3xl lg:border-none py-10 lg:py-0"
 			id={project.data.section_id as string}>
 			<Slider
+				isInfinite
 				show={{ desktop: 3.25, mobile: 1.15, tablet: 2.2 }}
-				appearance={{ container: 'lg:my-10' }}>
+				appearance={{ carousel: 'lg:my-10' }}>
 				{data.images.map(({ showcase }, i) => (
 					<Image
 						draggable={false}
