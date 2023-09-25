@@ -3,12 +3,9 @@
 }
 
 .innerCarousel {
-	@apply flex;
+	@apply flex ease-soft-spring duration-300;
 }
 
 .image {
 	@apply rounded-3xl pointer-events-none;
-}
-.carouselItem {
-	@apply duration-300 ease-soft-spring;
 }

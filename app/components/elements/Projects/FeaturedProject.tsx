@@ -36,24 +36,25 @@ export default async function FeaturedProject({ project }: Props) {
 			className="border-t-2 border-b-2 border-accent rounded-3xl lg:border-none py-10 lg:py-0"
 			id={project.data.section_id as string}>
 			<Slider
+				isInfinite
 				show={{ desktop: 3.25, mobile: 1.15, tablet: 2.2 }}
 				appearance={{ container: 'lg:my-10' }}>
 				{data.images.map(({ showcase }, i) => (
-					<Image
-						draggable={false}
-						width={1280}
-						height={1080}
-						className="w-full h-60 lg:h-80 rounded-2xl border-2 shadow-lg shadow-background my-5 border-glass object-cover"
-						key={i}
-						src={showcase.url || ''}
-						alt={showcase.alt || ''}
-					/>
+					// <Image
+					// 	draggable={false}
+					// 	width={1280}
+					// 	height={1080}
+					// 	className="w-full h-60 lg:h-80 rounded-2xl border-2 shadow-lg shadow-background my-5 border-glass object-cover"
+					// 	key={i}
+					// 	src={showcase.url || ''}
+					// 	alt={showcase.alt || ''}
+					// />
 
-					// <div
-					// 	className="h-96 mx-auto w-full bg-white border-2 border-black flex justify-center items-center text-6xl text-black rounded-2xl "
-					// 	key={i}>
-					// 	{i}
-					// </div>
+					<div
+						className="h-96 mx-auto w-full bg-white border-2 border-black flex justify-center items-center text-6xl text-black rounded-2xl "
+						key={i}>
+						{i}
+					</div>
 				))}
 			</Slider>
 			<div className="flex flex-col px-5 gap-4 lg:w-10/12 2xl:w-9/12 mx-auto lg:text-center">
