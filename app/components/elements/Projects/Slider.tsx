@@ -1,3 +1,176 @@
+'use client';
+import styles from './slider.module.css';
+import { cn } from '@/app/utils/cn';
+import useEmblaCarousel, { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel-react';
+import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
+import { useWindowSize } from '@uidotdev/usehooks';
+import { MobileScreen, tabletScreen } from '@/app/constants/screens';
+import SliderItem from './SliderItem';
+
+const numberWithinRange = (number: number, min: number, max: number): number =>
+	Math.min(Math.max(number, min), max);
+
+type Props = {
+	appearance?: {
+		carousel?: string;
+		innerCarousel?: string;
+		slideItem?: string;
+	};
+	show?: {
+		desktop?: number;
+		tablet?: number;
+		mobile?: number;
+	};
+	isInfinite?: boolean;
+	children: React.ReactNode[];
+	spacing?: number;
+	differential?: number;
+};
+export default function Slider({
+	appearance,
+	show,
+	isInfinite,
+	children,
+	spacing = 0,
+	differential = 0.5,
+}: Props) {
+	const [showCount, setShowCount] = useState<number>(1);
+	const { width: windowWidth } = useWindowSize();
+	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+	const TWEEN_FACTOR = differential;
+
+	const OPTIONS: EmblaOptionsType = {
+		loop: isInfinite,
+		startIndex: 1,
+		containScroll: 'keepSnaps',
+	};
+	const [carousel, emblaApi] = useEmblaCarousel(OPTIONS);
+	const [tweenValues, setTweenValues] = useState<number[]>([]);
+
+	const scrollTo = useCallback(
+		(index: number) => emblaApi && emblaApi.scrollTo(index),
+		[emblaApi],
+	);
+
+	const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+		setScrollSnaps(emblaApi.scrollSnapList());
+	}, []);
+
+	const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+		setSelectedIndex(emblaApi.selectedScrollSnap());
+	}, []);
+
+	useEffect(() => {
+		if (windowWidth !== null) {
+			if (windowWidth <= MobileScreen) {
+				setShowCount(show?.mobile || 1);
+			} else if (windowWidth <= tabletScreen) {
+				setShowCount(show?.tablet || 2);
+			} else {
+				setShowCount(show?.desktop || 3);
+			}
+		}
+	}, [show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
+
+	const onScroll = useCallback(() => {
+		if (!emblaApi) return;
+
+		const engine = emblaApi.internalEngine();
+		const scrollProgress = emblaApi.scrollProgress();
+
+		const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
+			let diffToTarget = scrollSnap - scrollProgress;
+
+			if (engine.options.loop) {
+				engine.slideLooper.loopPoints.forEach((loopItem) => {
+					const target = loopItem.target();
+					if (index === loopItem.index && target !== 0) {
+						const sign = Math.sign(target);
+						if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
+						if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
+					}
+				});
+			}
+			const tweenValue = 1 - Math.abs(diffToTarget * TWEEN_FACTOR);
+
+			return numberWithinRange(tweenValue, 0, 1);
+		});
+		setTweenValues(styles);
+	}, [TWEEN_FACTOR, emblaApi]);
+
+	useEffect(() => {
+		if (!emblaApi) return;
+
+		onInit(emblaApi);
+		onSelect(emblaApi);
+		emblaApi.on('reInit', onInit);
+		emblaApi.on('reInit', onSelect);
+		emblaApi.on('select', onSelect);
+
+		onScroll();
+		emblaApi.on('scroll', () => {
+			flushSync(() => onScroll());
+		});
+		emblaApi.on('reInit', onScroll);
+	}, [emblaApi, onInit, onScroll, onSelect]);
+
+	return (
+		<div className={cn(styles.carousel, appearance?.carousel)} ref={carousel}>
+			<ul
+				className={cn(styles.innerCarousel, appearance?.innerCarousel)}
+				style={{
+					gap: `${spacing}%`,
+				}}>
+				{children.map((child, i) => (
+					<SliderItem
+						className={cn('', appearance?.slideItem)}
+						key={i}
+						style={{
+							minWidth: `${100 / showCount - spacing}%`,
+							maxWidth: `${100 / showCount - spacing}%`,
+							...(tweenValues.length && {
+								transform: `scale(${tweenValues[i]})`,
+								opacity: tweenValues[i],
+							}),
+						}}
+						index={i}>
+						{child}
+					</SliderItem>
+				))}
+			</ul>
+			<div className={cn(styles.dots, appearance)}>
+				{scrollSnaps.map((_, index) => (
+					<DotButton
+						key={index}
+						onClick={() => scrollTo(index)}
+						className={cn(
+							styles.dot,
+							index === selectedIndex ? styles.activeDot : '',
+						)}
+					/>
+				))}
+			</div>
+		</div>
+	);
+}
+
+type PropType = PropsWithChildren<
+	React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+>;
+
+export const DotButton: React.FC<PropType> = (props) => {
+	const { children, ...restProps } = props;
+
+	return (
+		<button type="button" {...restProps}>
+			{children}
+		</button>
+	);
+};
+
 // 'use client';
 // import React, { useEffect, useRef, useState } from 'react';
 // import { PanInfo, motion } from 'framer-motion';
@@ -193,30 +366,3 @@
 // 		</motion.div>
 // 	);
 // }
-
-// Import Swiper React components
-'use client';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-
-type Props = {
-	appearance?: {};
-	show?: {
-		desktop?: number;
-		tablet?: number;
-		mobile?: number;
-	};
-	isInfinite?: boolean;
-	children: React.ReactNode[];
-};
-export default function Slider({ appearance, show, isInfinite, children }: Props) {
-	return (
-		<Swiper spaceBetween={50} slidesPerView={3}>
-			{children.map((child, i) => (
-				<SwiperSlide key={i}>{child}</SwiperSlide>
-			))}
-		</Swiper>
-	);
-}
