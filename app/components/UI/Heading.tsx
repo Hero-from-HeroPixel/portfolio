@@ -9,13 +9,8 @@ type Props = {
 	weight?: '900' | '800' | '700' | '600' | '500' | '400' | '300' | '200' | '100';
 };
 
-export default function Heading({
-	as: Comp = 'h1',
-	className,
-	size,
-	children,
-	weight,
-}: Props) {
+// eslint-disable-next-line react/display-name
+const Heading = ({ as: Comp = 'h1', className, size, children, weight }: Props) => {
 	return (
 		<Comp
 			className={cn(
@@ -52,4 +47,6 @@ export default function Heading({
 			{children}
 		</Comp>
 	);
-}
+};
+
+export default Heading;

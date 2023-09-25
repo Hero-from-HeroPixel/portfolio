@@ -2,20 +2,12 @@ import BoundWrapper from '@/app/components/UI/BoundWrapper';
 import { SocialButton } from '@/app/components/UI/Buttons';
 import Heading from '@/app/components/UI/Heading';
 import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
+import HeroText from '@/app/components/elements/Hero/HeroText';
 import { GithubIcon, LinkdnIcon, WhatsAppIcon } from '@/app/components/icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Content } from '@prismicio/client';
 import { JSXMapSerializer, PrismicRichText, SliceComponentProps } from '@prismicio/react';
-
-const components: JSXMapSerializer = {
-	paragraph: ({ children }) => (
-		<p className="text-start leading-tight tracking-tighter font-light lg:font-normal">
-			{children}
-		</p>
-	),
-	strong: ({ children }) => <strong className="text-primary">{children}</strong>,
-};
 
 /**
  * Props for `Hero`.
@@ -26,6 +18,11 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero = ({ slice }: HeroProps): JSX.Element => {
+	slice.primary.introduction;
+
+	const line1 = 'hero';
+	const span = 'from';
+	const line2 = 'heropixel';
 	return (
 		<BoundWrapper
 			id={slice.primary.section_id}
@@ -33,31 +30,15 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 			data-slice-variation={slice.variation}
 			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12 bg-transparent">
 			<div className="lg:w-3/4 flex flex-col lg:flex-row lg:h-[60%]">
-				<div className="relative w-fit lg:h-3/4 flex flex-col justify-center items-center lg:justify-start gap-12 lg:gap-0">
-					<Heading className="relative leading-[80%] lg:leading-[80%] tracking-[-0.37rem] lg:tracking-[-0.95rem]">
-						hero{' '}
-						<span className="align-middle lg:absolute lg:top-10 2xl:top-16 mb-5 lg:border-2 border font-normal rounded-full border-white text-2xl lg:text-4xl lg:py-2 lg:px-6 px-4 py-2 lg:-rotate-90 tracking-normal">
-							from
-						</span>{' '}
-						<br />
-						heropixel
-						<span className="absolute right-0 top-full 2xl:w-80 text-2xl lg:text-4xl 2xl:text-6xl tracking-widest lg:tracking-[0.4rem] font-light lg:font-normal leading-none">
-							full stack <br />
-							developer
-						</span>
-					</Heading>
-					{slice && (
-						<span className="lg:absolute lg:top-4 2xl:top-8 lg:-right-20 2xl:-right-8 w-72 lg:w-56 2xl:w-72">
-							<PrismicRichText
-								components={components}
-								field={slice.primary.introduction}
-							/>
-						</span>
-					)}
-				</div>
+				<HeroText
+					introduction={slice.primary.introduction}
+					line1={line1}
+					line2={line2}
+					span={span}
+				/>
 				<HeroCTA href={slice.primary.cta_link} title={slice.primary.cta_label} />
 			</div>
-			<div className="flex flex-col items-center gap-1 lg:gap-4">
+			<div className="flex opacity-0 flex-col items-center gap-1 lg:gap-4 animate-fade-in">
 				<div className="w-full h-2 lg:w-2 lg:h-24 bg-accent"></div>
 				<div className="flex lg:flex-col gap-2">
 					<SocialButton
