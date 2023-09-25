@@ -22,7 +22,9 @@ export default function HeroCTA({ title, href, targetId }: Props) {
 	};
 
 	return (
-		<PrimaryButton onClick={clickHandler} className="mt-20 lg:mt-0 self-end">
+		<PrimaryButton
+			onClick={clickHandler}
+			className="mt-20 lg:mt-0 self-end opacity-0 animate-fade-in ">
 			{title || 'Learn more about me'}
 		</PrimaryButton>
 	);
