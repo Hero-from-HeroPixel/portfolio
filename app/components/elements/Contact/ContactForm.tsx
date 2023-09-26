@@ -20,7 +20,6 @@ import Image from 'next/image';
 import Honeypot from './Honeypot';
 import Loader from '../../UI/Loader';
 import Heading from '../../UI/Heading';
-import { ExecuteResponse, HCaptchaProps, HCaptchaState } from '@hcaptcha/react-hcaptcha';
 const HCaptcha = dynamic(() => import('@hcaptcha/react-hcaptcha'), { ssr: false });
 
 type Props = {
@@ -54,6 +53,37 @@ interface Values {
 	phone: string;
 	subject: string;
 	message: string;
+}
+
+export interface HCaptchaState {
+	isApiReady: boolean;
+	isRemoved: boolean;
+	elementId: string;
+	captchaId: string;
+}
+
+export interface HCaptchaProps {
+	onExpire?: () => any;
+	onOpen?: () => any;
+	onClose?: () => any;
+	onChalExpired?: () => any;
+	onError?: (event: string) => any;
+	onVerify?: (token: string, ekey: string) => any;
+	onLoad?: () => any;
+	languageOverride?: string;
+	sitekey: string;
+	size?: 'normal' | 'compact' | 'invisible';
+	theme?: 'light' | 'dark';
+	tabIndex?: number;
+	id?: string;
+	reCaptchaCompat?: boolean;
+	loadAsync?: boolean;
+	scriptLocation?: HTMLElement | null;
+}
+
+export interface ExecuteResponse {
+	response: string;
+	key: string;
 }
 
 interface HCaptcha extends React.Component<HCaptchaProps, HCaptchaState> {
