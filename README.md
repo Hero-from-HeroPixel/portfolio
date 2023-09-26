@@ -14,7 +14,27 @@ If you are an employer or potential client please leave a short review of my cod
       - https://web.dev/reduce-the-scope-and-complexity-of-style-calculations/
 - hCaptcha causing perfomance issues?
     - What more to do than lazy loading the component?
+- Use a preloader for initial load
+https://meje.dev/blog/building-a-nextjs-preloader-the-right-way
 
 - ## Best practices
     - Why does prismic log to console?
     - hCaptcha using deprecated API? Migrate to more up to date hCaptcha component.
+ 
+- ## Accessibility
+    - Implement reduceMotion config from framer motion
+ 
+## Features to add
+
+- ### Functionality
+- Error bounds
+- Loading page
+- custom 404
+
+- ### Elements
+- Design Section
+- Testimonials
+
+- ### Styling
+- Project cards e.g. https://youtu.be/DCRcFf39SYo?si=tpMHINvcaXfwAPVC
+- Animate projects into case studies e.g. https://codesandbox.io/s/app-store-ui-using-react-and-framer-motion-ecgc2
