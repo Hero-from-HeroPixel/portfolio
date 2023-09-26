@@ -1,7 +1,7 @@
-import About from '@/app/components/elements/About_Me/About';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
-
+import dynamic from 'next/dynamic';
+const About = dynamic(() => import('@/app/components/elements/About_Me/About'));
 /**
  * Props for `Job`.
  */

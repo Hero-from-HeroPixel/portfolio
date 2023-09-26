@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import React, { useRef, useState } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
@@ -19,7 +20,7 @@ import Image from 'next/image';
 import Honeypot from './Honeypot';
 import Loader from '../../UI/Loader';
 import Heading from '../../UI/Heading';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+const HCaptcha = dynamic(() => import('@hcaptcha/react-hcaptcha'), { ssr: false });
 
 type Props = {
 	className?: string;
@@ -54,9 +55,48 @@ interface Values {
 	message: string;
 }
 
-// interface Values {
-// 	[value: string]: string;
-// }
+export interface HCaptchaState {
+	isApiReady: boolean;
+	isRemoved: boolean;
+	elementId: string;
+	captchaId: string;
+}
+
+export interface HCaptchaProps {
+	onExpire?: () => any;
+	onOpen?: () => any;
+	onClose?: () => any;
+	onChalExpired?: () => any;
+	onError?: (event: string) => any;
+	onVerify?: (token: string, ekey: string) => any;
+	onLoad?: () => any;
+	languageOverride?: string;
+	sitekey: string;
+	size?: 'normal' | 'compact' | 'invisible';
+	theme?: 'light' | 'dark';
+	tabIndex?: number;
+	id?: string;
+	reCaptchaCompat?: boolean;
+	loadAsync?: boolean;
+	scriptLocation?: HTMLElement | null;
+}
+
+export interface ExecuteResponse {
+	response: string;
+	key: string;
+}
+
+interface HCaptcha extends React.Component<HCaptchaProps, HCaptchaState> {
+	resetCaptcha(): void;
+	renderCaptcha(): void;
+	removeCaptcha(): void;
+	getRespKey(): string;
+	getResponse(): string;
+	setData(data: object): void;
+	execute(opts: { async: true }): Promise<ExecuteResponse>;
+	execute(opts?: { async: false }): void;
+	execute(opts?: { async: boolean }): Promise<ExecuteResponse> | void;
+}
 
 export default function ContactForm({ className }: Props) {
 	const [submitState, setSubmitState] = useState<'submitting' | 'success' | 'error'>();
@@ -241,6 +281,7 @@ export default function ContactForm({ className }: Props) {
 						<div className="rounded-3xl">
 							<HCaptcha
 								size="normal"
+								//@ts-ignore
 								ref={captcha}
 								theme="dark"
 								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access

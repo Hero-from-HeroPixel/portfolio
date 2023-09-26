@@ -73,7 +73,7 @@ export default function Skill({ icon, title, iconAsName, viewBox }: SkillProps) 
 			{iconAsName && (
 				<Image
 					src={`/icons/${iconAsName}.svg`}
-					alt={iconAsName}
+					alt=""
 					width={64}
 					height={64}
 					style={{ objectFit: 'contain' }}
