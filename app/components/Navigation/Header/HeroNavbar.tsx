@@ -13,7 +13,6 @@ import { HeroNavbarContent } from '@/app/components/Navigation/Header/NavMenu';
 import { useWindowSize } from '@uidotdev/usehooks';
 import Brand from '@/app/components/Navigation/Brand';
 import Curve from '@/app/components/Navigation/Header/Curve';
-import CreditsModal from '@/app/components/Navigation/CreditsModal';
 import { MobileScreen } from '@/app/constants/screens';
 
 type Props = {
@@ -135,7 +134,6 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 									className="w-3/4 mx-auto"
 									links={data.navigation}></HeroNavbarContent>
 							</div>
-							{/* <CreditsModal modalTitle={} openButton={{ className: 'mb-5' }} /> */}
 							<Curve />
 						</motion.div>
 					)}

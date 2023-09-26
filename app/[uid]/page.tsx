@@ -14,3 +14,11 @@ export default async function Home() {
 		</BoundWrapper>
 	);
 }
+
+export async function generateStaticParams() {
+	const pages = await prismicClient.getAllByType('page');
+
+	return pages.map((page) => {
+		return { uid: page.uid };
+	});
+}
