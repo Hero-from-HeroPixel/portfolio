@@ -15,7 +15,7 @@
 }
 
 .dots {
-	@apply flex justify-center my-5 gap-2 w-3/4 lg:w-1/2 2xl:w-4/12 mx-auto;
+	@apply flex justify-center my-5 lg:gap-4 gap-5 mx-auto;
 }
 
 .activeDot {
