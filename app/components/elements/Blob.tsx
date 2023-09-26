@@ -41,8 +41,10 @@ export default function Blob({}: Props) {
 			const blobEl = document.getElementById('blob');
 			if (blobEl) {
 				if (windowWidth !== null && windowWidth <= MobileScreen) {
-					window.addEventListener('touchstart', touchEventHandler);
-					window.addEventListener('touchmove', touchMoveHandler);
+					window.addEventListener('touchstart', touchEventHandler, {
+						passive: true,
+					});
+					window.addEventListener('touchmove', touchMoveHandler, { passive: true });
 				} else {
 					window.onpointermove = (e) => {
 						const { clientX, clientY } = e;

@@ -1,13 +1,7 @@
 import { prismicClient } from '@/app/lib/clients';
-import Hero from '@/app/components/elements/Hero/Hero';
 import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
-import EducationTable from '@/app/components/elements/Education/EducationTable';
-import About from '@/app/components/elements/About_Me/About';
-import Experience from '@/app/components/elements/Experience/Experience';
-import Projects from './components/elements/Projects/Projects';
-import Contact from './components/elements/Contact/Contact';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -21,7 +15,6 @@ export default async function Home() {
 
 	if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
 	//*********************End Prismic Content */
-	
 }
 
 export async function generateMetadata(): Promise<Metadata> {
