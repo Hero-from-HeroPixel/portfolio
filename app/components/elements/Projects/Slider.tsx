@@ -162,10 +162,10 @@ type PropType = PropsWithChildren<
 >;
 
 export const DotButton: React.FC<PropType> = (props) => {
-	const { children, ...restProps } = props;
+	const { children, key, ...restProps } = props;
 
 	return (
-		<button type="button" {...restProps}>
+		<button aria-label={`index ${key as string}`} type="button" {...restProps}>
 			{children}
 		</button>
 	);

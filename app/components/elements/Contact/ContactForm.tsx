@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import React, { useRef, useState } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
@@ -19,7 +20,8 @@ import Image from 'next/image';
 import Honeypot from './Honeypot';
 import Loader from '../../UI/Loader';
 import Heading from '../../UI/Heading';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { ExecuteResponse, HCaptchaProps, HCaptchaState } from '@hcaptcha/react-hcaptcha';
+const HCaptcha = dynamic(() => import('@hcaptcha/react-hcaptcha'), { ssr: false });
 
 type Props = {
 	className?: string;
@@ -54,9 +56,17 @@ interface Values {
 	message: string;
 }
 
-// interface Values {
-// 	[value: string]: string;
-// }
+interface HCaptcha extends React.Component<HCaptchaProps, HCaptchaState> {
+	resetCaptcha(): void;
+	renderCaptcha(): void;
+	removeCaptcha(): void;
+	getRespKey(): string;
+	getResponse(): string;
+	setData(data: object): void;
+	execute(opts: { async: true }): Promise<ExecuteResponse>;
+	execute(opts?: { async: false }): void;
+	execute(opts?: { async: boolean }): Promise<ExecuteResponse> | void;
+}
 
 export default function ContactForm({ className }: Props) {
 	const [submitState, setSubmitState] = useState<'submitting' | 'success' | 'error'>();
@@ -241,6 +251,7 @@ export default function ContactForm({ className }: Props) {
 						<div className="rounded-3xl">
 							<HCaptcha
 								size="normal"
+								//@ts-ignore
 								ref={captcha}
 								theme="dark"
 								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access

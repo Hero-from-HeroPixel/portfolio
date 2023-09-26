@@ -1,13 +1,13 @@
 import BoundWrapper from '@/app/components/UI/BoundWrapper';
+import dynamic from 'next/dynamic';
 import { SocialButton } from '@/app/components/UI/Buttons';
-import Heading from '@/app/components/UI/Heading';
-import HeroCTA from '@/app/components/elements/Hero/HeroCTA';
 import HeroText from '@/app/components/elements/Hero/HeroText';
 import { GithubIcon, LinkdnIcon, WhatsAppIcon } from '@/app/components/icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Content } from '@prismicio/client';
-import { JSXMapSerializer, PrismicRichText, SliceComponentProps } from '@prismicio/react';
+import { SliceComponentProps } from '@prismicio/react';
+const HeroCTA = dynamic(() => import('@/app/components/elements/Hero/HeroCTA'));
 
 /**
  * Props for `Hero`.

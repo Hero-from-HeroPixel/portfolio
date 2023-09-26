@@ -1,19 +1,33 @@
 'use client';
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import { NavigationDocumentData, Simplify } from '@/prismicio-types';
-import { DefaultButton } from '@/app/components/UI/Buttons';
 import { scrollTo } from '@/app/utils/scrollTo';
 import { FilledLinkToWebField } from '@prismicio/client';
-import { MenuToggle } from '@/app/components/Navigation/Header/MenuToggle';
 import { AnimatePresence, scroll } from 'framer-motion';
-import { motion } from 'framer-motion';
 import { height } from '@fortawesome/free-solid-svg-icons/fa0';
 import { menuSlide, slide } from '@/app/components/Navigation/Header/anim';
-import { HeroNavbarContent } from '@/app/components/Navigation/Header/NavMenu';
 import { useWindowSize } from '@uidotdev/usehooks';
 import Brand from '@/app/components/Navigation/Brand';
 import Curve from '@/app/components/Navigation/Header/Curve';
 import { MobileScreen } from '@/app/constants/screens';
+
+import { LazyMotion, m } from 'framer-motion';
+const animFeatures = () => import('@/app/animFeatures').then((res) => res.default);
+
+const DefaultButton = dynamic(() =>
+	import('@/app/components/UI/Buttons').then((comp) => comp.DefaultButton),
+);
+
+const MenuToggle = dynamic(() =>
+	import('@/app/components/Navigation/Header/MenuToggle').then((comp) => comp.MenuToggle),
+);
+
+const HeroNavbarContent = dynamic(() =>
+	import('@/app/components/Navigation/Header/NavMenu').then(
+		(comp) => comp.HeroNavbarContent,
+	),
+);
 
 type Props = {
 	theme?: 'dark' | 'light';
@@ -50,25 +64,25 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 	};
 
 	return (
-		<>
+		<LazyMotion features={animFeatures}>
 			<AnimatePresence>
 				{isMenuOpen && (
-					<motion.div
+					<m.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						onClick={() => setIsMenuOpen(false)}
-						className="backdrop"></motion.div>
+						className="backdrop"></m.div>
 				)}
 			</AnimatePresence>
-			<motion.nav
+			<m.nav
 				initial={false}
 				animate={isMenuOpen ? 'open' : 'closed'}
 				custom={height}
 				className={`relative ${theme} text-foreground bg-transparent w-full h-14 lg:px-10 lg:pt-5 sticky top-0 z-50`}>
 				<AnimatePresence mode="wait">
 					{!headerMinify && (
-						<motion.div
+						<m.div
 							variants={slide.horizontal}
 							exit="exit"
 							className={`mx-auto 2xl:w-10/12 lg:w-full lg:grid lg:grid-cols-3 items-center`}>
@@ -84,12 +98,12 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 								className="lg:justify-self-end hidden lg:block animate-appearance-in">
 								{data.cta_label}
 							</DefaultButton>
-						</motion.div>
+						</m.div>
 					)}
 				</AnimatePresence>
 				<AnimatePresence>
 					{(headerMinify || (windowWidth !== null && windowWidth <= 1024)) && (
-						<motion.div
+						<m.div
 							initial={{ opacity: 0, x: 80 }}
 							animate={{ opacity: 100, x: 0, transition: { delay: 0.3 } }}
 							exit={{ x: 200 }}
@@ -99,12 +113,12 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 								onClick={() => setIsMenuOpen((current) => !current)}
 								isOpen={isMenuOpen}
 							/>
-						</motion.div>
+						</m.div>
 					)}
 				</AnimatePresence>
 				<AnimatePresence mode="wait">
 					{isMenuOpen && (
-						<motion.div
+						<m.div
 							variants={menuSlide}
 							initial="initial"
 							animate="enter"
@@ -135,10 +149,10 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 									links={data.navigation}></HeroNavbarContent>
 							</div>
 							<Curve />
-						</motion.div>
+						</m.div>
 					)}
 				</AnimatePresence>
-			</motion.nav>
-		</>
+			</m.nav>
+		</LazyMotion>
 	);
 }

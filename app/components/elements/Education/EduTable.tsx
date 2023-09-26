@@ -30,7 +30,11 @@ const components: JSXMapSerializer = {
 		}
 		const url = node.data.url;
 		return (
-			<Link className="text-primary" href={url || ''} target={target} rel="noopener">
+			<Link
+				className="text-primary underline"
+				href={url || ''}
+				target={target}
+				rel="noopener">
 				{children}
 			</Link>
 		);

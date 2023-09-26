@@ -15,8 +15,8 @@ interface Props extends MotionProps {
 
 export default function SliderItem({ index, children, className, ...restProps }: Props) {
 	return (
-		<motion.div {...restProps} className={cn(styles.item, className)}>
+		<motion.li {...restProps} className={cn(styles.item, className)}>
 			{children}
-		</motion.div>
+		</motion.li>
 	);
 }
