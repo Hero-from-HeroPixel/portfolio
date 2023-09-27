@@ -62,7 +62,7 @@ export default function HeroText({ line1, span, line2, introduction }: Props) {
 						animate={{ opacity: 1 }}
 						initial={{ opacity: 0 }}
 						transition={{ duration: 1, delay: 0.5 }}
-						className="align-middle lg:absolute lg:top-10 2xl:top-16 mb-5 lg:border-2 border font-normal rounded-full border-white text-2xl lg:text-4xl lg:py-2 lg:px-6 px-4 py-2 lg:-rotate-90 tracking-normal">
+						className=" align-middle ms-2 lg:absolute lg:top-10 2xl:top-16 mb-5 lg:border-2 border font-normal rounded-full border-white text-2xl lg:text-4xl lg:py-2 lg:px-6 px-4 py-2 lg:-rotate-90 tracking-normal">
 						{span}
 					</m.span>{' '}
 					<br />
