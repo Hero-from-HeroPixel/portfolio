@@ -1,6 +1,9 @@
-import Brand from '@/app/components/Navigation/Brand';
+import styles from '@/app/loader.module.css'
 
 export default function Loading() {
 	// Or a custom loading skeleton component
-	return <Brand color="light" />;
+	return (<div className="flex items-center w-full min-h-screen justify-center gap-4">
+		<p>Hi, I am</p>
+		<span className={styles.loader}></span>
+		</div>);
 }
