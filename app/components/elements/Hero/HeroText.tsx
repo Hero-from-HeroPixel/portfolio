@@ -32,7 +32,7 @@ const letter: Variants = {
 const paragraph: Variants = {
 	initial: { opacity: 0 },
 	animate: {
-		transition: { delay: 3 },
+		transition: { delay: 2.5, duration : 0.4, ease : 'easeIn' },
 		opacity: 1,
 	},
 };
