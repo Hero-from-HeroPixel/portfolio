@@ -90,7 +90,7 @@ export default function HeroText({
 						initial="initial"
 						animate="animate"
 						variants={paragraph}
-						transition={{ delay: executeDelay + 3, duration: 0.4, ease: 'easeIn' }}
+						transition={{ delay: executeDelay + 2, duration: 0.4, ease: 'easeIn' }}
 						className="absolute right-0 top-full 2xl:w-80 text-2xl lg:text-4xl 2xl:text-6xl tracking-widest lg:tracking-[0.4rem] font-light lg:font-normal leading-none">
 						full stack <br />
 						developer
@@ -100,7 +100,7 @@ export default function HeroText({
 					<m.span
 						initial="initial"
 						animate="animate"
-						transition={{ delay: executeDelay + 3 }}
+						transition={{ delay: executeDelay + 2, duration: 0.4, ease: 'easeIn' }}
 						variants={paragraph}
 						className="lg:absolute lg:top-4 2xl:top-8 lg:-right-20 2xl:-right-8 w-72 lg:w-56 2xl:w-72">
 						<PrismicRichText components={components} field={introduction} />

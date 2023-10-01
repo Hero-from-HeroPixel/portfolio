@@ -32,7 +32,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12 bg-transparent">
 			<div className="lg:w-3/4 flex flex-col lg:flex-row lg:h-[60%]">
 				<HeroText
-					executeDelay={2.5}
+					executeDelay={2}
 					introduction={slice.primary.introduction}
 					line1={line1}
 					line2={line2}
