@@ -6,6 +6,7 @@ import { prismicClient } from '@/app/lib/clients';
 import Tech, { IconListT } from '../Experience/Tech';
 import Slider from './Slider';
 import Image from 'next/image';
+import { EmblaOptionsType } from 'embla-carousel-react';
 
 const components: JSXMapSerializer = {
 	paragraph: ({ children }) => <p className="sm light">{children}</p>,
@@ -31,11 +32,17 @@ export default async function FeaturedProject({ project }: Props) {
 		console.error('Tech stack not provided');
 	}
 
+	const SliderOptions: EmblaOptionsType = {
+		loop: true,
+		startIndex: 1,
+		containScroll: 'keepSnaps',
+	};
 	return (
 		<div
 			className="border-t-2 border-b-2 border-accent rounded-3xl lg:border-none py-10 lg:py-0"
 			id={project.data.section_id as string}>
 			<Slider
+				OPTIONS={SliderOptions}
 				isInfinite
 				show={{ desktop: 3.25, mobile: 1.15, tablet: 2.2 }}
 				appearance={{ carousel: 'lg:my-10' }}>
