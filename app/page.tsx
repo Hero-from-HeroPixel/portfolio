@@ -2,6 +2,8 @@ import { prismicClient } from '@/app/lib/clients';
 import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 export default async function Home() {
 	//*********************Prismic Content */
@@ -13,7 +15,10 @@ export default async function Home() {
 		console.error('failed to fetch CMS data');
 	}
 
-	if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
+	
+	if (pageData) return <Suspense fallback={<Loading/>}>
+		<SliceZone slices={pageData.slices} components={components} />
+	</Suspense>
 	//*********************End Prismic Content */
 }
 

@@ -1,6 +1,5 @@
 'use client';
-import dynamic from 'next/dynamic';
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -20,7 +19,7 @@ import Image from 'next/image';
 import Honeypot from './Honeypot';
 import Loader from '../../UI/Loader';
 import Heading from '../../UI/Heading';
-const HCaptcha = dynamic(() => import('@hcaptcha/react-hcaptcha'), { ssr: false });
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 type Props = {
 	className?: string;
@@ -55,53 +54,16 @@ interface Values {
 	message: string;
 }
 
-export interface HCaptchaState {
-	isApiReady: boolean;
-	isRemoved: boolean;
-	elementId: string;
-	captchaId: string;
-}
-
-export interface HCaptchaProps {
-	onExpire?: () => any;
-	onOpen?: () => any;
-	onClose?: () => any;
-	onChalExpired?: () => any;
-	onError?: (event: string) => any;
-	onVerify?: (token: string, ekey: string) => any;
-	onLoad?: () => any;
-	languageOverride?: string;
-	sitekey: string;
-	size?: 'normal' | 'compact' | 'invisible';
-	theme?: 'light' | 'dark';
-	tabIndex?: number;
-	id?: string;
-	reCaptchaCompat?: boolean;
-	loadAsync?: boolean;
-	scriptLocation?: HTMLElement | null;
-}
-
-export interface ExecuteResponse {
-	response: string;
-	key: string;
-}
-
-interface HCaptcha extends React.Component<HCaptchaProps, HCaptchaState> {
-	resetCaptcha(): void;
-	renderCaptcha(): void;
-	removeCaptcha(): void;
-	getRespKey(): string;
-	getResponse(): string;
-	setData(data: object): void;
-	execute(opts: { async: true }): Promise<ExecuteResponse>;
-	execute(opts?: { async: false }): void;
-	execute(opts?: { async: boolean }): Promise<ExecuteResponse> | void;
-}
-
 export default function ContactForm({ className }: Props) {
 	const [submitState, setSubmitState] = useState<'submitting' | 'success' | 'error'>();
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 	const captcha = useRef<HCaptcha>(null);
+
+	useEffect(() => {
+		if(typeof window !== undefined){
+			
+		}
+	},[])
 
 	const submitHandler = async (values: Values, actions: FormikHelpers<Values>) => {
 		if (values.lastname !== '') return;
@@ -278,6 +240,7 @@ export default function ContactForm({ className }: Props) {
 							onBlur={handleBlur}
 							value={values.message}
 						/>
+						<Suspense fallback={<Loader/>}>
 						<div className="rounded-3xl">
 							<HCaptcha
 								size="normal"
@@ -291,7 +254,8 @@ export default function ContactForm({ className }: Props) {
 								<p className="light sm text-danger">please fill out captcha</p>
 							)}
 						</div>
-
+						</Suspense>
+						
 						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
 							<PrimaryButton
 								className="lg:ms-auto lg:mx-0 mx-auto"

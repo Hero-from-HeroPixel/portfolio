@@ -7,6 +7,7 @@ import { flushSync } from 'react-dom';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen, tabletScreen } from '@/app/constants/screens';
 import SliderItem from './SliderItem';
+import { DotButton } from './DotButton';
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
 	Math.min(Math.max(number, min), max);
@@ -22,32 +23,28 @@ type Props = {
 		tablet?: number;
 		mobile?: number;
 	};
-	isInfinite?: boolean;
 	children: React.ReactNode[];
 	spacing?: number;
 	differential?: number;
+	OPTIONS? : EmblaOptionsType
 };
 export default function Slider({
 	appearance,
 	show,
-	isInfinite,
 	children,
 	spacing = 0,
 	differential = 0.5,
+	OPTIONS
 }: Props) {
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+	const [options, setOptions] = useState(OPTIONS)
 
 	const TWEEN_FACTOR = differential;
 
-	const OPTIONS: EmblaOptionsType = {
-		loop: isInfinite,
-		startIndex: 1,
-		containScroll: 'keepSnaps',
-	};
-	const [carousel, emblaApi] = useEmblaCarousel(OPTIONS);
+	const [carousel, emblaApi] = useEmblaCarousel(options);
 	const [tweenValues, setTweenValues] = useState<number[]>([]);
 
 	const scrollTo = useCallback(
@@ -67,13 +64,14 @@ export default function Slider({
 		if (windowWidth !== null) {
 			if (windowWidth <= MobileScreen) {
 				setShowCount(show?.mobile || 1);
+				setOptions((prev) => ({ startIndex : 0 ,...prev}))
 			} else if (windowWidth <= tabletScreen) {
 				setShowCount(show?.tablet || 2);
 			} else {
 				setShowCount(show?.desktop || 3);
 			}
 		}
-	}, [show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
+	}, [ show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
 
 	const onScroll = useCallback(() => {
 		if (!emblaApi) return;
@@ -144,6 +142,7 @@ export default function Slider({
 			<div className={cn(styles.dots, appearance)}>
 				{scrollSnaps.map((_, index) => (
 					<DotButton
+						index={index}
 						key={index}
 						onClick={() => scrollTo(index)}
 						className={cn(
@@ -157,19 +156,7 @@ export default function Slider({
 	);
 }
 
-type PropType = PropsWithChildren<
-	React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
->;
 
-export const DotButton: React.FC<PropType> = (props) => {
-	const { children, key, ...restProps } = props;
-
-	return (
-		<button aria-label={`index ${key as string}`} type="button" {...restProps}>
-			{children}
-		</button>
-	);
-};
 
 // 'use client';
 // import React, { useEffect, useRef, useState } from 'react';
