@@ -72,14 +72,14 @@ export default function HeroNavbar({ data, theme = 'dark' }: Props) {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						onClick={() => setIsMenuOpen(false)}
-						className="backdrop"></m.div>
+						className="backdrop "></m.div>
 				)}
 			</AnimatePresence>
 			<m.nav
 				initial={false}
 				animate={isMenuOpen ? 'open' : 'closed'}
 				custom={height}
-				className={`relative ${theme} text-foreground bg-transparent w-full h-14 lg:px-10 lg:pt-5 sticky top-0 z-50`}>
+				className={`relative ${theme} text-foreground bg-transparent w-full h-14 lg:px-10 lg:pt-5 sticky top-0 z-40`}>
 				<AnimatePresence mode="wait">
 					{!headerMinify && (
 						<m.div

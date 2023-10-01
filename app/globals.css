@@ -29,7 +29,7 @@ p {
 }
 
 .backdrop {
-	@apply fixed w-screen h-screen bg-black bg-opacity-30 z-50;
+	@apply fixed w-screen h-screen bg-black bg-opacity-30 z-40;
 }
 
 .btn {
