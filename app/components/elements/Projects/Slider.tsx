@@ -7,6 +7,7 @@ import { flushSync } from 'react-dom';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen, tabletScreen } from '@/app/constants/screens';
 import SliderItem from './SliderItem';
+import { DotButton } from './DotButton';
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
 	Math.min(Math.max(number, min), max);
@@ -26,28 +27,31 @@ type Props = {
 	children: React.ReactNode[];
 	spacing?: number;
 	differential?: number;
+	OPTIONS?: EmblaOptionsType;
+};
+
+const DefaultSliderOptions: EmblaOptionsType = {
+	loop: true,
+	startIndex: 0,
+	containScroll: 'keepSnaps',
 };
 export default function Slider({
 	appearance,
 	show,
-	isInfinite,
 	children,
 	spacing = 0,
 	differential = 0.5,
+	OPTIONS = DefaultSliderOptions,
 }: Props) {
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+	const [options, setOptions] = useState(OPTIONS);
 
 	const TWEEN_FACTOR = differential;
 
-	const OPTIONS: EmblaOptionsType = {
-		loop: isInfinite,
-		startIndex: 1,
-		containScroll: 'keepSnaps',
-	};
-	const [carousel, emblaApi] = useEmblaCarousel(OPTIONS);
+	const [carousel, emblaApi] = useEmblaCarousel(options);
 	const [tweenValues, setTweenValues] = useState<number[]>([]);
 
 	const scrollTo = useCallback(
@@ -67,6 +71,7 @@ export default function Slider({
 		if (windowWidth !== null) {
 			if (windowWidth <= MobileScreen) {
 				setShowCount(show?.mobile || 1);
+				setOptions((prev) => ({ startIndex: 0, ...prev }));
 			} else if (windowWidth <= tabletScreen) {
 				setShowCount(show?.tablet || 2);
 			} else {
@@ -145,6 +150,7 @@ export default function Slider({
 				{scrollSnaps.map((_, index) => (
 					<DotButton
 						key={index}
+						index={index}
 						onClick={() => scrollTo(index)}
 						className={cn(
 							styles.dot,
@@ -156,20 +162,6 @@ export default function Slider({
 		</div>
 	);
 }
-
-type PropType = PropsWithChildren<
-	React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
->;
-
-export const DotButton: React.FC<PropType> = (props) => {
-	const { children, key, ...restProps } = props;
-
-	return (
-		<button aria-label={`index ${key as string}`} type="button" {...restProps}>
-			{children}
-		</button>
-	);
-};
 
 // 'use client';
 // import React, { useEffect, useRef, useState } from 'react';
