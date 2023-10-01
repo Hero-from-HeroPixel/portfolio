@@ -33,7 +33,6 @@ const letter: Variants = {
 const paragraph: Variants = {
 	initial: { opacity: 0 },
 	animate: {
-		transition: { delay: 3.5, duration: 0.4, ease: 'easeIn' },
 		opacity: 1,
 	},
 };
@@ -91,6 +90,7 @@ export default function HeroText({
 						initial="initial"
 						animate="animate"
 						variants={paragraph}
+						transition={{ delay: executeDelay + 3, duration: 0.4, ease: 'easeIn' }}
 						className="absolute right-0 top-full 2xl:w-80 text-2xl lg:text-4xl 2xl:text-6xl tracking-widest lg:tracking-[0.4rem] font-light lg:font-normal leading-none">
 						full stack <br />
 						developer
