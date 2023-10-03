@@ -1,5 +1,6 @@
 'use client';
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -19,7 +20,8 @@ import Image from 'next/image';
 import Honeypot from './Honeypot';
 import Loader from '../../UI/Loader';
 import Heading from '../../UI/Heading';
-import HCaptcha from '@hcaptcha/react-hcaptcha'
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+
 
 type Props = {
 	className?: string;

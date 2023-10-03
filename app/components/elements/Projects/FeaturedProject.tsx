@@ -32,8 +32,8 @@ export default async function FeaturedProject({ project }: Props) {
 		console.error('Tech stack not provided');
 	}
 
-	
-	const OPTIONS: EmblaOptionsType = {
+	const SliderOptions: EmblaOptionsType = {
+
 		loop: true,
 		startIndex: 1,
 		containScroll: 'keepSnaps',
@@ -44,7 +44,8 @@ export default async function FeaturedProject({ project }: Props) {
 			className="border-t-2 border-b-2 border-accent rounded-3xl lg:border-none py-10 lg:py-0"
 			id={project.data.section_id as string}>
 			<Slider
-				OPTIONS={OPTIONS}
+				OPTIONS={SliderOptions}
+				isInfinite
 				show={{ desktop: 3.25, mobile: 1.15, tablet: 2.2 }}
 				appearance={{ carousel: 'lg:my-10' }}>
 				{data.images.map(({ showcase }, i) => (

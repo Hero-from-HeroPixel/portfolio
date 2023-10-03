@@ -26,7 +26,11 @@ type Props = {
 	children: React.ReactNode[];
 	spacing?: number;
 	differential?: number;
-	OPTIONS? : EmblaOptionsType
+
+const DefaultSliderOptions: EmblaOptionsType = {
+	loop: true,
+	startIndex: 0,
+	containScroll: 'keepSnaps',
 };
 export default function Slider({
 	appearance,
@@ -34,13 +38,13 @@ export default function Slider({
 	children,
 	spacing = 0,
 	differential = 0.5,
-	OPTIONS
+	OPTIONS = DefaultSliderOptions,
 }: Props) {
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-	const [options, setOptions] = useState(OPTIONS)
+	const [options, setOptions] = useState(OPTIONS);
 
 	const TWEEN_FACTOR = differential;
 
@@ -64,7 +68,7 @@ export default function Slider({
 		if (windowWidth !== null) {
 			if (windowWidth <= MobileScreen) {
 				setShowCount(show?.mobile || 1);
-				setOptions((prev) => ({ startIndex : 0 ,...prev}))
+				setOptions((prev) => ({ startIndex: 0, ...prev }));
 			} else if (windowWidth <= tabletScreen) {
 				setShowCount(show?.tablet || 2);
 			} else {
@@ -144,6 +148,7 @@ export default function Slider({
 					<DotButton
 						index={index}
 						key={index}
+						index={index}
 						onClick={() => scrollTo(index)}
 						className={cn(
 							styles.dot,
@@ -155,8 +160,6 @@ export default function Slider({
 		</div>
 	);
 }
-
-
 
 // 'use client';
 // import React, { useEffect, useRef, useState } from 'react';
