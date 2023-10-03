@@ -1,0 +1,47 @@
+.loader {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@apply w-48 aspect-square lg:w-72 2xl:w-96
+}
+
+.loader:before,
+.loader:after {
+	content: '';
+	border-radius: 50%;
+	position: absolute;
+	inset: 0;
+	@apply shadow-primary shadow-2xl border-glass bg-default bg-opacity-75 border-2 lg:border-4
+}
+.loader:after {
+	animation: rotate 2s linear infinite;
+	@apply shadow-2xl shadow-accent;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 100%;
+	}
+
+	100% {
+		opacity: 0%;
+		transform: scale(5);
+	}
+}
+
+.container{
+	
+	animation: fadeUp 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+	animation-delay: 1.5s;
+	@apply flex items-center fixed inset-0 justify-center bg-none gap-4
+}

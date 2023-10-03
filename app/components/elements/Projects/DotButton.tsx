@@ -1,3 +1,4 @@
+
 import { PropsWithChildren } from 'react';
 
 interface Props extends React.HtmlHTMLAttributes<HTMLButtonElement> {
@@ -13,3 +14,4 @@ export const DotButton = (props: Props) => {
 		</button>
 	);
 };
+

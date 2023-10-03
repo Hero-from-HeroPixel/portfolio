@@ -33,10 +33,12 @@ export default async function FeaturedProject({ project }: Props) {
 	}
 
 	const SliderOptions: EmblaOptionsType = {
+
 		loop: true,
 		startIndex: 1,
 		containScroll: 'keepSnaps',
 	};
+
 	return (
 		<div
 			className="border-t-2 border-b-2 border-accent rounded-3xl lg:border-none py-10 lg:py-0"

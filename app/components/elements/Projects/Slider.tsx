@@ -23,12 +23,9 @@ type Props = {
 		tablet?: number;
 		mobile?: number;
 	};
-	isInfinite?: boolean;
 	children: React.ReactNode[];
 	spacing?: number;
 	differential?: number;
-	OPTIONS?: EmblaOptionsType;
-};
 
 const DefaultSliderOptions: EmblaOptionsType = {
 	loop: true,
@@ -78,7 +75,7 @@ export default function Slider({
 				setShowCount(show?.desktop || 3);
 			}
 		}
-	}, [show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
+	}, [ show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
 
 	const onScroll = useCallback(() => {
 		if (!emblaApi) return;
@@ -149,6 +146,7 @@ export default function Slider({
 			<div className={cn(styles.dots, appearance)}>
 				{scrollSnaps.map((_, index) => (
 					<DotButton
+						index={index}
 						key={index}
 						index={index}
 						onClick={() => scrollTo(index)}
