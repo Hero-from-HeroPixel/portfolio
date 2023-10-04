@@ -10,6 +10,8 @@ export default function Splash({}: Props) {
 
 	useEffect(() => {
 		const animHandler = setTimeout(animCompleteHandler, 3000);
+
+		return () => clearTimeout(animHandler);
 	}, []);
 	return (
 		<>
