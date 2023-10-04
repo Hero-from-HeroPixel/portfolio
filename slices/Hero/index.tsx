@@ -61,7 +61,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 					</SocialButton>
 				</div>
 			</div>
-			<Splash />
+			{/* <Splash /> */}
 		</BoundWrapper>
 	);
 };
