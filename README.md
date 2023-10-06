@@ -14,27 +14,33 @@ If you are an employer or potential client please leave a short review of my cod
       - https://web.dev/reduce-the-scope-and-complexity-of-style-calculations/
 - hCaptcha causing perfomance issues?
     - What more to do than lazy loading the component?
-- Use a preloader for initial load
-https://meje.dev/blog/building-a-nextjs-preloader-the-right-way
+        - Refactor/Optimise repository and contribute to OSP.
 
 - ## Best practices
     - Why does prismic log to console?
-    - hCaptcha using deprecated API? Migrate to more up to date hCaptcha component.
+    - hCaptcha using deprecated API? Refer to refactor/Optimise above.
  
 - ## Accessibility
-    - Implement reduceMotion config from framer motion
+    - Implement reduceMotion config from framer motion.
+    - Add disable animations option in Menu.
  
 ## Features to add
 
 - ### Functionality
 - Error bounds
-- Loading page
 - custom 404
 
 - ### Elements
-- Design Section
 - Testimonials
 
 - ### Styling
 - Project cards e.g. https://youtu.be/DCRcFf39SYo?si=tpMHINvcaXfwAPVC
 - Animate projects into case studies e.g. https://codesandbox.io/s/app-store-ui-using-react-and-framer-motion-ecgc2
+
+## Feedback
+- ### Topics
+  - Experience section too long?
+  - Too many experiences listed?
+  - Going into too much detail with previous experience?
+  - Too many Udemy courses listed? Relevance?
+  - Animations feedback? Option to disable animations?
