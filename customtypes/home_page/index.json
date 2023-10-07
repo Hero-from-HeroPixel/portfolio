@@ -28,6 +28,15 @@
             },
             "contact": {
               "type": "SharedSlice"
+            },
+            "featured_project": {
+              "type": "SharedSlice"
+            },
+            "main_projects": {
+              "type": "SharedSlice"
+            },
+            "mini_projects": {
+              "type": "SharedSlice"
             }
           }
         }

@@ -6,7 +6,10 @@ export const components = {
   contact: dynamic(() => import("./Contact")),
   education: dynamic(() => import("./Education")),
   experience: dynamic(() => import("./Experience")),
+  featured_project: dynamic(() => import("./FeaturedProject")),
   hero: dynamic(() => import("./Hero")),
   job: dynamic(() => import("./About")),
+  main_projects: dynamic(() => import("./MainProjects")),
+  mini_projects: dynamic(() => import("./MiniProjects")),
   projects: dynamic(() => import("./Projects")),
 };

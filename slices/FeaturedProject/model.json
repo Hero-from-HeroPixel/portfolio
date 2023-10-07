@@ -1,8 +1,8 @@
 {
-  "id": "projects",
+  "id": "featured_project",
   "type": "SharedSlice",
-  "name": "Projects",
-  "description": "Projects",
+  "name": "FeaturedProject",
+  "description": "FeaturedProject",
   "variations": [
     {
       "id": "default",
@@ -12,18 +12,21 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "heading": {
+        "title": {
           "type": "Text",
           "config": {
-            "label": "Heading",
+            "label": "Title",
             "placeholder": ""
           }
         },
-        "section_id": {
-          "type": "Text",
+        "project": {
+          "type": "Link",
           "config": {
-            "label": "Section ID",
-            "placeholder": ""
+            "label": "Project",
+            "select": "document",
+            "customtypes": [
+              "project"
+            ]
           }
         }
       },

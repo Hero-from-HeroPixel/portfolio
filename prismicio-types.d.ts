@@ -298,7 +298,10 @@ type HomePageDocumentDataSlicesSlice =
   | JobSlice
   | ExperienceSlice
   | ProjectsSlice
-  | ContactSlice;
+  | ContactSlice
+  | FeaturedProjectSlice
+  | MainProjectsSlice
+  | MiniProjectsSlice;
 
 /**
  * Content for Home Page documents
@@ -1544,6 +1547,61 @@ export type ExperienceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *FeaturedProject → Primary*
+ */
+export interface FeaturedProjectSliceDefaultPrimary {
+  /**
+   * Title field in *FeaturedProject → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_project.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Project field in *FeaturedProject → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_project.primary.project
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  project: prismic.ContentRelationshipField<"project">;
+}
+
+/**
+ * Default variation for FeaturedProject Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeaturedProjectSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FeaturedProjectSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FeaturedProject*
+ */
+type FeaturedProjectSliceVariation = FeaturedProjectSliceDefault;
+
+/**
+ * FeaturedProject Shared Slice
+ *
+ * - **API ID**: `featured_project`
+ * - **Description**: FeaturedProject
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeaturedProjectSlice = prismic.SharedSlice<
+  "featured_project",
+  FeaturedProjectSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -1728,6 +1786,126 @@ type JobSliceVariation = JobSliceDefault;
 export type JobSlice = prismic.SharedSlice<"job", JobSliceVariation>;
 
 /**
+ * Primary content in *MainProjects → Primary*
+ */
+export interface MainProjectsSliceDefaultPrimary {
+  /**
+   * Title field in *MainProjects → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: main_projects.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *MainProjects → Items*
+ */
+export interface MainProjectsSliceDefaultItem {
+  /**
+   * Projects field in *MainProjects → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: main_projects.items[].projects
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  projects: prismic.ContentRelationshipField<"project">;
+}
+
+/**
+ * Default variation for MainProjects Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MainProjectsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MainProjectsSliceDefaultPrimary>,
+  Simplify<MainProjectsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *MainProjects*
+ */
+type MainProjectsSliceVariation = MainProjectsSliceDefault;
+
+/**
+ * MainProjects Shared Slice
+ *
+ * - **API ID**: `main_projects`
+ * - **Description**: MainProjects
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MainProjectsSlice = prismic.SharedSlice<
+  "main_projects",
+  MainProjectsSliceVariation
+>;
+
+/**
+ * Primary content in *MiniProjects → Primary*
+ */
+export interface MiniProjectsSliceDefaultPrimary {
+  /**
+   * Title field in *MiniProjects → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: mini_projects.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *MiniProjects → Items*
+ */
+export interface MiniProjectsSliceDefaultItem {
+  /**
+   * Projects field in *MiniProjects → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: mini_projects.items[].projects
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  projects: prismic.ContentRelationshipField<"project">;
+}
+
+/**
+ * Default variation for MiniProjects Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MiniProjectsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MiniProjectsSliceDefaultPrimary>,
+  Simplify<MiniProjectsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *MiniProjects*
+ */
+type MiniProjectsSliceVariation = MiniProjectsSliceDefault;
+
+/**
+ * MiniProjects Shared Slice
+ *
+ * - **API ID**: `mini_projects`
+ * - **Description**: MiniProjects
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MiniProjectsSlice = prismic.SharedSlice<
+  "mini_projects",
+  MiniProjectsSliceVariation
+>;
+
+/**
  * Primary content in *Projects → Primary*
  */
 export interface ProjectsSliceDefaultPrimary {
@@ -1750,51 +1928,6 @@ export interface ProjectsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   section_id: prismic.KeyTextField;
-
-  /**
-   * Feature SectionTitle field in *Projects → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: projects.primary.feature_section_title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  feature_section_title: prismic.KeyTextField;
-
-  /**
-   * Featured Project field in *Projects → Primary*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: projects.primary.featured_project
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  featured_project: prismic.ContentRelationshipField<"project">;
-}
-
-/**
- * Primary content in *Projects → Items*
- */
-export interface ProjectsSliceDefaultItem {
-  /**
-   * Projects field in *Projects → Items*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: projects.items[].projects
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  projects: prismic.ContentRelationshipField;
-
-  /**
-   * Side Projects field in *Projects → Items*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: projects.items[].side_projects
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  side_projects: prismic.ContentRelationshipField<"project">;
 }
 
 /**
@@ -1807,7 +1940,7 @@ export interface ProjectsSliceDefaultItem {
 export type ProjectsSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<ProjectsSliceDefaultPrimary>,
-  Simplify<ProjectsSliceDefaultItem>
+  never
 >;
 
 /**
@@ -1887,6 +2020,10 @@ declare module "@prismicio/client" {
       ExperienceSliceDefaultItem,
       ExperienceSliceVariation,
       ExperienceSliceDefault,
+      FeaturedProjectSlice,
+      FeaturedProjectSliceDefaultPrimary,
+      FeaturedProjectSliceVariation,
+      FeaturedProjectSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
@@ -1895,9 +2032,18 @@ declare module "@prismicio/client" {
       JobSliceDefaultPrimary,
       JobSliceVariation,
       JobSliceDefault,
+      MainProjectsSlice,
+      MainProjectsSliceDefaultPrimary,
+      MainProjectsSliceDefaultItem,
+      MainProjectsSliceVariation,
+      MainProjectsSliceDefault,
+      MiniProjectsSlice,
+      MiniProjectsSliceDefaultPrimary,
+      MiniProjectsSliceDefaultItem,
+      MiniProjectsSliceVariation,
+      MiniProjectsSliceDefault,
       ProjectsSlice,
       ProjectsSliceDefaultPrimary,
-      ProjectsSliceDefaultItem,
       ProjectsSliceVariation,
       ProjectsSliceDefault,
     };

@@ -17,7 +17,7 @@ type Props = {
 	project: Content.ProjectDocument<string>;
 };
 
-export default async function FeaturedProject({ project }: Props) {
+export default async function FeaturedProjectCard({ project }: Props) {
 	const { data } = project;
 	let techStack;
 	try {
@@ -32,7 +32,6 @@ export default async function FeaturedProject({ project }: Props) {
 		console.error('Tech stack not provided');
 	}
 
-	
 	const OPTIONS: EmblaOptionsType = {
 		loop: true,
 		startIndex: 1,
