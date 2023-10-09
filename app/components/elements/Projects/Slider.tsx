@@ -23,17 +23,10 @@ type Props = {
 		tablet?: number;
 		mobile?: number;
 	};
-	isInfinite?: boolean;
 	children: React.ReactNode[];
 	spacing?: number;
 	differential?: number;
 	OPTIONS?: EmblaOptionsType;
-};
-
-const DefaultSliderOptions: EmblaOptionsType = {
-	loop: true,
-	startIndex: 0,
-	containScroll: 'keepSnaps',
 };
 export default function Slider({
 	appearance,
@@ -41,7 +34,7 @@ export default function Slider({
 	children,
 	spacing = 0,
 	differential = 0.5,
-	OPTIONS = DefaultSliderOptions,
+	OPTIONS,
 }: Props) {
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
@@ -149,8 +142,8 @@ export default function Slider({
 			<div className={cn(styles.dots, appearance)}>
 				{scrollSnaps.map((_, index) => (
 					<DotButton
-						key={index}
 						index={index}
+						key={index}
 						onClick={() => scrollTo(index)}
 						className={cn(
 							styles.dot,

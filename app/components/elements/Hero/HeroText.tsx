@@ -20,6 +20,7 @@ type Props = {
 	span: string;
 	line2: string;
 	introduction: RichTextField;
+	executeDelay?: number; //delay animation start (in seconds)
 };
 
 const letter: Variants = {
@@ -32,14 +33,19 @@ const letter: Variants = {
 const paragraph: Variants = {
 	initial: { opacity: 0 },
 	animate: {
-		transition: { delay: 2.5, duration : 0.4, ease : 'easeIn' },
 		opacity: 1,
 	},
 };
 
 const letter_delay = 0.1;
 
-export default function HeroText({ line1, span, line2, introduction }: Props) {
+export default function HeroText({
+	line1,
+	span,
+	line2,
+	introduction,
+	executeDelay = 1,
+}: Props) {
 	return (
 		<div className="relative w-fit lg:h-3/4 flex flex-col justify-center items-center lg:justify-start gap-12 lg:gap-0">
 			<LazyMotion features={animFeatures}>
@@ -49,7 +55,7 @@ export default function HeroText({ line1, span, line2, introduction }: Props) {
 							initial="initial"
 							animate="animate"
 							transition={{
-								delay: i * letter_delay,
+								delay: executeDelay + i * letter_delay,
 								duration: 1,
 								ease: 'easeOut',
 							}}
@@ -61,7 +67,7 @@ export default function HeroText({ line1, span, line2, introduction }: Props) {
 					<m.span
 						animate={{ opacity: 1 }}
 						initial={{ opacity: 0 }}
-						transition={{ duration: 1, delay: 0.5 }}
+						transition={{ duration: 1, delay: executeDelay + 0.5 }}
 						className=" align-middle ms-2 lg:absolute lg:top-10 2xl:top-16 mb-5 lg:border-2 border font-normal rounded-full border-white text-2xl lg:text-4xl lg:py-2 lg:px-6 px-4 py-2 lg:-rotate-90 tracking-normal">
 						{span}
 					</m.span>{' '}
@@ -70,7 +76,7 @@ export default function HeroText({ line1, span, line2, introduction }: Props) {
 						<m.span
 							initial="initial"
 							transition={{
-								delay: 1 + i * letter_delay,
+								delay: executeDelay + (1 + i * letter_delay),
 								duration: 1,
 								ease: 'easeOut',
 							}}
@@ -84,6 +90,7 @@ export default function HeroText({ line1, span, line2, introduction }: Props) {
 						initial="initial"
 						animate="animate"
 						variants={paragraph}
+						transition={{ delay: executeDelay + 2, duration: 0.4, ease: 'easeIn' }}
 						className="absolute right-0 top-full 2xl:w-80 text-2xl lg:text-4xl 2xl:text-6xl tracking-widest lg:tracking-[0.4rem] font-light lg:font-normal leading-none">
 						full stack <br />
 						developer
@@ -93,7 +100,7 @@ export default function HeroText({ line1, span, line2, introduction }: Props) {
 					<m.span
 						initial="initial"
 						animate="animate"
-						transition={{ delay: 3 }}
+						transition={{ delay: executeDelay + 2, duration: 0.4, ease: 'easeIn' }}
 						variants={paragraph}
 						className="lg:absolute lg:top-4 2xl:top-8 lg:-right-20 2xl:-right-8 w-72 lg:w-56 2xl:w-72">
 						<PrismicRichText components={components} field={introduction} />

@@ -1,6 +1,6 @@
 {
-  "id": "home_page",
-  "label": "Home Page",
+  "id": "portfolio",
+  "label": "portfolio",
   "format": "page",
   "repeatable": false,
   "status": true,
@@ -11,31 +11,22 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "hero": {
-              "type": "SharedSlice"
-            },
-            "education": {
-              "type": "SharedSlice"
-            },
-            "job": {
+            "contact": {
               "type": "SharedSlice"
             },
             "experience": {
               "type": "SharedSlice"
             },
+            "job": {
+              "type": "SharedSlice"
+            },
             "projects": {
               "type": "SharedSlice"
             },
-            "contact": {
+            "education": {
               "type": "SharedSlice"
             },
-            "featured_project": {
-              "type": "SharedSlice"
-            },
-            "main_projects": {
-              "type": "SharedSlice"
-            },
-            "mini_projects": {
+            "hero": {
               "type": "SharedSlice"
             }
           }

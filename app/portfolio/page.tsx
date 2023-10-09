@@ -2,27 +2,26 @@ import { prismicClient } from '@/app/lib/clients';
 import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
-import Splash from './Splash';
 
 export default async function Home() {
 	//*********************Prismic Content */
 	let pageData;
 	try {
-		const { data } = await prismicClient.getSingle('home_page');
+		const { data  } = await prismicClient.getSingle('portfolio');
 		pageData = data;
 	} catch (error) {
 		console.error('failed to fetch CMS data');
 	}
-
-	if (pageData) return <SliceZone slices={pageData.slices} components={components} />;
-
+	
+	if (pageData) return <SliceZone slices={pageData.slices} components={components} />
+	
 	//*********************End Prismic Content */
 }
 
 export async function generateMetadata(): Promise<Metadata> {
 	let metaData;
 	try {
-		metaData = await prismicClient.getSingle('home_page');
+		metaData = await prismicClient.getSingle('portfolio');
 	} catch (error) {
 		console.error('failed to fetch Metadata');
 	}

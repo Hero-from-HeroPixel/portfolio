@@ -7,6 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
+import Splash from '@/app/Splash';
 const HeroCTA = dynamic(() => import('@/app/components/elements/Hero/HeroCTA'));
 
 /**
@@ -31,6 +32,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 			className="lg:items-center lg:justify-between justify-center items-center lg:flex-row h-screen lg:gap-0 gap-12 bg-transparent">
 			<div className="lg:w-3/4 flex flex-col lg:flex-row lg:h-[60%]">
 				<HeroText
+					executeDelay={2}
 					introduction={slice.primary.introduction}
 					line1={line1}
 					line2={line2}
@@ -59,6 +61,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 					</SocialButton>
 				</div>
 			</div>
+			{/* <Splash /> */}
 		</BoundWrapper>
 	);
 };

@@ -17,7 +17,7 @@ type Props = {
 	project: Content.ProjectDocument<string>;
 };
 
-export default async function FeaturedProject({ project }: Props) {
+export default async function FeaturedProjectCard({ project }: Props) {
 	const { data } = project;
 	let techStack;
 	try {
@@ -32,18 +32,18 @@ export default async function FeaturedProject({ project }: Props) {
 		console.error('Tech stack not provided');
 	}
 
-	const SliderOptions: EmblaOptionsType = {
+	const OPTIONS: EmblaOptionsType = {
 		loop: true,
 		startIndex: 1,
 		containScroll: 'keepSnaps',
 	};
+
 	return (
 		<div
 			className="border-t-2 border-b-2 border-accent rounded-3xl lg:border-none py-10 lg:py-0"
 			id={project.data.section_id as string}>
 			<Slider
-				OPTIONS={SliderOptions}
-				isInfinite
+				OPTIONS={OPTIONS}
 				show={{ desktop: 3.25, mobile: 1.15, tablet: 2.2 }}
 				appearance={{ carousel: 'lg:my-10' }}>
 				{data.images.map(({ showcase }, i) => (
