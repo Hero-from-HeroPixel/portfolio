@@ -8,7 +8,6 @@ import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen, tabletScreen } from '@/app/constants/screens';
 import SliderItem from './SliderItem';
 import { DotButton } from './DotButton';
-import { DotButton } from './DotButton';
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
 	Math.min(Math.max(number, min), max);
@@ -45,7 +44,6 @@ export default function Slider({
 
 	const TWEEN_FACTOR = differential;
 
-	const [carousel, emblaApi] = useEmblaCarousel(options);
 	const [carousel, emblaApi] = useEmblaCarousel(options);
 	const [tweenValues, setTweenValues] = useState<number[]>([]);
 
@@ -146,7 +144,6 @@ export default function Slider({
 					<DotButton
 						index={index}
 						key={index}
-						index={index}
 						onClick={() => scrollTo(index)}
 						className={cn(
 							styles.dot,
