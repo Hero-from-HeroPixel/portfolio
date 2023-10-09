@@ -8,7 +8,7 @@ export default async function Home() {
 	//*********************Prismic Content */
 	let pageData;
 	try {
-		const { data } = await prismicClient.getSingle('portfolio');
+		const { data } = await prismicClient.getSingle('home_page');
 		pageData = data;
 	} catch (error) {
 		console.error('failed to fetch CMS data');
