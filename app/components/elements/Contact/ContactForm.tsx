@@ -19,7 +19,7 @@ import Image from 'next/image';
 import Honeypot from './Honeypot';
 import Loader from '../../UI/Loader';
 import Heading from '../../UI/Heading';
-import HCaptcha from '@hcaptcha/react-hcaptcha'
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 type Props = {
 	className?: string;
@@ -60,10 +60,9 @@ export default function ContactForm({ className }: Props) {
 	const captcha = useRef<HCaptcha>(null);
 
 	useEffect(() => {
-		if(typeof window !== undefined){
-			
+		if (typeof window !== undefined) {
 		}
-	},[])
+	}, []);
 
 	const submitHandler = async (values: Values, actions: FormikHelpers<Values>) => {
 		if (values.lastname !== '') return;
@@ -240,22 +239,24 @@ export default function ContactForm({ className }: Props) {
 							onBlur={handleBlur}
 							value={values.message}
 						/>
-						<Suspense fallback={<Loader/>}>
-						<div className="rounded-3xl">
-							<HCaptcha
-								size="normal"
-								//@ts-ignore
-								ref={captcha}
-								theme="dark"
-								sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access
-								onVerify={onHCaptchaChange}
-							/>
-							{errors.captcha && (
-								<p className="light sm text-danger">please fill out captcha</p>
-							)}
-						</div>
+						<Suspense fallback={<Loader />}>
+							<div className="rounded-3xl">
+								<HCaptcha
+									size="normal"
+									//@ts-ignore
+									ref={captcha}
+									theme="dark"
+									sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access
+									onVerify={onHCaptchaChange}
+								/>
+								{errors.captcha && (
+									<p className="light sm text-danger">
+										please fill out captcha
+									</p>
+								)}
+							</div>
 						</Suspense>
-						
+
 						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
 							<PrimaryButton
 								className="lg:ms-auto lg:mx-0 mx-auto"

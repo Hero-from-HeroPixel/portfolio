@@ -8,6 +8,7 @@ import { useWindowSize } from '@uidotdev/usehooks';
 import { MobileScreen, tabletScreen } from '@/app/constants/screens';
 import SliderItem from './SliderItem';
 import { DotButton } from './DotButton';
+import { DotButton } from './DotButton';
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
 	Math.min(Math.max(number, min), max);
@@ -26,7 +27,7 @@ type Props = {
 	children: React.ReactNode[];
 	spacing?: number;
 	differential?: number;
-	OPTIONS? : EmblaOptionsType
+	OPTIONS?: EmblaOptionsType;
 };
 export default function Slider({
 	appearance,
@@ -34,16 +35,17 @@ export default function Slider({
 	children,
 	spacing = 0,
 	differential = 0.5,
-	OPTIONS
+	OPTIONS,
 }: Props) {
 	const [showCount, setShowCount] = useState<number>(1);
 	const { width: windowWidth } = useWindowSize();
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-	const [options, setOptions] = useState(OPTIONS)
+	const [options, setOptions] = useState(OPTIONS);
 
 	const TWEEN_FACTOR = differential;
 
+	const [carousel, emblaApi] = useEmblaCarousel(options);
 	const [carousel, emblaApi] = useEmblaCarousel(options);
 	const [tweenValues, setTweenValues] = useState<number[]>([]);
 
@@ -64,14 +66,14 @@ export default function Slider({
 		if (windowWidth !== null) {
 			if (windowWidth <= MobileScreen) {
 				setShowCount(show?.mobile || 1);
-				setOptions((prev) => ({ startIndex : 0 ,...prev}))
+				setOptions((prev) => ({ startIndex: 0, ...prev }));
 			} else if (windowWidth <= tabletScreen) {
 				setShowCount(show?.tablet || 2);
 			} else {
 				setShowCount(show?.desktop || 3);
 			}
 		}
-	}, [ show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
+	}, [show?.desktop, show?.mobile, show?.tablet, showCount, windowWidth]);
 
 	const onScroll = useCallback(() => {
 		if (!emblaApi) return;
@@ -144,6 +146,7 @@ export default function Slider({
 					<DotButton
 						index={index}
 						key={index}
+						index={index}
 						onClick={() => scrollTo(index)}
 						className={cn(
 							styles.dot,
@@ -155,8 +158,6 @@ export default function Slider({
 		</div>
 	);
 }
-
-
 
 // 'use client';
 // import React, { useEffect, useRef, useState } from 'react';
