@@ -164,7 +164,7 @@ export default function ContactForm({ className }: Props) {
 			initialValues={initialValues}
 			onSubmit={submitHandler}
 			validationSchema={validation}>
-			{({ errors, handleChange, handleBlur, values, setFieldValue }) => {
+			{({ errors, handleChange, handleBlur, values, touched, setFieldValue }) => {
 				const onHCaptchaChange = (token: string) => {
 					setFieldValue('captcha', token);
 				};
@@ -236,7 +236,11 @@ export default function ContactForm({ className }: Props) {
 							onBlur={handleBlur}
 							value={values.message}
 						/>
-						<Captcha error={errors.captcha === ''} onVerify={onHCaptchaChange} />
+						<Captcha
+							touched={touched.captcha}
+							error={errors.captcha === ''}
+							onVerify={onHCaptchaChange}
+						/>
 						<div className="flex flex-col lg:col-span-2 lg:w-10/12">
 							<PrimaryButton
 								className="lg:ms-auto lg:mx-0 mx-auto"

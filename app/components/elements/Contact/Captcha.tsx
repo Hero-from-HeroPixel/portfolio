@@ -5,9 +5,10 @@ import Loader from '../../UI/Loader';
 type Props = {
 	onVerify: ((token: string, ekey: string) => any) | undefined;
 	error: boolean;
+	touched?: boolean;
 };
 
-export default function Captcha({ onVerify, error }: Props) {
+export default function Captcha({ onVerify, error, touched }: Props) {
 	return (
 		<Suspense fallback={<Loader />}>
 			<div className="rounded-3xl">
@@ -19,7 +20,9 @@ export default function Captcha({ onVerify, error }: Props) {
 					sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" //public access
 					onVerify={onVerify}
 				/>
-				{error && <p className="light sm text-danger">please fill out captcha</p>}
+				{error && touched && (
+					<p className="light sm text-danger">please fill out captcha</p>
+				)}
 			</div>
 		</Suspense>
 	);
