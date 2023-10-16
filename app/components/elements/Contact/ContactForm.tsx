@@ -70,6 +70,7 @@ export default function ContactForm({ className }: Props) {
 			setSubmitState('error');
 			if (!isOpen) onOpen();
 			console.error('Captcha failed');
+			return;
 		}
 		setSubmitState('submitting');
 		if (captcha) captcha.current?.resetCaptcha();
